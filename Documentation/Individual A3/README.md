@@ -5,8 +5,8 @@ _Note that the A3 names should follow the following format: `name_A3.pdf`. Where
 
 ## A3 Authors's
 - Carolina G. Santiago Perez
+- Christian E. Rosado Feliciano
 - Gabriela N. Flores Velazquez
-- Omar H. Yusuf Soto
 - Santos O. Martinez Brana
 - Sebastian O. Negron Seda
 - Songiemar S. Garcia Curbelo
