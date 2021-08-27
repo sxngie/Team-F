@@ -22,7 +22,7 @@ Will download and install the Sass binaries.
 
 ## Environment Variables
 
-To run this program you need to have a file named `.env.local` which will contain all of the react environment variables. Every variable should start with "**REACT*APP***" followed by the name of the variable you wish to have. A list of the currently used variables below:
+To run this program you need to have a file named `.env.local` which will contain all of the react environment variables. Every variable should start with `REACT_APP_` followed by the name of the variable you wish to have. A list of the currently used variables below:
 
 | Variable | Description |
 | -------- | ----------- |
