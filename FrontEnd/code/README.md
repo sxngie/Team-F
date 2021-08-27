@@ -14,7 +14,7 @@ To get started with this project you will need to run the following commands:
 
 ### `npm ci`
 
-This will fetch all the dependencies. We pref
+This will fetch all the dependencies. We prefer to use this command over `npm install` because creates a deterministic, repeatable build. This ensures that we are all running the same versions of packages.
 
 ### `yarn sass-install`
 
