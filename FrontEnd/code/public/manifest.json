@@ -1,0 +1,11 @@
+{
+	"name": "Full Name",
+	"short_name": "Short Name",
+	"theme_color": "#282c34",
+	"background_color": "#282c34",
+	"display": "standalone",
+	"Scope": "/",
+	"start_url": ".",
+	"icons": [],
+	"splash_pages": null
+}

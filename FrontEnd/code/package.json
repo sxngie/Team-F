@@ -1,0 +1,59 @@
+{
+	"name": "team-f-project",
+	"version": "0.1.0",
+	"description": "Share and discuss music with friends",
+	"main": "src/index.tsx",
+	"private": true,
+	"author": {
+		"name": "Santos O. Martínez Braña",
+		"email": "santos.martinez1@upr.edu",
+		"url": "https://github.com/SantosOMartinez"
+	},
+	"contributors": [
+		"Carolina G. Santiago Perez",
+		"Christian E. Rosado Feliciano",
+		"Gabriela N. Flores Velazquez",
+		"Sebastian O. Negron Seda",
+		"Songiemar S. Garcia Curbelo"
+	],
+	"license": "UNLICENSED",
+	"dependencies": {
+		"cra-template-typescript": "1.1.2",
+		"node-sass": "^6.0.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-scripts": "4.0.3",
+		"typescript": "^4.4.2"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"sass-install": "node node_modules/node-sass/scripts/install.js",
+		"test": "react-scripts test"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@types/jest": "^27.0.1",
+		"@types/react": "^17.0.19",
+		"@types/react-dom": "^17.0.9",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^12.0.0"
+	}
+}
