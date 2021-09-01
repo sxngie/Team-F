@@ -21,6 +21,6 @@
 <img style="max-height:450px;" src="https://user-images.githubusercontent.com/60373473/131608232-92783949-e633-4ff5-a769-584e3447269c.png"/>
 </p>
 
-Music application that allows users to listen to music and create discussions.
+Web application that allows users to listen to music and create discussions.
 Social gathering place to listen to music with friends while having a chat.
 Chat with strangers and have listening parties as well.
