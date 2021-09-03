@@ -4,7 +4,7 @@ import React from 'react';
 interface Props {
 	size?: number | string;
 	className?: string;
-	name: string;
+	name: IconName;
 }
 
 const Icon: React.FC<Props> = ({ size = 16, className, name }) => {
@@ -23,13 +23,18 @@ const Icon: React.FC<Props> = ({ size = 16, className, name }) => {
 export default Icon;
 
 /**
+ * Name of icon.
+ */
+export type IconName = keyof typeof icons;
+
+/**
  * Object containing all of the icons that are used in the application.
  * Add more or remove based on what is needed.
  *
  * *The value should be a string of the icons svg path.*
  *
  */
-const icons: { [key: string]: string } = {
+const icons = {
 	"arrow-down":
 		"M10.805 6.362c-.26-.26-.682-.26-.943 0L8 8.224 6.138 6.362c-.26-.26-.682-.26-.943 0s-.26.682 0 .943l2.333 2.333c.26.26.682.26.943 0l2.333-2.333c.26-.26.26-.682 0-.943z",
 	"arrow-bottom":
