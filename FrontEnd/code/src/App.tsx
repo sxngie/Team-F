@@ -1,8 +1,8 @@
-import './App.scss';
+import './styles/app.sass';
 
 import React from 'react';
 
-const App: React.FC = () => {
+const App = () => {
 	return <div className="app"></div>;
 };
 
