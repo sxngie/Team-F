@@ -31,14 +31,20 @@ const Counter: React.FC<Props> = ({
 				className={cn(styles.button, {
 					[styles.disabled]: value <= 0 && !allowNegatives,
 				})}
-				onClick={() => setValue(value - delta)}
+				{...(allowNegatives && {
+					onClick: () => setValue(value - delta),
+				})}
+				data-testid="decrease"
 			>
 				<Icon name={iconMinus} size="24" />
 			</button>
-			<div className={styles.number}>{displayValue}</div>
+			<div className={styles.number} data-testid="display">
+				{displayValue}
+			</div>
 			<button
 				className={styles.button}
 				onClick={() => setValue(value + delta)}
+				data-testid="increase"
 			>
 				<Icon name={iconPlus} size="24" />
 			</button>
