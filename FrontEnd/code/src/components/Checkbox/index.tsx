@@ -15,12 +15,13 @@ const Checkbox: React.FC<Props> = ({
 	className,
 	content,
 	note,
-	value = false,
+	value,
 	onChange,
 }) => {
 	return (
 		<label className={cn(styles.checkbox, className)}>
 			<input
+				data-testid="checkbox"
 				className={styles.input}
 				type="checkbox"
 				onChange={onChange}
@@ -28,8 +29,14 @@ const Checkbox: React.FC<Props> = ({
 			/>
 			<span className={styles.inner}>
 				<span className={styles.tick}></span>
-				<span className={styles.text}>{content}</span>
-				{note && <span className={styles.note}>{note}</span>}
+				<span className={styles.text} data-testid="content">
+					{content}
+				</span>
+				{note && (
+					<span className={styles.note} data-testid="note">
+						{note}
+					</span>
+				)}
 			</span>
 		</label>
 	);
