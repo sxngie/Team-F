@@ -17,6 +17,7 @@ const Theme: React.FC<Props> = ({ className }) => {
 				checked={darkMode.value}
 				onChange={darkMode.toggle}
 				type="checkbox"
+				data-testid="checkbox"
 			/>
 			<span className={styles.inner}>
 				<span className={styles.box}></span>
