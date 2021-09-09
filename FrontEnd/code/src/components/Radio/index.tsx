@@ -7,7 +7,7 @@ interface Props {
 	className?: string;
 	content?: string;
 	name?: string;
-	value: any;
+	value?: any;
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -26,10 +26,13 @@ const Radio: React.FC<Props> = ({
 				name={name}
 				onChange={onChange}
 				checked={value}
+				data-testid="radio"
 			/>
 			<span className={styles.inner}>
 				<span className={styles.tick}></span>
-				<span className={styles.text}>{content}</span>
+				<span className={styles.text} data-testid="content">
+					{content}
+				</span>
 			</span>
 		</label>
 	);
