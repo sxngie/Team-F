@@ -27,9 +27,13 @@ const TextInput: React.FC<Props> = ({
 				className
 			)}
 		>
-			{label && <div className={styles.label}>{label}</div>}
+			{label && (
+				<div className={styles.label} data-testid="label">
+					{label}
+				</div>
+			)}
 			<div className={styles.wrap}>
-				<input className={styles.input} {...props} />
+				<input className={styles.input} {...props} data-testid="text" />
 				{view && (
 					<button className={styles.toggle}>
 						<Icon name="eye" size="24" />

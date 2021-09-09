@@ -11,9 +11,17 @@ interface Props extends React.ComponentPropsWithoutRef<"textarea"> {
 const TextArea: React.FC<Props> = ({ className, label, ...props }) => {
 	return (
 		<div className={cn(styles.field, className)}>
-			{label && <div className={styles.label}>{label}</div>}
+			{label && (
+				<div className={styles.label} data-testid="label">
+					{label}
+				</div>
+			)}
 			<div className={styles.wrap}>
-				<textarea className={styles.textarea} {...props} />
+				<textarea
+					className={styles.textarea}
+					{...props}
+					data-testid="text-area"
+				/>
 			</div>
 		</div>
 	);
