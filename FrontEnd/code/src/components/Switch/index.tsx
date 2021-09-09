@@ -9,7 +9,7 @@ interface Props {
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const Switch: React.FC<Props> = ({ className, value = false, onChange }) => {
+const Switch: React.FC<Props> = ({ className, value, onChange }) => {
 	return (
 		<label className={cn(styles.switch, className)}>
 			<input
@@ -17,6 +17,7 @@ const Switch: React.FC<Props> = ({ className, value = false, onChange }) => {
 				type="checkbox"
 				checked={value}
 				onChange={onChange}
+				data-testid="switch"
 			/>
 			<span className={styles.inner}>
 				<span className={styles.box}></span>
