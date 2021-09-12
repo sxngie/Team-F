@@ -22,7 +22,8 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"analyze": "source-map-explorer 'build/static/js/*.js'",
-		"sass-install": "node node_modules/node-sass/scripts/install.js"
+		"sass-install": "node node_modules/node-sass/scripts/install.js",
+		"ci": "npm ci; yarn sass-install"
 	},
 	"eslintConfig": {
 		"extends": [
