@@ -1,0 +1,21 @@
+@import ../../styles/helpers
+
+.container
+    display: grid
+    place-items: center
+    height: 100vh
+
+.content
+    display: grid
+    justify-items: center
+
+.warning
+    animation: hover 4s ease-in-out infinite
+    color: $p1
+    +hero
+
+.message
+    +caption-1
+    color: $n3
+    +dark
+        color: $n4

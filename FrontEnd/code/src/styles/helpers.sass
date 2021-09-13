@@ -29,7 +29,7 @@
 
 // -----[Fonts]-----
 =dm-sans
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'DM Sans', sans-serif
 
 =poppins
     font-family: 'Poppins', sans-serif
@@ -46,7 +46,7 @@
 =dark-common
     @at-root .dark-mode &
         @content
-    
+
 // -----[Colors]-----
 // Primary
 $p1: #3B71FE
@@ -71,6 +71,42 @@ $n7: #F4F5F6
 $n8: #FCFCFD
 
 // -----[Typography]-----
+
+=hero
+    +dm-sans
+    font-size: 96px
+    line-height: 1
+    font-weight: 700
+    letter-spacing: -.02em
+
+=headline-1
+    +dm-sans
+    font-size: 64px
+    line-height: 1
+    font-weight: 700
+    letter-spacing: -.02em
+
+=headline-2
+    +dm-sans
+    font-size: 48px
+    line-height: (56/48)
+    font-weight: 700
+    letter-spacing: -.02em
+
+=headline-3
+    +dm-sans
+    font-size: 40px
+    line-height: (48/40)
+    font-weight: 700
+    letter-spacing: -.01em
+
+=headline-4
+    +dm-sans
+    font-size: 32px
+    line-height: (40/32)
+    font-weight: 700
+    letter-spacing: -.01em
+
 =body-1
     font-size: 24px
     line-height: (32/24)
@@ -132,7 +168,7 @@ $n8: #FCFCFD
     font-size: 14px
     line-height: (16/14)
     font-weight: 700
-    
+
 // -----[Triangle]-----
 /// Creates a triangle.
 ///
