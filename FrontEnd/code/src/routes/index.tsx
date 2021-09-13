@@ -23,6 +23,7 @@ const routeNames = [
 /**
  * Application routes to be rendered.
  */
+// TODO: Add corresponding screens for each route.
 const routes: Route[] = [
 	{ path: "" },
 	{ path: "music" },
@@ -34,3 +35,10 @@ const routes: Route[] = [
 ];
 
 export default routes;
+
+//-----[Lazy Imports]-----
+// TODO: Import screens lazily to improve performance.
+/*
+	Ex)
+	const Component = lazy(() => import('./Component'));
+*/

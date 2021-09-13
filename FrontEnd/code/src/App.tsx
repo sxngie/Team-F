@@ -2,10 +2,13 @@ import './styles/app.sass';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from 'routes';
+import Development from 'routes/Development';
 import Page404 from 'screens/Page404';
 
-import Development from './routes/Development';
-
+/**
+ * Entry level component to the application.
+ *
+ */
 const App = () => (
 	<Router>
 		<Switch>
