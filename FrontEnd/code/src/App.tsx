@@ -1,8 +1,8 @@
 import './styles/app.sass';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import routes from 'routes';
-import Development from 'routes/Development';
+import Transitions from 'routes/Transitions';
 import Page404 from 'screens/Page404';
 
 /**
@@ -11,7 +11,7 @@ import Page404 from 'screens/Page404';
  */
 const App = () => (
 	<Router>
-		<Switch>
+		<Transitions>
 			{routes.map(({ path, render }, index) => (
 				<Route
 					exact
@@ -20,9 +20,8 @@ const App = () => (
 					key={index}
 				/>
 			))}
-			<Development />
-			<Route path="/*" component={Page404} />
-		</Switch>
+			<Route component={Page404} />
+		</Transitions>
 	</Router>
 );
 export default App;
