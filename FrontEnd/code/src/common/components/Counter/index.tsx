@@ -31,7 +31,7 @@ const Counter: React.FC<Props> = ({
 				className={cn(styles.button, {
 					[styles.disabled]: value <= 0 && !allowNegatives,
 				})}
-				{...(allowNegatives && {
+				{...((allowNegatives || value > 0) && {
 					onClick: () => setValue(value - delta),
 				})}
 				data-testid="decrease"
