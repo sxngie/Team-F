@@ -1,4 +1,4 @@
-import { formatNumber } from 'functions/formatter';
+import { formatNumber } from 'utils/functions/formatter';
 
 import { fireEvent, render } from '@testing-library/react';
 

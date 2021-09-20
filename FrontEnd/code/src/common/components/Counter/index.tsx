@@ -9,8 +9,8 @@ interface Props {
 	value?: number;
 	displayValue?: number | string;
 	setValue?: (val: number) => any;
-	iconMinus: IconName;
-	iconPlus: IconName;
+	iconMinus?: IconName;
+	iconPlus?: IconName;
 	allowNegatives?: boolean;
 	delta?: number;
 }
@@ -20,18 +20,19 @@ const Counter: React.FC<Props> = ({
 	value = 0,
 	displayValue = value,
 	setValue = () => {},
-	iconMinus,
-	iconPlus,
+	iconMinus = "minus",
+	iconPlus = "plus",
 	allowNegatives = false,
 	delta = 1,
 }) => {
+	const isDisabled = value <= 0 && !allowNegatives;
 	return (
 		<div className={cn(className, styles.counter)}>
 			<button
 				className={cn(styles.button, {
-					[styles.disabled]: value <= 0 && !allowNegatives,
+					[styles.disabled]: isDisabled,
 				})}
-				{...((allowNegatives || value > 0) && {
+				{...(!isDisabled && {
 					onClick: () => setValue(value - delta),
 				})}
 				data-testid="decrease"
