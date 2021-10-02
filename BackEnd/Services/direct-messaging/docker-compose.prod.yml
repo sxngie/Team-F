@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+    direct-messaging:
+        build:
+            target: production
+        command: node build/index.js
