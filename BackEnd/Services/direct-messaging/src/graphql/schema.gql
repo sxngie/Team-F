@@ -39,7 +39,7 @@ type Message {
 	updatedAt: DateTime!
 	message: String!
 	attachment: ID
-	reply: String
+	reply: ID
 }
 
 type Messages {
