@@ -4,4 +4,5 @@ services:
     direct-messaging:
         build:
             target: production
+        image: direct-message-prod
         command: node build/index.js

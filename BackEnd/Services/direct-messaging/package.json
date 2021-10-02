@@ -2,7 +2,7 @@
 	"name": "direct-messaging",
 	"version": "1.0.0",
 	"description": "Messaging Service for Communikey.",
-	"main": "index.js",
+	"main": "build/index.js",
 	"scripts": {
 		"start": "NODE_PATH=./build node build/index.js",
 		"build": "tsc -p .",
@@ -25,10 +25,10 @@
 	"devDependencies": {
 		"@types/express": "^4.17.13",
 		"nodemon": "^2.0.13",
-		"ts-node": "^10.2.1",
-		"typescript": "^4.4.3"
+		"ts-node": "^10.2.1"
 	},
 	"dependencies": {
-		"express": "^4.17.1"
+		"express": "^4.17.1",
+		"typescript": "^4.4.3"
 	}
 }

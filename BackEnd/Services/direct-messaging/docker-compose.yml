@@ -6,6 +6,7 @@ services:
             context: .
             dockerfile: Dockerfile
             target: base
+        image: direct-message
         volumes:
             - ./src:/home/node/app/src
             - ./nodemon.json:/home/node/app/nodemon.json
