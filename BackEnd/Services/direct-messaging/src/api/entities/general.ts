@@ -35,3 +35,5 @@ export interface User {
 export interface Member extends User {
 	role: role;
 }
+
+//TODO: Create the rest of the general interfaces.

@@ -2,6 +2,8 @@
 	All of the mutations used in this application.
 */
 
+//TODO: Create types for the mutations.
+
 export type JoinChat = (params: {}) => {};
 export type CreateMessage = (params: {}) => {};
 export type DeleteMessage = (params: {}) => {};

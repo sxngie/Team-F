@@ -30,6 +30,8 @@ export type GetMessages = (params: {
 	token: Token;
 }) => Messages;
 
+//TODO: Create types for the other queries
+
 export type GetChats = (params: {}) => {};
 export type GetChat = (params: {}) => {};
 export type GetUsers = (params: {}) => {};

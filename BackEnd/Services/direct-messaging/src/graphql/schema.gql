@@ -3,6 +3,7 @@
 type Query {
 	getMessage(id: ID!, token: ID!): Message
 	getMessages(id: ID!, pageSize: Int!, cursor: Int!, token: ID!): Messages
+	#TODO: Add other queries.
 }
 
 type Mutation {
@@ -12,6 +13,7 @@ type Mutation {
 		chatId: ID!
 		message: MessageInput
 	): Message
+	#TODO: Add other mutations.
 }
 
 #-----[Inputs]-----
