@@ -1,7 +1,10 @@
+import { role } from '../utils/enums';
+import { Id } from '../utils/types';
+
 export interface Message {
-	id: string;
-	owner: string; // User id
-	chatId: string;
+	id: Id;
+	owner: Id; // User id
+	chatId: Id;
 	createdAt: string;
 	updatedAt: string;
 	message: string;
@@ -16,7 +19,7 @@ export interface Messages {
 }
 
 export interface Chat {
-	id: string;
+	id: Id;
 	name: string;
 	count: number; // Amount of messages in a chat.
 	users: Member[];
@@ -24,11 +27,11 @@ export interface Chat {
 }
 
 export interface User {
-	id: string;
+	id: Id;
 	username: string;
 	avatar: string;
 }
 
 export interface Member extends User {
-	role: string;
+	role: role;
 }
