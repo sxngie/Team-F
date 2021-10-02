@@ -12,7 +12,7 @@ import { Id, Token } from '../utils/types';
  * @param {Token} token User auth token.
  * @returns {Message} Specific chat message.
  */
-export type getMessage = (params: { id: Id; token: Token }) => Message;
+export type GetMessage = (params: { id: Id; token: Token }) => Message;
 
 /**
  * Fetches messages in a given chat.
@@ -23,13 +23,13 @@ export type getMessage = (params: { id: Id; token: Token }) => Message;
  * @param {Token} token User auth token.
  * @returns {Messages} Chat messages.
  */
-export type getMessages = (params: {
+export type GetMessages = (params: {
 	id: Id;
 	pageSize: number;
 	cursor: number;
 	token: Token;
 }) => Messages;
 
-export type getChats = (params: {}) => void;
-export type getChat = (params: {}) => void;
-export type getUsers = (params: {}) => void;
+export type GetChats = (params: {}) => {};
+export type GetChat = (params: {}) => {};
+export type GetUsers = (params: {}) => {};

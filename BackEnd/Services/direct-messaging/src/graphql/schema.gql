@@ -1,0 +1,79 @@
+#-----[Root Fields]-----
+
+type Query {
+	getMessage(id: ID!, token: ID!): Message
+	getMessages(id: ID!, pageSize: Int!, cursor: Int!, token: ID!): Messages
+}
+
+type Mutation {
+	createMessage(
+		id: ID!
+		token: ID!
+		chatId: ID!
+		message: MessageInput
+	): Message
+}
+
+#-----[Inputs]-----
+input MessageInput {
+	message: String
+	reply: ID
+	attachment: ID
+}
+
+#-----[Interfaces]-----
+
+interface Person {
+	id: ID!
+	username: String!
+	avatar: ID!
+}
+
+#-----[Types]-----
+
+type Message {
+	id: ID!
+	owner: ID!
+	chatId: ID!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	message: String!
+	attachment: ID
+	reply: String
+}
+
+type Messages {
+	hasMore: Boolean!
+	messages: [Message!]!
+	cursor: Int!
+}
+
+type Chat {
+	id: ID!
+	name: String!
+	count: Int!
+	users: [Member!]!
+	messages: Messages
+}
+
+type User implements Person {
+	id: ID!
+	username: String!
+	avatar: ID!
+}
+
+type Member implements Person {
+	id: ID!
+	username: String!
+	avatar: ID!
+	role: Role!
+}
+
+#-----[Enum]-----
+enum Role {
+	admin
+	owner
+	member
+}
+
+scalar DateTime
