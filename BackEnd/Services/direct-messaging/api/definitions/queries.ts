@@ -1,10 +1,8 @@
 /*
-    Direct Messaging Service:
-    All api call definitions that belong to this api. Information on how the 
-    services should look like without direct code implementation.
+	All of the queries used in this application.
 */
 
-import { Chat, Message, Messages, User } from './entities';
+import { Message, Messages } from '../entities/general';
 
 /**
  * Fetches a specific chat message.

@@ -1,8 +1,3 @@
-/*
-    Direct Messaging Service:
-    All entity definitions that belong to this api.
-*/
-
 export interface Message {
 	id: string;
 	owner: string; // User id
@@ -11,7 +6,7 @@ export interface Message {
 	updatedAt: string;
 	message: string;
 	attachment: string; //TODO It should be Image or Music Type (or maybe an Attachment Interface)
-	reply?: string;
+	reply?: string; // Id of the message being replied to.
 }
 
 export interface Messages {
@@ -22,9 +17,9 @@ export interface Messages {
 
 export interface Chat {
 	id: string;
-	title: string;
+	name: string;
 	count: number; // Amount of messages in a chat.
-	users: User[];
+	users: Member[];
 	messages: Messages;
 }
 
@@ -32,4 +27,8 @@ export interface User {
 	id: string;
 	username: string;
 	avatar: string;
+}
+
+export interface Member extends User {
+	role: string;
 }

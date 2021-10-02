@@ -16,8 +16,6 @@
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
-		"noImplicitAny": true,
-		"baseUrl": "src" // saves us the use of '../../../file' and instead lets us just use 'file'
-	},
-	"include": ["src"]
+		"noImplicitAny": true
+	}
 }
