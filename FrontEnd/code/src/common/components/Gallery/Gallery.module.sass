@@ -1,0 +1,30 @@
+@import ../../../styles/helpers
+
+.gallery
+    position: relative
+    width: 375px
+    height: 250px
+
+.container
+    position: absolute
+    width: 100%
+    height: 100%
+    will-change: transform
+    display: flex
+    align-items: center
+    transform-style: preserve-3d
+    justify-content: center
+.card
+    width: 170px
+    height: 210px
+    user-select: none
+    will-change: transform
+    border-radius: 16px
+    transform-style: preserve-3d
+    background: $n6
+    box-shadow: 0px 4px 8px $n4
+    display: grid
+    place-items: center
+    +dark
+        background: $n2
+        box-shadow: 0px 4px 8px $n1
