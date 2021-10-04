@@ -4,6 +4,6 @@
 
 //TODO: Create types for the subscriptions.
 
-export type ChatSub = () => {};
+export type ChatSub = (params: {}) => {};
 export type UserSub = (params: {}) => {};
 export type MessageSub = (params: {}) => {};

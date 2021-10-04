@@ -32,6 +32,12 @@ export type GetMessages = (params: {
 
 //TODO: Create types for the other queries
 
-export type GetChats = (params: {}) => {};
 export type GetChat = (params: {}) => {};
+export type GetChats = (params: {}) => {};
+export type getUser = (params: {}) => {};
 export type GetUsers = (params: {}) => {};
+export type GetFile = (params: {}) => {};
+export type GetFiles = (params: {}) => {};
+export type getLastFiles = (params: {}) => {};
+export type GetLinks = (params: {}) => {};
+export type GetLastLinks = (params: {}) => {};

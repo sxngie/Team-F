@@ -7,9 +7,16 @@ export interface Message {
 	chatId: Id;
 	createdAt: string;
 	updatedAt: string;
-	message: string;
-	attachment: string; //TODO It should be Image or Music Type (or maybe an Attachment Interface)
-	reply?: string; // Id of the message being replied to.
+	message?: string; // Only undefined if it includes an attachment.
+	attachment?: File;
+	reply?: Id; // Id of the message being replied to.
+}
+
+export interface File {
+	id: Id;
+	name: string;
+	mimeType: string;
+	size: string;
 }
 
 export interface Messages {

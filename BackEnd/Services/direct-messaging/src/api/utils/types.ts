@@ -9,8 +9,8 @@
 export type Id = string;
 
 /**
- * String based token.
+ * JWT based token.
+ * ##### Format `xxxxx.yyyyy.zzzzz`
  * ##### *Used to add more context in code.*
  */
-
-export type Token = string;
+export type Token = `${string}.${string}.${string}`;

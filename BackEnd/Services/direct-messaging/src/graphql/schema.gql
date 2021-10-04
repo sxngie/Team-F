@@ -2,15 +2,31 @@
 
 type Query {
 	getMessage(id: ID!, token: ID!): Message
-	getMessages(id: ID!, pageSize: Int!, cursor: Int!, token: ID!): Messages
+	getMessages(id: ID!, pageSize: Int!, cursor: Int!, token: ID!): Messages!
+	getChat(id: ID!, token: ID!): Chat
+	getChats(token: ID!): [Chat!]!
+	getUser(token: ID!): User
+	getUsers(chat: ID!, token: ID!): [Member!]!
+	#-----[Resources]-----
+	getFile(id: ID!, token: ID!, type: FileType!): File
+	getFiles(
+		chat: ID!
+		token: ID!
+		type: FileType!
+		pageSize: Int!
+		cursor: Int!
+	): Files!
+	getLastFiles(chat: ID!, token: ID!, type: FileType!): [File!]!
+	getLinks(chat: ID!, token: ID!, pageSize: Int!, cursor: Int!): Links!
+	getLastLinks(chat: ID!, token: ID!): [String!]!
 	#TODO: Add other queries.
 }
 
 type Mutation {
 	createMessage(
 		id: ID!
+		chat: ID!
 		token: ID!
-		chatId: ID!
 		message: MessageInput
 	): Message
 	#TODO: Add other mutations.
@@ -20,7 +36,7 @@ type Mutation {
 input MessageInput {
 	message: String
 	reply: ID
-	attachment: ID
+	#Files are included in the body of the request.
 }
 
 #-----[Interfaces]-----
@@ -36,12 +52,31 @@ interface Person {
 type Message {
 	id: ID!
 	owner: ID!
-	chatId: ID!
+	chat: ID!
 	createdAt: DateTime!
 	updatedAt: DateTime!
 	message: String!
-	attachment: ID
+	attachment: File
 	reply: ID
+}
+
+type File {
+	id: ID!
+	name: String!
+	mimeType: String!
+	size: String!
+}
+
+type Links {
+	hasMore: Boolean!
+	cursor: Int!
+	links: [String!]!
+}
+
+type Files {
+	hasMore: Boolean!
+	cursor: Int!
+	files: [File!]!
 }
 
 type Messages {
@@ -53,9 +88,9 @@ type Messages {
 type Chat {
 	id: ID!
 	name: String!
-	count: Int!
+	unread: Int!
 	users: [Member!]!
-	messages: Messages
+	latest: Message
 }
 
 type User implements Person {
@@ -76,6 +111,11 @@ enum Role {
 	admin
 	owner
 	member
+}
+
+enum FileType {
+	file
+	media
 }
 
 scalar DateTime
