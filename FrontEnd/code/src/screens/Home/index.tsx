@@ -5,7 +5,7 @@ import styles from './Home.module.sass';
 
 interface Props {}
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const cards = [1, 2, 3, 4, 5, 6, 7];
 
 const Home: React.FC<Props> = () => {
 	return (

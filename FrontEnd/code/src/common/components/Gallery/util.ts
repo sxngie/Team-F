@@ -15,77 +15,64 @@ export const middle = (length: number) =>
  * @param {number} sides Amount of items to be included from each side.
  * @returns Subset of the provided list.
  */
-export const inView = <T>(
-	list: T[],
-	active: number,
-	sides: number
-): [
-	{
-		index: number;
-		item: T;
-	}[],
-	number
-] => {
+export const inView = <T>(list: T[], active: number, sides: number) => {
 	let view = [];
 
 	const length = list.length;
 	const first = active - sides >= 0 ? active - sides : 0;
 	const last = active + sides < length ? active + sides : length - 1;
 
-	let index = 0;
 	for (let i = first; i <= last; i++) {
-		if (i < active) index += 1;
-
 		view.push({ index: i, item: list[i] });
 	}
 
-	return [view, index];
+	return view;
 };
 
-export const to = (i: number, mid: number) => ({
-	x: X(i, mid),
-	y: Y(i, mid),
+export const to = (i: number, index: number, h: number, w: number) => ({
 	scale: 1,
-	rot: angle(i, mid),
-	delay: getSide(i, mid) * 100,
+	rot: X(i, index, h, w).rot,
+	x: X(i, index, h, w).x,
+	y: 0,
 });
 
-export const from = (i: number, mid: number) => ({
+export const from = (i: number) => ({
 	x: 0,
+	y: 0,
 	rot: 0,
 	scale: 1,
-	y: Y(i, mid),
 });
-
-export const trans = (r: SpringValue<number>) => `rotate(${r}deg)`;
 
 export const getSide = (i: number, mid: number) =>
 	i > mid ? i - mid : mid - i;
 
-export const height = (i: number, mid: number, h: number, diff = 10) =>
-	i === mid ? h : h - diff * getSide(i, mid);
+/**
+ * Returns the translation that needs to be taken for an object in a circular path.
+ * @param h Height of the object.
+ * @param w Width of the object.
+ * @param angle Angle in radians of the object.
+ * @returns Translations of the object
+ */
+export const getTranslation = (h: number, w: number, angle: number) => {
+	const a1 = h * Math.sin(angle);
+	const a2 = w * Math.cos(angle);
+	const total = a1 + a2;
 
-export const Y = (i: number, mid: number, diff = 10) =>
-	i === mid ? 0 : getSide(i, mid) * diff;
-
-export const X = (i: number, mid: number, diff = 10) =>
-	i === mid ? 0 : i > mid ? getSide(i, mid) * diff : -getSide(i, mid) * diff;
-
-export const angle = (
-	i: number,
-	mid: number,
-	options = { a1: 3, d: 2 }
-): number => {
-	if (i === mid) return 0;
-
-	const { a1, d } = options;
-	const n = getSide(i, mid);
-
-	const f = (i: number) => a1 + d * (i - 1);
-	return i > mid ? f(n) : -f(n);
+	return {
+		left: a1,
+		right: total,
+	};
 };
 
-export const swipe = (active: number, dir: number, max: number) => {
-	if ((active === 0 && dir < 0) || (active === max && dir > 0)) return active;
-	return active + dir;
+export const getAngle = (y: number, h: number) => Math.asin(y / h);
+
+export const X = (i: number, mid: number, h: number, w: number, diff = 10) => {
+	const n = getSide(i, mid);
+	const angle = (i > mid ? 1 : -1) * getAngle(n * diff, h);
+	const trans = getTranslation(h, w, angle);
+
+	return {
+		rot: angle,
+		x: trans.left,
+	};
 };

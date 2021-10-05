@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { animated, to as interpolate, useSprings } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 
 import styles from './Gallery.module.sass';
-import { angle, from, getSide, height, inView, middle, swipe, to, X } from './util';
+import { from, getAngle, getSide, getTranslation, inView, middle, to, X } from './util';
 
 interface Props<T> {
 	list?: T[];
@@ -11,77 +11,94 @@ interface Props<T> {
 
 const sides = 3;
 const velocityTrigger = 0.2;
-const h = 210;
+const angleTrigger = 0.5;
+
+const refH = (ref: React.RefObject<HTMLLIElement>) =>
+	(ref.current?.clientHeight ?? 1) + 20;
+
+const refW = (ref: React.RefObject<HTMLLIElement>) =>
+	ref.current?.clientWidth ?? 1;
 
 const Gallery = <T extends any>({ list = [] }: Props<T>) => {
-	const [active, setActive] = useState(() => middle(list.length));
-	const [elements, index] = inView(list, active, sides);
+	const selected = useRef(middle(list.length));
+	const galleryRef = useRef<HTMLUListElement>(null);
+	const ref = useRef<HTMLLIElement>(null);
+
+	console.log("update");
+
+	const [dimensions, setDimensions] = useState({
+		h: refH(ref),
+		w: refW(ref),
+	});
+
+	useEffect(() => {
+		setDimensions({
+			h: refH(ref),
+			w: refW(ref),
+		});
+	}, [ref]);
+	const elements = inView(list, selected.current, sides);
+	const index = elements.findIndex(({ index }) => index === selected.current);
+
 	const [props, api] = useSprings(elements.length, (i) => ({
-		...to(i, index),
-		from: from(i, index),
+		...to(i, index, 180, 140),
+		from: from(i),
 	}));
 
-	const bind = useDrag(
-		({ down, delta: [xDelta], distance, direction: [xDir], velocity }) => {
-			const vMax = velocity > velocityTrigger; // If you flick hard enough it should trigger the card to change.
-			const dir = xDir < 0 ? -1 : 1;
+	const bind = useDrag(({ down, velocity, initial: [xInitial], xy: [x] }) => {
+		const vMax = velocity > velocityTrigger;
+		const gx =
+			(galleryRef.current?.getBoundingClientRect().left ?? 0) +
+			(galleryRef.current?.clientWidth ?? 0) / 2;
 
-			const trigger = vMax;
-			const isGone = !down && trigger;
-			if (isGone) setActive((n) => swipe(n, -dir, list.length - 1));
+		const dir = x - gx < 0 ? -1 : 1;
+		const move = down ? Math.abs(x - xInitial) * dir : 0;
 
-			api.start((i) => {
-				const isTarget = index === i;
+		const { h, w } = dimensions;
 
-				if (!isTarget) {
-					const rot = angle(i, index);
-					const x = X(i, index); // When a card is gone it goes to the next position
-					return {
-						rot,
-						x,
-						delay: undefined,
-						config: { friction: 10, tension: 100 },
-					}; // We only care for the active card
-				}
+		const angle = getAngle(Math.abs(move) >= h ? dir * h : move, h);
 
-				const rot = angle(i, index) + (isGone ? 0 : xDelta);
-				const x = isGone ? X(i, index) : xDelta; // When a card is gone it goes to the next position
+		const aMax = Math.abs(angle) > angleTrigger;
 
-				return {
-					x,
-					rot,
-					delay: undefined,
-					config: { friction: 10, tension: 100 },
-				};
-			});
-		}
-	);
+		api.start((i) => {
+			if (i !== index) return;
+
+			const x = getTranslation(
+				h,
+				w,
+				aMax ? dir * angleTrigger : angle
+			).left;
+
+			const rot = aMax ? dir * angleTrigger : angle;
+
+			return {
+				x,
+				rot,
+				config: {
+					friction: 20,
+					clamp: true,
+				},
+			};
+		});
+	});
 
 	return (
-		<animated.ul className={styles.gallery}>
+		<ul className={styles.gallery} ref={galleryRef} {...bind()}>
 			{props.map(({ x, y, rot }, i) => (
-				<animated.li className={styles.container} key={i}>
-					<animated.span
-						{...bind(i)}
-						className={styles.card}
-						style={{
-							transform: interpolate(
-								[x, y, getSide(i, index), rot],
-								(x, y, z, r) =>
-									`rotate(${r}deg) translate3d(${x}px,${y}px,-${z}px)`
-							),
-							height: interpolate(
-								[h],
-								(h) => `${height(i, index, h, 30)}px`
-							),
-						}}
-					>
-						{/*@ts-ignore*/}
-						{elements[i].item}
-					</animated.span>
-				</animated.li>
+				<animated.li
+					ref={ref}
+					key={i}
+					className={styles.card}
+					style={{
+						transform: interpolate(
+							[x, y, rot, getSide(i, index)],
+							(x, y, r, z) =>
+								`translate3d(${x}px,${y}px,-${z}px) rotate(${r}rad)`
+						),
+					}}
+				></animated.li>
 			))}
-		</animated.ul>
+		</ul>
 	);
 };
 

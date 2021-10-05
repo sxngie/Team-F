@@ -3,24 +3,25 @@
 .gallery
     position: relative
     width: 375px
-    height: 250px
+    height: 200px
 
-.container
-    position: absolute
-    width: 100%
-    height: 100%
-    will-change: transform
     display: flex
     align-items: center
     transform-style: preserve-3d
     justify-content: center
+    will-change: transform
+    outline: 1px solid red
+
 .card
-    width: 170px
-    height: 210px
+    transform-origin: center bottom
+    position: absolute
+    width: 140px
+    will-change: transform
+    height: 180px
     user-select: none
     will-change: transform
-    border-radius: 16px
     transform-style: preserve-3d
+    border-radius: 16px
     background: $n6
     box-shadow: 0px 4px 8px $n4
     display: grid
