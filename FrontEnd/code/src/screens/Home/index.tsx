@@ -16,7 +16,7 @@ const cards = [
 const Home: React.FC<Props> = () => {
 	return (
 		<main className={styles.main}>
-			<Gallery>
+			<Gallery onClick={(item) => console.log("click")}>
 				{cards.map((src, i) => (
 					<img key={i} src={src} alt="test" />
 				))}
