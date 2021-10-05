@@ -2,7 +2,7 @@
 
 .gallery
     position: relative
-    width: 375px
+    width: 275px
     height: 200px
 
     display: flex
@@ -10,7 +10,6 @@
     transform-style: preserve-3d
     justify-content: center
     will-change: transform
-    outline: 1px solid red
 
 .card
     transform-origin: center bottom
@@ -26,6 +25,13 @@
     box-shadow: 0px 4px 8px $n4
     display: grid
     place-items: center
+    overflow: hidden
     +dark
         background: $n2
         box-shadow: 0px 4px 8px $n1
+
+    & > :first-child
+
+        height: 100%
+        width: 100%
+        pointer-events: none

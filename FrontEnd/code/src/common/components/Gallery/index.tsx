@@ -3,15 +3,14 @@ import { animated, to as interpolate, useSprings } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 
 import styles from './Gallery.module.sass';
-import { from, getAngle, getSide, getTranslation, inView, middle, to, X } from './util';
+import { from, getAngle, getSide, getTranslation, inView, swipe, to, X } from './util';
 
 interface Props<T> {
 	list?: T[];
+	velocityTrigger?: number;
+	angleTrigger?: number;
+	sides?: number;
 }
-
-const sides = 3;
-const velocityTrigger = 0.2;
-const angleTrigger = 0.5;
 
 const refH = (ref: React.RefObject<HTMLLIElement>) =>
 	(ref.current?.clientHeight ?? 1) + 20;
@@ -19,12 +18,20 @@ const refH = (ref: React.RefObject<HTMLLIElement>) =>
 const refW = (ref: React.RefObject<HTMLLIElement>) =>
 	ref.current?.clientWidth ?? 1;
 
-const Gallery = <T extends any>({ list = [] }: Props<T>) => {
-	const selected = useRef(middle(list.length));
+/**
+ * For now it is hard to split the array to smaller bite size.
+ * Dont go past 7 items in the demo.
+ */
+const Gallery = <T extends any>({
+	list = [],
+	sides = 6,
+	velocityTrigger = 0.2,
+	angleTrigger = 0.5,
+}: Props<T>) => {
+	const [selected, setSelected] = useState(0);
+
 	const galleryRef = useRef<HTMLUListElement>(null);
 	const ref = useRef<HTMLLIElement>(null);
-
-	console.log("update");
 
 	const [dimensions, setDimensions] = useState({
 		h: refH(ref),
@@ -37,8 +44,8 @@ const Gallery = <T extends any>({ list = [] }: Props<T>) => {
 			w: refW(ref),
 		});
 	}, [ref]);
-	const elements = inView(list, selected.current, sides);
-	const index = elements.findIndex(({ index }) => index === selected.current);
+	const elements = inView(list, selected, sides);
+	const index = elements.findIndex(({ index }) => index === selected);
 
 	const [props, api] = useSprings(elements.length, (i) => ({
 		...to(i, index, 180, 140),
@@ -46,7 +53,6 @@ const Gallery = <T extends any>({ list = [] }: Props<T>) => {
 	}));
 
 	const bind = useDrag(({ down, velocity, initial: [xInitial], xy: [x] }) => {
-		const vMax = velocity > velocityTrigger;
 		const gx =
 			(galleryRef.current?.getBoundingClientRect().left ?? 0) +
 			(galleryRef.current?.clientWidth ?? 0) / 2;
@@ -58,10 +64,21 @@ const Gallery = <T extends any>({ list = [] }: Props<T>) => {
 
 		const angle = getAngle(Math.abs(move) >= h ? dir * h : move, h);
 
-		const aMax = Math.abs(angle) > angleTrigger;
+		const vMax = velocity > velocityTrigger;
+		const aMax = Math.abs(angle) >= angleTrigger;
+
+		const trigger = aMax || vMax;
+
+		if (!down && trigger)
+			setSelected((n) => swipe(n, -dir, list.length - 1));
 
 		api.start((i) => {
-			if (i !== index) return;
+			if (i !== index) {
+				return {
+					x: X(i, index, h, w, sides).x,
+					rot: X(i, index, h, w).rot,
+				};
+			}
 
 			const x = getTranslation(
 				h,
@@ -72,8 +89,18 @@ const Gallery = <T extends any>({ list = [] }: Props<T>) => {
 			const rot = aMax ? dir * angleTrigger : angle;
 
 			return {
-				x,
-				rot,
+				x:
+					i === 0 && x > 0
+						? 0
+						: i === elements.length - 1 && x < 0
+						? 0
+						: x,
+				rot:
+					i === 0 && rot > 0
+						? 0
+						: i === elements.length - 1 && rot < 0
+						? 0
+						: rot,
 				config: {
 					friction: 20,
 					clamp: true,
@@ -96,10 +123,21 @@ const Gallery = <T extends any>({ list = [] }: Props<T>) => {
 								`translate3d(${x}px,${y}px,-${z}px) rotate(${r}rad)`
 						),
 					}}
-				></animated.li>
+				>
+					{elements[i].item as any}
+				</animated.li>
 			))}
 		</ul>
 	);
 };
 
-export default Gallery;
+/**
+ * Work around gor rendering children arrays with ease.
+ *
+ */
+const Container: React.FC = ({ children }) => {
+	const list = React.Children.toArray(children);
+	return <Gallery list={list} />;
+};
+
+export default Container;

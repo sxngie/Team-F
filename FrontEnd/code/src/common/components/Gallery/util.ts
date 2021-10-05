@@ -17,7 +17,6 @@ export const middle = (length: number) =>
  */
 export const inView = <T>(list: T[], active: number, sides: number) => {
 	let view = [];
-
 	const length = list.length;
 	const first = active - sides >= 0 ? active - sides : 0;
 	const last = active + sides < length ? active + sides : length - 1;
@@ -44,7 +43,7 @@ export const from = (i: number) => ({
 });
 
 export const getSide = (i: number, mid: number) =>
-	i > mid ? i - mid : mid - i;
+	i === mid ? 0 : i > mid ? i - mid : mid - i;
 
 /**
  * Returns the translation that needs to be taken for an object in a circular path.
@@ -75,4 +74,9 @@ export const X = (i: number, mid: number, h: number, w: number, diff = 10) => {
 		rot: angle,
 		x: trans.left,
 	};
+};
+
+export const swipe = (active: number, dir: number, max: number) => {
+	if ((active === 0 && dir < 0) || (active === max && dir > 0)) return active;
+	return active + dir;
 };
