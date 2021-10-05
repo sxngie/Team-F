@@ -1,5 +1,3 @@
-import { SpringValue } from 'react-spring';
-
 /**
  * Finds the middle index of the list.
  * @param {number} length Size of the list.
@@ -65,7 +63,7 @@ export const getTranslation = (h: number, w: number, angle: number) => {
 
 export const getAngle = (y: number, h: number) => Math.asin(y / h);
 
-export const X = (i: number, mid: number, h: number, w: number, diff = 10) => {
+export const X = (i: number, mid: number, h: number, w: number, diff = 15) => {
 	const n = getSide(i, mid);
 	const angle = (i > mid ? 1 : -1) * getAngle(n * diff, h);
 	const trans = getTranslation(h, w, angle);

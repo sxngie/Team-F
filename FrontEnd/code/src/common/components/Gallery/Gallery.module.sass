@@ -4,12 +4,9 @@
     position: relative
     width: 275px
     height: 200px
-
     display: flex
     align-items: center
-    transform-style: preserve-3d
     justify-content: center
-    will-change: transform
 
 .card
     transform-origin: center bottom
@@ -18,8 +15,6 @@
     will-change: transform
     height: 180px
     user-select: none
-    will-change: transform
-    transform-style: preserve-3d
     border-radius: 16px
     background: $n6
     box-shadow: 0px 4px 8px $n4
@@ -31,7 +26,9 @@
         box-shadow: 0px 4px 8px $n1
 
     & > :first-child
-
         height: 100%
         width: 100%
+        background-size: cover
+        background-repeat: no-repeat
+        background-position: center
         pointer-events: none
