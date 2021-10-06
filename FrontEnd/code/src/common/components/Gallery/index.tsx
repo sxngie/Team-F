@@ -12,6 +12,7 @@ interface Props {
 	onClick?: (item: React.ReactNode) => void;
 }
 
+// Helper functions to get the width and height of the container.
 const refH = (ref: React.RefObject<HTMLLIElement>) =>
 	(ref.current?.clientHeight ?? 1) + 20;
 
@@ -19,8 +20,10 @@ const refW = (ref: React.RefObject<HTMLLIElement>) =>
 	ref.current?.clientWidth ?? 1;
 
 /**
- * For now it is hard to split the array to smaller bite size.
- * Dont go past 7 items in the demo.
+ * Creates a gallery of the given elements.\
+ * \
+ * *For now it is hard to virtualize the list of items and have the animations
+ * run smoothly. Dont go past 7 items in the demo so that the animations still work.*
  */
 const Gallery = ({
 	sides = 6,
