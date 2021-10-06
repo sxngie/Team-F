@@ -9,7 +9,7 @@ interface Props {
 	velocityTrigger?: number;
 	angleTrigger?: number;
 	sides?: number;
-	onClick?: (item: React.ReactNode) => void;
+	onClick?: (index: number) => void;
 }
 
 // Helper functions to get the width and height of the container.
@@ -115,7 +115,7 @@ const Gallery = ({
 				});
 			},
 			onClick: ({ dragging, down }) =>
-				!dragging && !down ? onClick(list[selected]) : undefined,
+				!dragging && !down ? onClick(selected) : undefined,
 		},
 		{ drag: { filterTaps: true } }
 	);
