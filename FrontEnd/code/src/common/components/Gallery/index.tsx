@@ -26,9 +26,9 @@ const refW = (ref: React.RefObject<HTMLLIElement>) =>
  * run smoothly. Dont go past 7 items in the demo so that the animations still work.*
  */
 const Gallery = ({
-	sides = 6,
+	sides = 10,
 	velocityTrigger = 0.2,
-	angleTrigger = 0.5,
+	angleTrigger = 0.3,
 	onClick = () => {},
 	children,
 }: React.PropsWithChildren<Props>) => {
@@ -56,65 +56,69 @@ const Gallery = ({
 		from: from(i),
 	}));
 
-	const bind = useGesture({
-		onDrag: ({ down, velocity, initial: [xInitial], xy: [x] }) => {
-			const gx =
-				(galleryRef.current?.getBoundingClientRect().left ?? 0) +
-				(galleryRef.current?.clientWidth ?? 0) / 2;
+	const bind = useGesture(
+		{
+			onDrag: ({ down, velocity, initial: [xInitial], xy: [x] }) => {
+				const gx =
+					(galleryRef.current?.getBoundingClientRect().left ?? 0) +
+					(galleryRef.current?.clientWidth ?? 0) / 2;
 
-			const dir = x - gx < 0 ? -1 : 1;
-			const move = down ? Math.abs(x - xInitial) * dir : 0;
+				const dir = x - gx < 0 ? -1 : 1;
+				const move = down ? Math.abs(x - xInitial) * dir : 0;
 
-			const { h, w } = dimensions;
+				const { h, w } = dimensions;
 
-			const angle = getAngle(Math.abs(move) >= h ? dir * h : move, h);
+				const angle = getAngle(Math.abs(move) >= h ? dir * h : move, h);
 
-			const vMax = velocity > velocityTrigger;
-			const aMax = Math.abs(angle) >= angleTrigger;
+				const vMax = velocity > velocityTrigger;
+				const aMax = Math.abs(angle) >= angleTrigger;
 
-			const trigger = aMax || vMax;
+				const trigger = aMax || vMax;
 
-			if (!down && trigger)
-				setSelected((n) => swipe(n, -dir, list.length - 1));
+				if (!down && trigger)
+					setSelected((n) => swipe(n, -dir, list.length - 1));
 
-			api.start((i) => {
-				if (i !== index) {
+				api.start((i) => {
+					if (i !== index) {
+						return {
+							x: X(i, index, h, w, sides).x,
+							rot: X(i, index, h, w).rot,
+						};
+					}
+
+					const x = getTranslation(
+						h,
+						w,
+						aMax ? dir * angleTrigger : angle
+					).left;
+
+					const rot = aMax ? dir * angleTrigger : angle;
+
 					return {
-						x: X(i, index, h, w, sides).x,
-						rot: X(i, index, h, w).rot,
+						x:
+							i === 0 && x > 0
+								? 0
+								: i === elements.length - 1 && x < 0
+								? 0
+								: x,
+						rot:
+							i === 0 && rot > 0
+								? 0
+								: i === elements.length - 1 && rot < 0
+								? 0
+								: rot,
+						config: {
+							friction: 20,
+							clamp: true,
+						},
 					};
-				}
-
-				const x = getTranslation(
-					h,
-					w,
-					aMax ? dir * angleTrigger : angle
-				).left;
-
-				const rot = aMax ? dir * angleTrigger : angle;
-
-				return {
-					x:
-						i === 0 && x > 0
-							? 0
-							: i === elements.length - 1 && x < 0
-							? 0
-							: x,
-					rot:
-						i === 0 && rot > 0
-							? 0
-							: i === elements.length - 1 && rot < 0
-							? 0
-							: rot,
-					config: {
-						friction: 20,
-						clamp: true,
-					},
-				};
-			});
+				});
+			},
+			onClick: ({ dragging, down }) =>
+				!dragging && !down ? onClick(list[selected]) : undefined,
 		},
-		onClick: () => onClick(list[selected]),
-	});
+		{ drag: { filterTaps: true } }
+	);
 
 	return (
 		<ul className={styles.gallery} ref={galleryRef} {...bind()}>
