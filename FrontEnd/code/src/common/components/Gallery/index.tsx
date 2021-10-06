@@ -10,6 +10,7 @@ interface Props {
 	angleTrigger?: number;
 	sides?: number;
 	onClick?: (index: number) => void;
+	onChange?: (index: number) => void;
 }
 
 // Helper functions to get the width and height of the container.
@@ -30,6 +31,7 @@ const Gallery = ({
 	velocityTrigger = 0.2,
 	angleTrigger = 0.3,
 	onClick = () => {},
+	onChange = () => {},
 	children,
 }: React.PropsWithChildren<Props>) => {
 	const [selected, setSelected] = useState(0);
@@ -41,6 +43,10 @@ const Gallery = ({
 		h: refH(ref),
 		w: refW(ref),
 	});
+
+	useEffect(() => {
+		onChange(selected);
+	}, [selected]);
 
 	useEffect(() => {
 		setDimensions({
