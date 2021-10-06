@@ -1,0 +1,92 @@
+@import ../../../styles/helpers
+
+.list
+    width: 100%
+    display: flex
+    row-gap: 10px
+    flex-direction: column
+    padding: 5px
+
+.item
+    display: flex
+    align-items: center
+    cursor: pointer
+    user-select: none
+    flex-direction: row
+    column-gap: 10px
+    padding: 5px 15px
+    border-radius: 16px
+    height: 74px
+
+    &:hover
+        transition: $transition
+        background: $n6
+        +dark
+            background: $n2
+
+.text
+    position: relative
+    display: flex
+    overflow: hidden
+    flex-direction: column
+    align-items: flex-start
+    flex-grow: 1
+
+.controls
+    position: relative
+    height: 100%
+    display: grid
+    min-width: max-content
+    grid-template-rows: min-content 1fr
+    justify-items: center
+    align-items: center
+    row-gap: 10px
+
+.arrow
+    opacity: 0
+    pointer-events: none
+    transition: $transition
+    height: 16px
+    width: 16px
+    fill: $n4
+    +dark
+        fill: $n4
+
+.item:hover .arrow
+    opacity: 1
+    animation: shake 4s ease infinite
+    animation-delay: 1s
+
+.name
+    +body-bold-2
+    width: 100%
+    +text-overflow
+    color: $n2
+    +dark
+        color: $n7
+
+.item:hover .last-name
+    color: $n3
+    +dark
+        color: $n4
+
+.item:hover img
+    border: 2px solid $n6
+    +dark
+        border: 2px solid $n2
+
+.last-name
+    width: 100%
+    +caption-1
+    +text-overflow
+    color: $n4
+    +dark
+        color: $n4
+
+@keyframes shake
+    0%, 100%
+        transform: translateX(0)
+    50%, 80%
+        transform: translateX(-3px)
+    60%
+        transform: translateX(3px)

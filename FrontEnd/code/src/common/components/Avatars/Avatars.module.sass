@@ -1,0 +1,72 @@
+@import ../../../styles/helpers
+
+.one
+    position: relative
+    display: flex
+    align-items: center
+    justify-items: center
+
+    &  img
+        height: 48px
+        min-width: 48px
+
+.two
+    position: relative
+    display: flex
+    flex-direction: row
+    height: 40px
+    min-width: 64px
+
+    &  img
+        height: 40px
+        width: 40px
+
+    & img:nth-child(1)
+        position: absolute
+        left: 0px
+        top: 0px
+
+    & img:nth-child(2)
+        position: absolute
+        left: 24px
+        top: 0px
+
+.three
+    position: relative
+    display: flex
+    flex-direction: row
+    height: 50px
+    min-width: 56px
+    &  img
+        height: 28px
+        width: 28px
+
+    & img:nth-child(1)
+        position: absolute
+        left: 0px
+        top: 10px
+
+    & img:nth-child(2)
+        position: absolute
+        left: 14px
+        top: 2px
+
+    & img:nth-child(3)
+        position: absolute
+        left: 28px
+        top: 10px
+
+.image
+    object-fit: cover
+    user-select: none
+    position: relative
+    overflow: hidden
+    border-radius: 50%
+    border: 2px solid $n8
+    background-color: $n6
+    display: grid
+    place-items: center
+
+    +dark
+        background-color: $n2
+        border: 2px solid $n1

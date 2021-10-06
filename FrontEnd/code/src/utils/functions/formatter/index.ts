@@ -32,4 +32,17 @@ export const formatDate = (
 	options?: Intl.DateTimeFormatOptions
 ) => new Intl.DateTimeFormat(locales, options).format(d);
 
+/**
+ * Formats a date to only give the time
+ *
+ * @param {Date} date Date to fomat
+ * @returns {string} Time format HH:MM AM/PM
+ */
+export const formatTime = (date: Date) =>
+	date.toLocaleString("en-US", {
+		hour: "numeric",
+		minute: "numeric",
+		hour12: true,
+	});
+
 // etc... More to come as needed.
