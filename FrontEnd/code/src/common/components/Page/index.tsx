@@ -9,6 +9,7 @@ import styles from './Page.module.sass';
 export interface PageProps extends RouteComponentProps {
 	separatorHeader?: boolean;
 	footerHide?: boolean;
+	headerHide?: boolean;
 	wide?: boolean;
 	notAuthorized?: boolean;
 }
@@ -17,6 +18,7 @@ const Page: React.FC<PageProps> = ({
 	separatorHeader,
 	children,
 	footerHide,
+	headerHide,
 	wide,
 	notAuthorized,
 }) => {
@@ -30,11 +32,13 @@ const Page: React.FC<PageProps> = ({
 	return (
 		<>
 			<div className={styles.page}>
-				<Header
-					separatorHeader={separatorHeader}
-					wide={wide}
-					notAuthorized={notAuthorized}
-				/>
+				{!headerHide && (
+					<Header
+						separatorHeader={separatorHeader}
+						wide={wide}
+						notAuthorized={notAuthorized}
+					/>
+				)}
 				<div className={styles.inner}>{children}</div>
 				{!footerHide && <Footer />}
 			</div>

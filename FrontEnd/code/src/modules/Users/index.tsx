@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import Chat from 'common/components/Chat';
-import User from 'common/components/User';
+import Loader from 'common/components/Loader';
+import Person from 'common/components/Person';
 import React from 'react';
 import { Chat as C, Favorite } from 'utils/types/Chat';
 
@@ -16,6 +17,8 @@ interface Props {
 			chatId?: string;
 		}>
 	>;
+	chatsLoad?: boolean;
+	favLoad?: boolean;
 	activeId?: string;
 }
 
@@ -25,6 +28,8 @@ const Users: React.FC<Props> = ({
 	className,
 	setChat,
 	activeId,
+	chatsLoad,
+	favLoad,
 }) => {
 	return (
 		<section className={cn(className, styles.container)}>
@@ -35,13 +40,20 @@ const Users: React.FC<Props> = ({
 						{favorites
 							.sort((a, b) => a.name.localeCompare(b.name))
 							.map((fav, i) => (
-								<User
+								<Person
 									key={i}
 									chat={fav}
-									setChat={setChat}
+									onClick={(id) =>
+										setChat({ visible: true, chatId: id })
+									}
 									activeId={activeId}
 								/>
 							))}
+						{favLoad && (
+							<span className={cn(styles.load, styles.vertical)}>
+								<Loader className={styles.loader} />
+							</span>
+						)}
 					</nav>
 				</>
 			)}
@@ -51,11 +63,16 @@ const Users: React.FC<Props> = ({
 					<Chat
 						chat={chat}
 						key={i}
-						setChat={setChat}
+						onClick={(id) => setChat({ visible: true, chatId: id })}
 						activeId={activeId}
 					/>
 				))}
 			</nav>
+			{chatsLoad && (
+				<span className={styles.load}>
+					<Loader className={styles.loader} />
+				</span>
+			)}
 		</section>
 	);
 };

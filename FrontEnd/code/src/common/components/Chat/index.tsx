@@ -9,21 +9,11 @@ import styles from './Chat.module.sass';
 interface Props {
 	chat: C;
 	notificationMax?: number;
-	setChat: React.Dispatch<
-		React.SetStateAction<{
-			visible: boolean;
-			chatId?: string;
-		}>
-	>;
+	onClick: (id: string) => void;
 	activeId?: string;
 }
 
-const Chat: React.FC<Props> = ({
-	chat,
-	setChat,
-	activeId,
-	notificationMax = 999,
-}) => {
+const Chat: React.FC<Props> = ({ chat, onClick, activeId }) => {
 	const { avatars, lastMessage, name, timeStamp, notifications, id } = chat;
 
 	return (
@@ -31,7 +21,7 @@ const Chat: React.FC<Props> = ({
 			className={cn(styles.item, {
 				[styles.active]: activeId === id,
 			})}
-			onClick={() => setChat({ chatId: id, visible: true })}
+			onClick={() => onClick(id)}
 		>
 			<span
 				className={cn(styles.notification, {

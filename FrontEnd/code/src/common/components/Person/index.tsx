@@ -3,27 +3,22 @@ import React from 'react';
 import { Favorite } from 'utils/types/Chat';
 
 import Avatars from '../Avatars';
-import styles from './User.module.sass';
+import styles from './Person.module.sass';
 
 interface Props {
 	chat: Favorite;
-	setChat: React.Dispatch<
-		React.SetStateAction<{
-			visible: boolean;
-			chatId?: string;
-		}>
-	>;
+	onClick: (id: string) => void;
 	activeId?: string;
 }
 
-const User: React.FC<Props> = ({ chat, setChat, activeId }) => {
+const Person: React.FC<Props> = ({ chat, onClick, activeId }) => {
 	const { avatars, id, name, notifications } = chat;
 	return (
 		<button
 			className={cn(styles.item, {
 				[styles.active]: activeId === id,
 			})}
-			onClick={() => setChat({ chatId: id, visible: true })}
+			onClick={() => onClick(id)}
 		>
 			<span className={styles.icon}>
 				<Avatars avatars={avatars} />
@@ -34,4 +29,4 @@ const User: React.FC<Props> = ({ chat, setChat, activeId }) => {
 	);
 };
 
-export default User;
+export default Person;

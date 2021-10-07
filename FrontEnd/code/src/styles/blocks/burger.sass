@@ -1,0 +1,31 @@
+.burger
+    display: none
+    +m
+        display: block
+        position: relative
+        z-index: 15
+        margin-left: 20px
+        width: 32px
+        height: 32px
+        background: none
+        -webkit-tap-highlight-color: rgba(0,0,0,0)
+        &.active
+            &:before
+                transform: translateY(0) rotate(-45deg)
+            &:after
+                transform: translateY(0) rotate(45deg)
+        &:before,
+        &:after
+            content: ''
+            position: absolute
+            top: 16px
+            left: 6px
+            width: 20px
+            height: 2px
+            background: $n4
+            border-radius: 2px
+            transition: transform .2s
+        &:before
+            transform: translateY(-4px)
+        &:after
+            transform: translateY(3px)

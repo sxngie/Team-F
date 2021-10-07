@@ -6,6 +6,7 @@
     padding: 24px 0
     +m
         padding: 48px 0 24px
+
     &.wide
         .container
             max-width: 100%
@@ -14,3 +15,131 @@
     box-shadow: inset 0 -1px 0 0 $n6
     +dark
         box-shadow: inset 0 -1px 0 0 $n2
+
+.container
+    display: flex
+    align-items: center
+    height: 100%
+
+.logo
+    margin-right: 40px
+    +d
+        margin-right: 32px
+    +m
+        position: relative
+        z-index: 15
+        margin-right: auto
+    img
+
+.pic
+    height: 40px
+    fill: $n2
+    +dark
+        fill: $n7
+
+.picTitle
+    margin-left: 10px
+    height: 40px
+    fill: $n2
+    +dark
+        fill: $n7
+    +t
+        display: none
+
+.wrapper
+    display: flex
+    height: 100%
+    align-items: center
+    flex-grow: 1
+    column-gap: 40px
+    justify-content: flex-end
+    padding-left: 40px
+    border-left: 1px solid $n6
+    +d
+        padding-left: 32px
+    +t
+        padding-left: 0
+        border: none
+    +m
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        z-index: 10
+        flex-direction: column
+        align-items: stretch
+        justify-content: flex-start
+        height: 100vh
+        min-height: auto
+        padding: 132px 32px 48px
+        background: $n7
+        visibility: hidden
+        opacity: 0
+        pointer-events: none
+        transition: all .3s
+        +dark
+            background: $n1
+        &.active
+            visibility: visible
+            opacity: 1
+            pointer-events: all
+    +dark
+        border-color: $n2
+    & > div
+        &:first-child
+            +t
+                margin-right: auto
+            +m
+                margin: 0
+
+.dropdown
+    margin-right: auto
+
+.link
+    +button-2
+    color: $n4
+    transition: color .2s
+    +t
+        display: none
+    +m
+        display: flex
+        align-items: center
+        margin: 0 -32px
+        padding: 0 32px
+        height: 64px
+        +poppins
+        font-size: 24px
+        font-weight: 600
+    &:hover,
+    &.active
+        color: $n2
+        +m
+            background: none
+            box-shadow: inset 2px 0 0 $p1
+        +dark
+            color: $n6
+            +m
+                background: none
+                color: $n6
+
+.login
+    width: 40px
+    height: 40px
+    border-radius: 50%
+    display: grid
+    place-items: center
+    background: $p4
+    transition: background .2s
+    svg
+        fill: $n8
+    &:hover
+        background: darken($p4, 8)
+
+.auth
+    display: flex
+    justify-content: flex-end
+    align-items: center
+    padding-left: 40px
+    column-gap: 20px
+    +m
+        flex-grow: 1

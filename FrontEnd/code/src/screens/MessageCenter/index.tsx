@@ -1,6 +1,6 @@
 import cn from 'classnames';
-import Messages from 'common/components/Messages';
 import { fakeChats, fakeFavorites } from 'mockup/fakeData';
+import Messages from 'modules/Messages';
 import Users from 'modules/Users';
 import React, { useState } from 'react';
 
