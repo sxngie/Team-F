@@ -19,7 +19,7 @@ interface Props {
 const User: React.FC<Props> = ({ chat, setChat, activeId }) => {
 	const { avatars, id, name, notifications } = chat;
 	return (
-		<li
+		<button
 			className={cn(styles.item, {
 				[styles.active]: activeId === id,
 			})}
@@ -30,7 +30,7 @@ const User: React.FC<Props> = ({ chat, setChat, activeId }) => {
 				{notifications && <span className={styles.notification}></span>}
 			</span>
 			<p className={styles.name}>{name}</p>
-		</li>
+		</button>
 	);
 };
 

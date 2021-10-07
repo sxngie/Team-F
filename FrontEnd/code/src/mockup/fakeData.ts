@@ -10,7 +10,7 @@ function getRandomInt(min: number, max: number) {
 export const avatars = (min = 1, max = 3) =>
 	Array.from({ length: getRandomInt(1, 4) }, () => faker.image.avatar());
 
-export const getFakeChats = (length: number, notif = 250): Chat[] =>
+export const getFakeChats = (length: number): Chat[] =>
 	Array.from({ length }, () => {
 		const icons = avatars();
 		const name =
@@ -27,7 +27,7 @@ export const getFakeChats = (length: number, notif = 250): Chat[] =>
 				new Date(2021, 10, 1)
 			),
 			avatars: icons,
-			notifications: Math.floor(Math.random() * notif),
+			notifications: Math.random() < 0.5,
 			favorite: Math.random() < 0.2,
 		};
 	});
@@ -39,7 +39,7 @@ export const convertToFav = (chats: Chat[], length = 6): Favorite[] =>
 			id: chat.id,
 			name: chat.name,
 			avatars: chat.avatars,
-			notifications: !!chat.notifications,
+			notifications: chat.notifications,
 		}));
 
 export const getFakeFavorites = (length = 6): Favorite[] =>
@@ -58,7 +58,7 @@ export const getFakeFavorites = (length = 6): Favorite[] =>
 		};
 	});
 
-export const fakeChats = getFakeChats(20, 10).sort((a, b) =>
+export const fakeChats = getFakeChats(20).sort((a, b) =>
 	!a.timeStamp || !b.timeStamp
 		? -1
 		: b.timeStamp.getTime() - a.timeStamp.getTime()

@@ -3,6 +3,7 @@
 .item
     display: flex
     align-items: center
+    justify-content: center
     cursor: pointer
     user-select: none
     flex-direction: row
@@ -11,7 +12,7 @@
     border-radius: 16px
     height: 74px
 
-    &:hover,&.active
+    &:hover,&.active,&:focus
         transition: $transition
         background: $n6
         +dark
@@ -20,31 +21,19 @@
     &:active
         transform: scale(0.95)
 
-.info
-    position: relative
-    display: grid
-    place-items: center
-
 .notification
-    top: 30px
-    right: -7px
-    max-width: 100%
-    position: absolute
-    padding: 0px 4px
-    justify-self: flex-end
-    align-self: flex-end
-    background: $s4
-    border-radius: 22px
-    min-width: 22px
-    min-height: 22px
+    background: $p1
+    border-radius: 50%
+    min-width: 12px
+    min-height: 12px
     display: grid
+    opacity: 0
+    transform: scale(0)
     place-items: center
-    +caption-bold-2
-    font-size: 11px
-    color: $n8
-    +dark
-        color: $n1
-    border: 2px solid currentColor
+    transition: opacity $transition
+    &.on
+        transform: scale(1)
+        opacity: 1
 
 .text
     position: relative
@@ -74,10 +63,11 @@
     +dark
         fill: $n4
 
-.item:hover .arrow
-    opacity: 1
-    animation: shake 4s ease infinite
-    animation-delay: 1s
+.item:hover,.item:focus
+    .arrow
+        opacity: 1
+        animation: shake 4s ease infinite
+        animation-delay: 1s
 
 .name
     +body-bold-2
@@ -92,8 +82,8 @@
     +dark
         color: $n4
 
-.item:hover,.active
-    img,.notification
+.item:hover,.active,.item:focus
+    img
         transition: $transition
         border: 2px solid $n6
         +dark

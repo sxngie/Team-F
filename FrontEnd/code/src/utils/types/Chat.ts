@@ -4,7 +4,7 @@ export interface Chat {
 	lastMessage?: string;
 	timeStamp?: Date;
 	avatars: string[];
-	notifications?: number;
+	notifications: boolean;
 	favorite?: boolean;
 }
 

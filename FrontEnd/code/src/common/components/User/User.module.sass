@@ -13,7 +13,7 @@
     padding: 15px
     border-radius: 16px
 
-    &:hover,&.active
+    &:hover,&.active,&:focus
         transition: $transition
         background: $n6
         +dark
@@ -30,7 +30,7 @@
     position: absolute
     justify-self: flex-end
     align-self: flex-end
-    background: $s4
+    background: $p1
     border-radius: 50%
     min-width: 18px
     min-height: 18px
@@ -43,7 +43,7 @@
         color: $n1
     border: 2px solid currentColor
 
-.item:hover,.active
+.item:hover,.active,.item:focus
     img,.notification
         transition: $transition
         border: 2px solid $n6
@@ -71,8 +71,10 @@
 
     @keyframes blinker
         0%, 100%
-            opacity: 1
-        50%, 80%
-            opacity: 1
+            transform: scale(1)
+
+        50%, 70%
+            transform: scale(1)
+
         60%
-            opacity: 0.5
+            transform: scale(0.6)

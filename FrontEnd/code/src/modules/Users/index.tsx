@@ -31,7 +31,7 @@ const Users: React.FC<Props> = ({
 			{favorites.length > 0 && (
 				<>
 					<h3 className={styles.header}>Favorites</h3>
-					<ul className={styles.favorites}>
+					<nav className={styles.favorites}>
 						{favorites
 							.sort((a, b) => a.name.localeCompare(b.name))
 							.map((fav, i) => (
@@ -42,11 +42,11 @@ const Users: React.FC<Props> = ({
 									activeId={activeId}
 								/>
 							))}
-					</ul>
+					</nav>
 				</>
 			)}
 			<h3 className={styles.header}>Direct Messages</h3>
-			<ul className={styles.chats}>
+			<nav className={styles.chats}>
 				{users.map((chat, i) => (
 					<Chat
 						chat={chat}
@@ -55,7 +55,7 @@ const Users: React.FC<Props> = ({
 						activeId={activeId}
 					/>
 				))}
-			</ul>
+			</nav>
 		</section>
 	);
 };
