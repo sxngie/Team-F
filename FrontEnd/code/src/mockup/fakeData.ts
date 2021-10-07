@@ -57,3 +57,9 @@ export const getFakeFavorites = (length = 6): Favorite[] =>
 			notifications: Math.random() < 0.5,
 		};
 	});
+
+export const fakeChats = getFakeChats(20, 10).sort((a, b) =>
+	!a.timeStamp || !b.timeStamp
+		? -1
+		: b.timeStamp.getTime() - a.timeStamp.getTime()
+);
