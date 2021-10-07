@@ -1,22 +1,38 @@
 import cn from 'classnames';
-import ChatList from 'common/components/ChatList';
-import { chatList } from 'mockup/chatList';
-import React from 'react';
+import Messages from 'common/components/Messages';
+import { convertToFav, getFakeChats } from 'mockup/fakeData';
+import Users from 'modules/Users';
+import React, { useState } from 'react';
 
-import styles from './Messages.module.sass';
+import styles from './MessageCenter.module.sass';
 
 interface Props {}
 
-const Messages: React.FC<Props> = () => {
+const list = getFakeChats(20, 10).sort((a, b) =>
+	!a.timeStamp || !b.timeStamp
+		? -1
+		: b.timeStamp.getTime() - a.timeStamp.getTime()
+);
+
+const MessageCenter: React.FC<Props> = () => {
+	const [chat, setChat] = useState<{ visible: boolean; chatId?: string }>({
+		visible: false,
+		chatId: list[0]?.id,
+	});
+
 	return (
 		<main className={styles.container}>
-			<section className={styles.list}>
-				<ChatList list={chatList} />
-			</section>
-			<article className={styles.chat}></article>
-			<section className={cn(styles.info, "tablet-hide")}></section>
+			<Users
+				users={list}
+				favorites={convertToFav(list)}
+				className={styles.users}
+				setChat={setChat}
+				activeId={chat.chatId}
+			/>
+			<Messages setChat={setChat} chat={chat} />
+			<section className={cn(styles.info)}></section>
 		</main>
 	);
 };
 
-export default Messages;
+export default MessageCenter;

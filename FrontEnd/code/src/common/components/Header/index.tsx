@@ -17,13 +17,13 @@ interface Props {
  */
 const Header: React.FC<Props> = ({ separatorHeader, wide, notAuthorized }) => {
 	return (
-		<div
+		<nav
 			className={cn(
 				styles.header,
 				{ [styles.headerBorder]: separatorHeader },
 				{ [styles.wide]: wide }
 			)}
-		></div>
+		></nav>
 	);
 };
 

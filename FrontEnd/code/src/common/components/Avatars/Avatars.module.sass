@@ -28,6 +28,7 @@
 
     & img:nth-child(2)
         position: absolute
+        animation-delay: 0.2s
         left: 24px
         top: 0px
 
@@ -35,7 +36,7 @@
     position: relative
     display: flex
     flex-direction: row
-    height: 50px
+    height: 38px
     min-width: 56px
     &  img
         height: 28px
@@ -48,15 +49,18 @@
 
     & img:nth-child(2)
         position: absolute
+        animation-delay: 0.2s
         left: 14px
         top: 2px
 
     & img:nth-child(3)
         position: absolute
+        animation-delay: 0.4s
         left: 28px
         top: 10px
 
 .image
+    animation: grow 0.4s ease forwards
     object-fit: cover
     user-select: none
     position: relative
@@ -66,7 +70,12 @@
     background-color: $n6
     display: grid
     place-items: center
+    transform: scale(0)
 
     +dark
         background-color: $n2
         border: 2px solid $n1
+
+@keyframes grow
+    to
+        transform: scale(1)

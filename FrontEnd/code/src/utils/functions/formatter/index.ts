@@ -46,3 +46,23 @@ export const formatTime = (date: Date) =>
 	});
 
 // etc... More to come as needed.
+
+//TODO: Fix issue relating to edge case for today and yesteday.
+export const getTimeStamp = (date: Date) => {
+	const day = 60 * 60 * 24 * 1000;
+	const now = Date.now();
+	const diff = now - date.getTime();
+
+	if (diff <= day) {
+		return formatTime(date);
+	} else if (diff <= day * 2) {
+		return "Yesterday";
+	} else if (diff <= day * 7) {
+		return date.toLocaleString("en-US", {
+			weekday: "long",
+		});
+	}
+	return date.toLocaleString("en-US", {
+		dateStyle: "short",
+	});
+};

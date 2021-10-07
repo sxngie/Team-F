@@ -1,3 +1,4 @@
+import Page from 'common/components/Page';
 import React, { lazy } from 'react';
 
 export type RouteName = typeof routeNames[number];
@@ -26,7 +27,7 @@ const Home = lazy(() => import("screens/Home"));
 const Music = lazy(() => import("screens/Music"));
 const Library = lazy(() => import("screens/Library"));
 const Discover = lazy(() => import("screens/Discover"));
-const Messages = lazy(() => import("screens/Messages"));
+const MessageCenter = lazy(() => import("screens/Messages"));
 const Profile = lazy(() => import("screens/Profile"));
 const Settings = lazy(() => import("screens/Settings"));
 
@@ -39,7 +40,14 @@ const routes: Route[] = [
 	{ path: "music", render: <Music /> },
 	{ path: "library", render: <Library /> },
 	{ path: "discover", render: <Discover /> },
-	{ path: "messages", render: <Messages /> },
+	{
+		path: "messages",
+		render: (
+			<Page footerHide separatorHeader>
+				<MessageCenter />
+			</Page>
+		),
+	},
 	{ path: "profile", render: <Profile /> },
 	{ path: "settings", render: <Settings /> },
 ];

@@ -1,3 +1,5 @@
+@import ./helpers
+
 // common styles
 body
     min-width: 375px
@@ -39,7 +41,7 @@ img
         display: none !important
         +t
             display: block !important
-            
+
 .mobile
     &-hide
         +m
@@ -51,18 +53,20 @@ img
 
 // Scrollbar customization, supported on Chrome.
 ::-webkit-scrollbar
-	width: 6px;
-	height: 6px;
+    width: 10px
+    height: 10px
 
 ::-webkit-scrollbar-thumb
-	border-radius: 3px;
-	background-clip: padding-box;
-	background: black; // color of the scroll thumb.
+    border-radius: 3px
+    background-clip: padding-box
+    background: $n5 // color of the scroll thumb.
+    +dark
+        background: $n2
 
-::-webkit-scrollbar-button 
-	width: 0;
-	height: 0;
-	display: none;
+::-webkit-scrollbar-button
+    width: 0
+    height: 0
+    display: none
 
-::-webkit-scrollbar-corner 
-	background-color: transparent;
+::-webkit-scrollbar-corner
+    background-color: transparent

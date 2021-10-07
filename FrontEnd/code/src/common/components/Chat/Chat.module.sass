@@ -1,12 +1,5 @@
 @import ../../../styles/helpers
 
-.list
-    width: 100%
-    display: flex
-    row-gap: 10px
-    flex-direction: column
-    padding: 5px
-
 .item
     display: flex
     align-items: center
@@ -18,11 +11,40 @@
     border-radius: 16px
     height: 74px
 
-    &:hover
+    &:hover,&.active
         transition: $transition
         background: $n6
         +dark
             background: $n2
+
+    &:active
+        transform: scale(0.95)
+
+.info
+    position: relative
+    display: grid
+    place-items: center
+
+.notification
+    top: 30px
+    right: -7px
+    max-width: 100%
+    position: absolute
+    padding: 0px 4px
+    justify-self: flex-end
+    align-self: flex-end
+    background: $s4
+    border-radius: 22px
+    min-width: 22px
+    min-height: 22px
+    display: grid
+    place-items: center
+    +caption-bold-2
+    font-size: 11px
+    color: $n8
+    +dark
+        color: $n1
+    border: 2px solid currentColor
 
 .text
     position: relative
@@ -70,10 +92,12 @@
     +dark
         color: $n4
 
-.item:hover img
-    border: 2px solid $n6
-    +dark
-        border: 2px solid $n2
+.item:hover,.active
+    img,.notification
+        transition: $transition
+        border: 2px solid $n6
+        +dark
+            border: 2px solid $n2
 
 .last-name
     width: 100%
@@ -82,6 +106,14 @@
     color: $n4
     +dark
         color: $n4
+
+.time
+    width: 100%
+    +caption-1
+    +text-overflow
+    color: $p1
+    +dark
+        color: $p1
 
 @keyframes shake
     0%, 100%

@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import React from 'react';
 
 import styles from './Avatars.module.sass';
@@ -17,17 +16,16 @@ const pos = (n: number) => {
 };
 
 interface Props {
-	icons: string[];
+	avatars: string[];
 }
 
-const Avatars: React.FC<Props> = ({ icons }) => {
-	const count = icons.length > 3 ? 3 : icons.length;
-	const list = icons.slice(0, 3);
+const Avatars: React.FC<Props> = ({ avatars }) => {
+	const count = avatars.length > 3 ? 3 : avatars.length;
 	const imgClass = pos(count);
 
 	return (
 		<span className={imgClass}>
-			{list.map((src, i) => (
+			{avatars.slice(0, 3).map((src, i) => (
 				<img
 					src={src}
 					alt="User Avatar"

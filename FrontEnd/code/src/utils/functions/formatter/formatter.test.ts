@@ -1,4 +1,4 @@
-import { formatDate, formatNumber } from './index';
+import { formatDate, formatNumber, getTimeStamp } from './index';
 
 test("formats dates properly", () => {
 	const date = new Date(1999, 4, 11);
