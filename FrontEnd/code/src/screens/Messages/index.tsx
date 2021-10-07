@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import Messages from 'common/components/Messages';
-import { convertToFav, fakeChats } from 'mockup/fakeData';
+import { fakeChats, fakeFavorites } from 'mockup/fakeData';
 import Users from 'modules/Users';
 import React, { useState } from 'react';
 
@@ -18,7 +18,7 @@ const MessageCenter: React.FC<Props> = () => {
 		<main className={styles.container}>
 			<Users
 				users={fakeChats}
-				favorites={convertToFav(fakeChats)}
+				favorites={fakeFavorites}
 				className={styles.users}
 				setChat={setChat}
 				activeId={chat.chatId}

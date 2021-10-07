@@ -63,3 +63,5 @@ export const fakeChats = getFakeChats(20, 10).sort((a, b) =>
 		? -1
 		: b.timeStamp.getTime() - a.timeStamp.getTime()
 );
+
+export const fakeFavorites = convertToFav(fakeChats);
