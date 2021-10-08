@@ -11,7 +11,7 @@ export interface PageProps extends RouteComponentProps {
 	footerHide?: boolean;
 	headerHide?: boolean;
 	wide?: boolean;
-	notAuthorized?: boolean;
+	authorized?: boolean;
 }
 
 const Page: React.FC<PageProps> = ({
@@ -20,7 +20,7 @@ const Page: React.FC<PageProps> = ({
 	footerHide,
 	headerHide,
 	wide,
-	notAuthorized,
+	authorized,
 }) => {
 	const { pathname } = useLocation();
 
@@ -36,7 +36,7 @@ const Page: React.FC<PageProps> = ({
 					<Header
 						separatorHeader={separatorHeader}
 						wide={wide}
-						notAuthorized={notAuthorized}
+						authorized={authorized}
 					/>
 				)}
 				<div className={styles.inner}>{children}</div>

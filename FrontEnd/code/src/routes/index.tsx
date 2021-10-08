@@ -5,21 +5,24 @@ export type RouteName = typeof routeNames[number];
 
 export interface Route {
 	path: RouteName;
-	render?: React.ReactNode; // Screen component goes here.
+	render: (auth: boolean) => React.ReactNode | null; // Screen component goes here.
 	name: string;
+	needAuth: boolean;
 }
 
 /**
  * All possible routes, in the application.
  */
 const routeNames = [
-	"",
+	"", // This is reserved for the product page.
+	"home",
 	"music",
 	"library",
 	"discover",
 	"messages",
 	"profile",
 	"settings",
+	"support",
 ] as const;
 
 //-----[Lazy Imports Screens]-----
@@ -31,6 +34,7 @@ const Discover = lazy(() => import("screens/Discover"));
 const MessageCenter = lazy(() => import("screens/MessageCenter"));
 const Profile = lazy(() => import("screens/Profile"));
 const Settings = lazy(() => import("screens/Settings"));
+const Product = lazy(() => import("screens/Product"));
 
 /**
  * Application routes to be rendered.
@@ -38,28 +42,85 @@ const Settings = lazy(() => import("screens/Settings"));
 // TODO: Add corresponding screens for each route.
 const routes: Route[] = [
 	{
-		path: "",
-		render: (
-			<Page footerHide separatorHeader notAuthorized>
+		path: "home",
+		render: (auth) => (
+			<Page separatorHeader authorized={auth}>
 				<Home />
 			</Page>
 		),
 		name: "Home",
+		needAuth: true,
 	},
-	{ path: "music", render: <Music />, name: "Music" },
-	{ path: "library", render: <Library />, name: "Library" },
-	{ path: "discover", render: <Discover />, name: "Discover" },
+	{
+		path: "music",
+		render: (auth) => (
+			<Page authorized={auth}>
+				<Music />
+			</Page>
+		),
+		name: "Music",
+		needAuth: true,
+	},
+	{
+		path: "library",
+		render: (auth) => (
+			<Page authorized={auth}>
+				<Library />
+			</Page>
+		),
+		name: "Library",
+		needAuth: true,
+	},
+	{
+		path: "discover",
+		render: (auth) => (
+			<Page authorized={auth}>
+				<Discover />
+			</Page>
+		),
+		name: "Discover",
+		needAuth: true,
+	},
 	{
 		path: "messages",
-		render: (
-			<Page footerHide separatorHeader notAuthorized>
+		render: (auth) => (
+			<Page footerHide separatorHeader authorized={auth}>
 				<MessageCenter />
 			</Page>
 		),
 		name: "Messages",
+		needAuth: true,
 	},
-	{ path: "profile", render: <Profile />, name: "Profile" },
-	{ path: "settings", render: <Settings />, name: "Settings" },
+	{
+		path: "profile",
+		render: (auth) => (
+			<Page authorized={auth}>
+				<Profile />
+			</Page>
+		),
+		name: "Profile",
+		needAuth: true,
+	},
+	{
+		path: "settings",
+		render: (auth) => (
+			<Page authorized={auth}>
+				<Settings />
+			</Page>
+		),
+		name: "Settings",
+		needAuth: true,
+	},
+	{
+		path: "",
+		render: () => (
+			<Page>
+				<Product />
+			</Page>
+		),
+		name: "Product",
+		needAuth: false,
+	}, // Implement the product page.
 ];
 
 export default routes;

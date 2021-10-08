@@ -3,6 +3,8 @@ import { ReactComponent as LogoTitle } from 'assets/svg/LogoTitle.svg';
 import cn from 'classnames';
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { authAtom } from 'store/auth';
 
 import Modal from '../Modal';
 import styles from './Header.module.sass';
@@ -10,7 +12,7 @@ import styles from './Header.module.sass';
 interface Props {
 	separatorHeader?: boolean;
 	wide?: boolean;
-	notAuthorized?: boolean;
+	authorized?: boolean;
 }
 
 interface Auth {
@@ -24,7 +26,8 @@ interface Auth {
  * Application Header
  *
  */
-const Header: React.FC<Props> = ({ separatorHeader, wide, notAuthorized }) => {
+const Header: React.FC<Props> = ({ separatorHeader, wide, authorized }) => {
+	const authenticated = useRecoilValue(authAtom);
 	const [visibleNav, setVisibleNav] = useState(false); // used in mobile mode
 	const [auth, setAuth] = useState<Auth>({ isOpen: false, type: "sign in" });
 	return (
@@ -37,7 +40,10 @@ const Header: React.FC<Props> = ({ separatorHeader, wide, notAuthorized }) => {
 				)}
 			>
 				<div className={cn("container", styles.container)}>
-					<Link className={styles.logo} to="/">
+					<Link
+						className={styles.logo}
+						to={authenticated ? "/home" : "/"}
+					>
 						<Logo className={styles.pic} />
 						<LogoTitle className={styles.picTitle} />
 					</Link>
@@ -46,7 +52,7 @@ const Header: React.FC<Props> = ({ separatorHeader, wide, notAuthorized }) => {
 							[styles.active]: visibleNav,
 						})}
 					>
-						{notAuthorized && (
+						{!authorized && (
 							<>
 								<NavLink
 									className={styles.link}
@@ -60,7 +66,7 @@ const Header: React.FC<Props> = ({ separatorHeader, wide, notAuthorized }) => {
 						)}
 					</div>
 					{
-						notAuthorized ? (
+						!authorized ? (
 							<div className={styles.auth}>
 								<button
 									className={cn("button-stroke button-small")}
