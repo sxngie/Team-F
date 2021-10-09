@@ -1,0 +1,50 @@
+@import ../../../styles/helpers
+
+.item
+    user-select: none
+    animation: fade-in $transition * 2 ease forwards
+
+.title
+    text-align: center
+
+.info
+    margin-top: 12px
+    text-align: center
+    +body-2
+    color: $n4
+
+.btns
+    display: flex
+    justify-content: center
+    margin-top: 32px
+    .button
+        &:not(:last-child)
+            margin-right: 12px
+
+.form
+    margin-top: 32px
+    & > .button
+        width: 100%
+        margin-top: 12px
+
+.variants
+    display: flex
+    flex-direction: column
+    margin-bottom: 20px
+
+.radio
+    &:not(:last-child)
+        margin-bottom: 16px
+        padding-bottom: 16px
+        border-bottom: 1px solid $n6
+        +dark
+            border-color: $n3
+
+.back
+    margin-bottom: 20px
+
+@keyframes fade-in
+    from
+        opacity: 0
+    to
+        opacity: 1

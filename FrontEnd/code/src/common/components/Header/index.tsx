@@ -1,6 +1,8 @@
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 import { ReactComponent as LogoTitle } from 'assets/svg/LogoTitle.svg';
 import cn from 'classnames';
+import Auth from 'modules/Auth';
+import { Mode } from 'modules/Auth/util';
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -12,12 +14,11 @@ import styles from './Header.module.sass';
 interface Props {
 	separatorHeader?: boolean;
 	wide?: boolean;
-	authorized?: boolean;
 }
 
-interface Auth {
+export interface ModalState {
 	isOpen: boolean;
-	type: "sign in" | "sign up";
+	type: Mode;
 }
 
 // TODO: Implement the application header.
@@ -26,10 +27,13 @@ interface Auth {
  * Application Header
  *
  */
-const Header: React.FC<Props> = ({ separatorHeader, wide, authorized }) => {
-	const authenticated = useRecoilValue(authAtom);
+const Header: React.FC<Props> = ({ separatorHeader, wide }) => {
 	const [visibleNav, setVisibleNav] = useState(false); // used in mobile mode
-	const [auth, setAuth] = useState<Auth>({ isOpen: false, type: "sign in" });
+	const { isAuth } = useRecoilValue(authAtom);
+	const [modal, setModal] = useState<ModalState>({
+		isOpen: false,
+		type: Mode.login,
+	});
 	return (
 		<>
 			<nav
@@ -40,10 +44,7 @@ const Header: React.FC<Props> = ({ separatorHeader, wide, authorized }) => {
 				)}
 			>
 				<div className={cn("container", styles.container)}>
-					<Link
-						className={styles.logo}
-						to={authenticated ? "/home" : "/"}
-					>
+					<Link className={styles.logo} to={isAuth ? "/home" : "/"}>
 						<Logo className={styles.pic} />
 						<LogoTitle className={styles.picTitle} />
 					</Link>
@@ -52,7 +53,7 @@ const Header: React.FC<Props> = ({ separatorHeader, wide, authorized }) => {
 							[styles.active]: visibleNav,
 						})}
 					>
-						{!authorized && (
+						{!isAuth && (
 							<>
 								<NavLink
 									className={styles.link}
@@ -66,14 +67,14 @@ const Header: React.FC<Props> = ({ separatorHeader, wide, authorized }) => {
 						)}
 					</div>
 					{
-						!authorized ? (
+						!isAuth ? (
 							<div className={styles.auth}>
 								<button
 									className={cn("button-stroke button-small")}
 									onClick={() =>
-										setAuth({
+										setModal({
 											isOpen: true,
-											type: "sign in",
+											type: Mode.login,
 										})
 									}
 								>
@@ -82,9 +83,9 @@ const Header: React.FC<Props> = ({ separatorHeader, wide, authorized }) => {
 								<button
 									className={cn("button-small")}
 									onClick={() =>
-										setAuth({
+										setModal({
 											isOpen: true,
-											type: "sign up",
+											type: Mode.signUp,
 										})
 									}
 								>
@@ -102,10 +103,10 @@ const Header: React.FC<Props> = ({ separatorHeader, wide, authorized }) => {
 				</div>
 			</nav>
 			<Modal
-				visible={auth.isOpen}
-				onClose={() => setAuth((a) => ({ ...a, isOpen: false }))}
+				visible={modal.isOpen}
+				onClose={() => setModal((a) => ({ ...a, isOpen: false }))}
 			>
-				{/* Login panel here */}
+				<Auth type={modal.type} setModal={setModal} />
 			</Modal>
 		</>
 	);

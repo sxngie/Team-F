@@ -61,3 +61,20 @@
   &:hover
     svg
       transform: rotate(90deg)
+
+.notch
+  pointer-events: none
+  position: absolute
+  opacity: 0
+  top: -8px
+  left: 50%
+  height: 4px
+  width: 64px
+  transform: translateX(-50%)
+  border-radius: 8px
+  background: $n7
+  transition: $transition
+  +dark
+    background: $n1
+  +t
+    opacity: 1

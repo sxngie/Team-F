@@ -45,7 +45,35 @@ export const formatTime = (date: Date) =>
 		hour12: true,
 	});
 
-// etc... More to come as needed.
+/**
+ * Formats a string to follow a phone number style.
+ * @param {string} phone Phone number to format
+ * @returns {string | null} Formated phone number or null if it doesnt match
+ * the style.
+ */
+export const formatPhoneNumber = (phone: string) => {
+	const cleaned = phone.replace(/\D/g, "");
+	const match = cleaned.match(/^(\d|)?(\d{3})(\d{3})(\d{4})$/);
+	if (match) {
+		const intlCode = match[1] ? `+${match[1]} ` : "";
+		return [intlCode, "(", match[2], ") ", match[3], "-", match[4]].join(
+			""
+		);
+	}
+	return null;
+};
+
+export const formatEmailHide = (email: string) => {
+	const show =
+		Math.floor(email.length * 0.2) < 1 ? 1 : Math.floor(email.length * 0.2);
+	const str = email.split("@");
+
+	return (
+		str[0].slice(0, show) +
+		Array.from({ length: str[0].length - show }, () => "•").join("") +
+		str[1]
+	);
+};
 
 //TODO: Fix issue relating to edge case for today and yesteday.
 export const getTimeStamp = (date: Date) => {
@@ -66,3 +94,5 @@ export const getTimeStamp = (date: Date) => {
 		dateStyle: "short",
 	});
 };
+
+// etc... More to come as needed.

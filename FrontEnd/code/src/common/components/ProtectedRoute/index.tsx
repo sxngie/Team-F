@@ -5,7 +5,7 @@ import { authAtom } from 'store/auth';
 
 interface Props {
 	path: string;
-	render: (auth: boolean) => React.ReactNode;
+	render: React.ReactNode;
 	needAuth?: boolean;
 }
 
@@ -21,7 +21,7 @@ const ProtectedRoute: React.FC<Props> = ({ render, needAuth, ...rest }) => {
 			exact
 			render={(props) =>
 				hasAcces ? (
-					render(auth.isAuth)
+					render
 				) : (
 					<Redirect
 						to={{

@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Icon from '../Icon';
 import styles from './TextInput.module.sass';
@@ -18,6 +18,7 @@ const TextInput: React.FC<Props> = ({
 	view,
 	...props
 }) => {
+	const [passwordView, setPasswordView] = useState(false);
 	return (
 		<div
 			className={cn(
@@ -33,9 +34,20 @@ const TextInput: React.FC<Props> = ({
 				</div>
 			)}
 			<div className={styles.wrap}>
-				<input className={styles.input} {...props} data-testid="text" />
+				<input
+					className={styles.input}
+					{...props}
+					data-testid="text"
+					{...(passwordView && { type: "text" })}
+				/>
 				{view && (
-					<button className={styles.toggle}>
+					<button
+						className={styles.toggle}
+						onClick={(e) => {
+							e.preventDefault();
+							setPasswordView((v) => !v);
+						}}
+					>
 						<Icon name="eye" size="24" />
 					</button>
 				)}

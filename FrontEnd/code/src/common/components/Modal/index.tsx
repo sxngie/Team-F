@@ -78,6 +78,7 @@ const Modal: React.FC<Props> = ({
 								>
 									<Icon name="close" size="24" />
 								</button>
+								<span className={styles.notch}></span>
 							</OutsideClickHandler>
 						</animated.div>
 					</animated.div>

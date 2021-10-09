@@ -5,7 +5,7 @@ export type RouteName = typeof routeNames[number];
 
 export interface Route {
 	path: RouteName;
-	render: (auth: boolean) => React.ReactNode | null; // Screen component goes here.
+	render: React.ReactNode; // Screen component goes here.
 	name: string;
 	needAuth: boolean;
 }
@@ -43,8 +43,8 @@ const Product = lazy(() => import("screens/Product"));
 const routes: Route[] = [
 	{
 		path: "home",
-		render: (auth) => (
-			<Page separatorHeader authorized={auth}>
+		render: (
+			<Page separatorHeader>
 				<Home />
 			</Page>
 		),
@@ -53,8 +53,8 @@ const routes: Route[] = [
 	},
 	{
 		path: "music",
-		render: (auth) => (
-			<Page authorized={auth}>
+		render: (
+			<Page>
 				<Music />
 			</Page>
 		),
@@ -63,8 +63,8 @@ const routes: Route[] = [
 	},
 	{
 		path: "library",
-		render: (auth) => (
-			<Page authorized={auth}>
+		render: (
+			<Page>
 				<Library />
 			</Page>
 		),
@@ -73,8 +73,8 @@ const routes: Route[] = [
 	},
 	{
 		path: "discover",
-		render: (auth) => (
-			<Page authorized={auth}>
+		render: (
+			<Page>
 				<Discover />
 			</Page>
 		),
@@ -83,8 +83,8 @@ const routes: Route[] = [
 	},
 	{
 		path: "messages",
-		render: (auth) => (
-			<Page footerHide separatorHeader authorized={auth}>
+		render: (
+			<Page footerHide separatorHeader>
 				<MessageCenter />
 			</Page>
 		),
@@ -93,8 +93,8 @@ const routes: Route[] = [
 	},
 	{
 		path: "profile",
-		render: (auth) => (
-			<Page authorized={auth}>
+		render: (
+			<Page>
 				<Profile />
 			</Page>
 		),
@@ -103,8 +103,8 @@ const routes: Route[] = [
 	},
 	{
 		path: "settings",
-		render: (auth) => (
-			<Page authorized={auth}>
+		render: (
+			<Page>
 				<Settings />
 			</Page>
 		),
@@ -113,7 +113,7 @@ const routes: Route[] = [
 	},
 	{
 		path: "",
-		render: () => (
+		render: (
 			<Page>
 				<Product />
 			</Page>
