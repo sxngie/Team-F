@@ -28,6 +28,7 @@ const User: React.FC<Props> = ({ className, items = [] }) => {
 	const [auth, setAuth] = useRecoilState(authAtom);
 	const [visible, setVisible] = useState(false);
 	const isOnline = useOnline();
+	const [error, setError] = useState(false);
 
 	return (
 		<OutsideClickHandler onOutsideClick={() => setVisible(false)}>
@@ -41,13 +42,24 @@ const User: React.FC<Props> = ({ className, items = [] }) => {
 					onClick={() => setVisible(!visible)}
 				>
 					{auth.avatar ? (
-						<img src={auth.avatar} alt="Avatar" />
+						!error ? (
+							<img
+								src={auth.avatar}
+								alt="Avatar"
+								className={styles.image}
+								onError={() => setError(true)}
+							/>
+						) : (
+							<figure className={styles.image}>
+								<Icon name="image" />
+							</figure>
+						)
 					) : (
 						<Icon name="user" className={styles.icon} size="24" />
 					)}
 					<span
 						className={cn(styles.network, {
-							[styles.offline]: isOnline,
+							[styles.offline]: !isOnline,
 						})}
 					></span>
 				</button>

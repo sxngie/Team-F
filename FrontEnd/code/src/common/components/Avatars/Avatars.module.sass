@@ -1,4 +1,5 @@
 @import ../../../styles/helpers
+@import ../../../styles/blocks/skeleton
 
 .one
     position: relative
@@ -6,54 +7,56 @@
     align-items: center
     justify-items: center
 
-    &  img
+    .image
         height: 48px
-        min-width: 48px
+        width: 48px
 
 .two
+
     position: relative
     display: flex
     flex-direction: row
     height: 40px
     min-width: 64px
 
-    &  img
+    .image
         height: 40px
         width: 40px
 
-    & img:nth-child(1)
+    .image:nth-child(1)
         position: absolute
         left: 0px
         top: 0px
 
-    & img:nth-child(2)
+    .image:nth-child(2)
         position: absolute
         animation-delay: 0.2s
         left: 24px
         top: 0px
 
 .three
+
     position: relative
     display: flex
     flex-direction: row
     height: 38px
     min-width: 56px
-    &  img
+    .image
         height: 28px
         width: 28px
 
-    & img:nth-child(1)
+    .image:nth-child(1)
         position: absolute
         left: 0px
         top: 10px
 
-    & img:nth-child(2)
+    .image:nth-child(2)
         position: absolute
         animation-delay: 0.2s
         left: 14px
         top: 2px
 
-    & img:nth-child(3)
+    .image:nth-child(3)
         position: absolute
         animation-delay: 0.4s
         left: 28px
@@ -75,6 +78,11 @@
     +dark
         background-color: $n2
         border: 2px solid $n1
+
+    svg
+        fill: $n3
+        +dark
+            fill: $n4
 
 @keyframes grow
     to

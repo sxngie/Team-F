@@ -40,6 +40,8 @@
         height: 100%
         object-fit: cover
         border-radius: inherit
+    .image
+        fill: $n3
 
 .icon
     color: $n7
@@ -50,15 +52,21 @@
     right: -5px
     bottom: -5px
     border: 2px solid $n7
-
+    transition: background $transition
     background: $p4
     border-radius: 50%
+    box-shadow: inset 0px 0px 4px lighten($p4,25 )
     width: 18px
     height: 18px
     +dark
+        box-shadow: inset 0px 0px 4px lighten($p4,50 )
         border: 2px solid $n1
-    .offline
-        background: $n4
+    &.offline
+        box-shadow: inset 0px 0px 4px darken($n6,6 )
+        background: darken($n6, 5)
+        +dark
+            box-shadow: inset 0px 0px 4px lighten($n3,10 )
+            background: $n3
 
 .body
     position: absolute
