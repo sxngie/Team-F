@@ -5,18 +5,13 @@ import Person from 'common/components/Person';
 import React from 'react';
 import { Chat as C, Favorite } from 'utils/types/Chat';
 
+import { Base } from '../util';
 import styles from './Users.module.sass';
 
-interface Props {
+interface Props extends Base {
 	users?: C[];
 	favorites?: Favorite[];
 	className?: string;
-	setChat: React.Dispatch<
-		React.SetStateAction<{
-			visible: boolean;
-			chatId?: string;
-		}>
-	>;
 	chatsLoad?: boolean;
 	favLoad?: boolean;
 	activeId?: string;

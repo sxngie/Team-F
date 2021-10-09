@@ -1,0 +1,22 @@
+@import ../../../../../styles/helpers
+.container
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+
+.item
+    width: 40px
+    height: 40px
+    display: grid
+    place-items: center
+    transition: $transition
+    svg
+        fill: $n5
+        width: 24px
+        height: 24px
+        +dark
+            fill: $n4
+    &.active
+        svg
+            fill: $p1

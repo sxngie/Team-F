@@ -85,7 +85,7 @@ const routes: Route[] = [
 	{
 		path: "messages",
 		render: (
-			<Page footerHide separatorHeader wide>
+			<Page footerHide separatorHeader>
 				<MessageCenter />
 			</Page>
 		),

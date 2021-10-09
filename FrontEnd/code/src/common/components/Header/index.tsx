@@ -1,6 +1,7 @@
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 import { ReactComponent as LogoTitle } from 'assets/svg/LogoTitle.svg';
 import cn from 'classnames';
+import { fakeNotifications } from 'mockup/fakeData';
 import Auth from 'modules/Auth';
 import { Mode } from 'modules/Auth/util';
 import React, { useState } from 'react';
@@ -79,7 +80,7 @@ const Header: React.FC<Props> = ({ separatorHeader, wide }) => {
 							<>
 								<NavLink
 									className={styles.link}
-									to={`/about`}
+									to={`/support`}
 									exact
 									activeClassName={styles.active}
 								>
@@ -123,7 +124,10 @@ const Header: React.FC<Props> = ({ separatorHeader, wide }) => {
 						</div>
 					) : (
 						<div className={styles.controls}>
-							<Notification className={styles.notification} />
+							<Notification
+								className={styles.notification}
+								items={fakeNotifications}
+							/>
 							<User className={styles.user} items={items} />
 						</div>
 					)}

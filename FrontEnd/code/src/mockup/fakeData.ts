@@ -1,5 +1,6 @@
 import faker from 'faker';
 import { Chat, Favorite } from 'utils/types/Chat';
+import { Notification } from 'utils/types/header';
 
 function getRandomInt(min: number, max: number) {
 	min = Math.ceil(min);
@@ -65,3 +66,16 @@ export const fakeChats = getFakeChats(20).sort((a, b) =>
 );
 
 export const fakeFavorites = convertToFav(fakeChats);
+
+export const getFakeNotifications = (length: number): Notification[] =>
+	Array.from({ length }, () => ({
+		avatar: faker.image.avatar(),
+		content: faker.lorem.sentence(),
+		date: faker.date.soon(),
+		title: `${faker.name.firstName()} ${faker.name.lastName()}`,
+		url: "messages",
+	}));
+
+export const fakeNotifications = getFakeNotifications(6).sort((a, b) =>
+	!a.date || !b.date ? -1 : b.date.getTime() - a.date.getTime()
+);

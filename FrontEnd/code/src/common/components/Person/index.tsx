@@ -7,11 +7,11 @@ import styles from './Person.module.sass';
 
 interface Props {
 	chat: Favorite;
-	onClick: (id: string) => void;
+	onClick?: (id: string) => void;
 	activeId?: string;
 }
 
-const Person: React.FC<Props> = ({ chat, onClick, activeId }) => {
+const Person: React.FC<Props> = ({ chat, onClick = () => {}, activeId }) => {
 	const { avatars, id, name, notifications } = chat;
 	return (
 		<button

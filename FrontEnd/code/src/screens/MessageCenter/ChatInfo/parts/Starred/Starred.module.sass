@@ -1,0 +1,28 @@
+@import ../../../../../styles/helpers
+
+.btn
+    width: 100%
+    padding: 10px
+    grid-template-columns: min-content 1fr min-content
+    display: grid
+    align-items: center
+    column-gap: 10px
+    border-radius: 16px
+    transition: $transition
+    &:hover,&:focus
+        background: $n6
+        +dark
+            background: $n2
+
+    &:active
+        transform: scale(0.95)
+
+.icon
+    width: 24px
+    height: 24px
+    fill: $n4
+    +dark
+        fill: $n4
+
+.title
+    +caption-1

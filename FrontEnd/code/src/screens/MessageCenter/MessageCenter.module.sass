@@ -61,12 +61,19 @@
     flex-shrink: 0
     height: 100%
     border-left: 1px solid $n6
+    padding: 40px
+    display: flex
+    flex-direction: column
+    row-gap: 10px
+    position: relative
+    overflow-y: auto
+    overflow-x: hidden
+    width: 450px
     +dark
         border-left: 1px solid $n2
-
-    width: 450px
-
     +w
+        padding: 20px
         width: 300px
+
     +t
         display: none

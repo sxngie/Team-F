@@ -1,20 +1,11 @@
 import cn from 'classnames';
 import React from 'react';
 
+import { Base } from '../util';
 import styles from './Messages.module.sass';
 
-interface Props {
+interface Props extends Base {
 	className?: string;
-	chat: {
-		visible: boolean;
-		chatId?: string;
-	};
-	setChat: React.Dispatch<
-		React.SetStateAction<{
-			visible: boolean;
-			chatId?: string;
-		}>
-	>;
 }
 
 const Messages: React.FC<Props> = ({ chat, setChat, className }) => {

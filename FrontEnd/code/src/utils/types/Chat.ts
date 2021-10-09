@@ -1,10 +1,6 @@
-export interface Chat {
-	id: string;
-	name: string;
+export interface Chat extends Favorite {
 	lastMessage?: string;
 	timeStamp?: Date;
-	avatars: string[];
-	notifications: boolean;
 	favorite?: boolean;
 }
 
