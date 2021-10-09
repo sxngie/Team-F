@@ -3,9 +3,9 @@
 */
 
 export interface Auth {
-	token: string | null;
-	avatar: string | null;
-	username: string | null;
+	token?: string;
+	avatar?: string;
+	username?: string;
 	isAuth: boolean;
 }
 

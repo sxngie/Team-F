@@ -9,7 +9,11 @@ import { useRecoilValue } from 'recoil';
 import { authAtom } from 'store/auth';
 
 import Modal from '../Modal';
+import Theme from '../Theme';
+import Dropdown, { Item } from './Dropdown';
 import styles from './Header.module.sass';
+import Notification from './Notification';
+import User, { Options } from './User';
 
 interface Props {
 	separatorHeader?: boolean;
@@ -21,6 +25,23 @@ export interface ModalState {
 	type: Mode;
 }
 
+const items: Options[] = [
+	{
+		menu: [
+			{ title: "Account", icon: "user", path: "profile" },
+			{ title: "Settings", icon: "gear", path: "settings" },
+		],
+	},
+	{ menu: [] },
+];
+
+const routes: Item[] = [
+	{ title: "Discover", icon: "globe", path: "discover" },
+	{ title: "Messages", icon: "email", path: "messages" },
+	{ title: "Music", icon: "music", path: "music" },
+	{ title: "Library", icon: "music-album", path: "library" },
+];
+
 // TODO: Implement the application header.
 
 /**
@@ -30,6 +51,7 @@ export interface ModalState {
 const Header: React.FC<Props> = ({ separatorHeader, wide }) => {
 	const [visibleNav, setVisibleNav] = useState(false); // used in mobile mode
 	const { isAuth } = useRecoilValue(authAtom);
+
 	const [modal, setModal] = useState<ModalState>({
 		isOpen: false,
 		type: Mode.login,
@@ -65,37 +87,48 @@ const Header: React.FC<Props> = ({ separatorHeader, wide }) => {
 								</NavLink>
 							</>
 						)}
+						{isAuth && (
+							<Dropdown
+								className={styles.drowdown}
+								items={routes}
+								setValue={setVisibleNav}
+							/>
+						)}
 					</div>
-					{
-						!isAuth ? (
-							<div className={styles.auth}>
-								<button
-									className={cn("button-stroke button-small")}
-									onClick={() =>
-										setModal({
-											isOpen: true,
-											type: Mode.login,
-										})
-									}
-								>
-									Login
-								</button>
-								<button
-									className={cn("button-small")}
-									onClick={() =>
-										setModal({
-											isOpen: true,
-											type: Mode.signUp,
-										})
-									}
-								>
-									Sign Up
-								</button>
-							</div>
-						) : null /* User component here */
-					}
+					{!isAuth ? (
+						<div className={styles.auth}>
+							<Theme className={styles.theme} />
+							<button
+								className={cn("button-stroke button-small")}
+								onClick={() =>
+									setModal({
+										isOpen: true,
+										type: Mode.login,
+									})
+								}
+							>
+								Login
+							</button>
+							<button
+								className={cn("button-small")}
+								onClick={() =>
+									setModal({
+										isOpen: true,
+										type: Mode.signUp,
+									})
+								}
+							>
+								Sign Up
+							</button>
+						</div>
+					) : (
+						<div className={styles.controls}>
+							<Notification className={styles.notification} />
+							<User className={styles.user} items={items} />
+						</div>
+					)}
 					<button
-						className={cn("burger", {
+						className={cn("burger", styles.burger, {
 							active: visibleNav,
 						})}
 						onClick={() => setVisibleNav(!visibleNav)}

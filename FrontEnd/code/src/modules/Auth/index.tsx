@@ -1,5 +1,8 @@
 import { ModalState } from 'common/components/Header';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { authAtom } from 'store/auth';
 
 import Forgot from './Forgot';
 import Login from './Login';
@@ -12,13 +15,26 @@ interface Props {
 	setModal: React.Dispatch<React.SetStateAction<ModalState>>;
 }
 
+//TODO: Add authentication functionalities
 const Auth: React.FC<Props> = ({ type, setModal }) => {
 	const [mode, setMode] = useState(type);
+	const history = useHistory();
+	const auth = useRecoilValue(authAtom);
 	const [info, setInfo] = useState<Credentials>({
 		confirmPhone: false,
 		email: "UserEmail@gmail.com",
 		phone: "+17871234567",
 	});
+
+	useEffect(() => {
+		if (auth.isAuth) {
+			history.push("/home");
+		} else {
+			history.push("/");
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [auth.isAuth]);
+
 	const props = {
 		setType: setMode,
 		setInfo,

@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import useDarkMode from 'use-dark-mode';
 
+import Icon from '../Icon';
 import styles from './Theme.module.sass';
 
 interface Props {
@@ -12,6 +13,7 @@ const Theme: React.FC<Props> = ({ className }) => {
 
 	return (
 		<label className={cn(className, styles.theme)}>
+			<Icon name="bulb" size="18" />
 			<input
 				className={styles.input}
 				checked={darkMode.value}

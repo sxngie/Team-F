@@ -21,6 +21,8 @@
     display: flex
     align-items: center
     height: 100%
+    +a
+        padding: 0 8px
 
 .logo
     margin-right: 40px
@@ -44,7 +46,7 @@
     fill: $n2
     +dark
         fill: $n7
-    +t
+    +m
         display: none
 
 .wrapper
@@ -53,7 +55,6 @@
     align-items: center
     flex-grow: 1
     column-gap: 40px
-    justify-content: flex-end
     padding-left: 40px
     border-left: 1px solid $n6
     +d
@@ -89,19 +90,22 @@
     & > div
         &:first-child
             +t
-                margin-right: auto
+                margin-right: 32px
             +m
                 margin: 0
 
 .dropdown
     margin-right: auto
 
+.controls
+    display: flex
+    column-gap: 30px
+
 .link
     +button-2
     color: $n4
     transition: color .2s
-    +t
-        display: none
+
     +m
         display: flex
         align-items: center
@@ -144,3 +148,18 @@
     column-gap: 20px
     +m
         flex-grow: 1
+
+.theme
+    +a
+        display: none
+
+.burger
+    margin-left: 20px
+    margin-right: 10px
+    width: 40px
+    display: grid
+    place-items: center
+    height: 40px
+    +a
+        margin-left: 10px
+        margin-right: 0

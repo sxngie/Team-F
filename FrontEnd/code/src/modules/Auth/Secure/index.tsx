@@ -1,6 +1,8 @@
 import cn from 'classnames';
 import Icon from 'common/components/Icon';
 import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { authAtom } from 'store/auth';
 import { formatEmailHide, formatPhoneNumber } from 'utils/functions/formatter';
 
 import { Mode, Navigate } from '../util';
@@ -11,12 +13,18 @@ interface Props extends Navigate {}
 const securitySize = 6;
 
 //TODO: Add authentication functionalities
-const Secure: React.FC<Props> = ({ setType, info, setInfo }) => {
+const Secure: React.FC<Props> = ({ setType, info, setModal }) => {
 	const ref = useRef<HTMLInputElement[]>([]);
 	const submitRef = useRef<HTMLButtonElement>(null);
 	const [code, setCode] = useState<string[]>(
 		Array.from({ length: securitySize }, () => "")
 	);
+	const setAuth = useSetRecoilState(authAtom);
+	const handleSubmit = (e: any) => {
+		e.preventDefault();
+		setAuth((v) => ({ ...v, isAuth: true }));
+		setModal((v) => ({ ...v, isOpen: false }));
+	};
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const getCode = () => code.join("").trim(); // Will be used to get the code.
@@ -85,7 +93,7 @@ const Secure: React.FC<Props> = ({ setType, info, setInfo }) => {
 						: formatEmailHide(info.email ?? "")
 				}`}
 			</div>
-			<form className={styles.form}>
+			<form className={styles.form} onSubmit={handleSubmit}>
 				<div className={styles.code}>
 					{Array.from({ length: securitySize }, (_, i) => (
 						<div className={styles.number} key={i}>

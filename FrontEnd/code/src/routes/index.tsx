@@ -1,3 +1,4 @@
+import { IconName } from 'common/components/Icon';
 import Page from 'common/components/Page';
 import React, { lazy } from 'react';
 
@@ -84,7 +85,7 @@ const routes: Route[] = [
 	{
 		path: "messages",
 		render: (
-			<Page footerHide separatorHeader>
+			<Page footerHide separatorHeader wide>
 				<MessageCenter />
 			</Page>
 		),

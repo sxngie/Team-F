@@ -1,0 +1,124 @@
+@import ../../../../styles/helpers
+
+.dropdown
+    position: relative
+    &.active
+        .head
+            color: $n2
+            svg
+                fill: $n2
+                transform: rotate(180deg)
+            +dark
+                color: $n6
+                svg
+                    fill: $n6
+        .body
+            visibility: visible
+            opacity: 1
+            transform: translateY(0)
+
+.head
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 40px
+    min-width: 40px
+    +button-2
+    color: $n4
+    transition: color $transition
+    column-gap: 8px
+    +m
+        display: none
+    svg
+        fill: $n4
+        transition: all $transition
+    &:hover
+        color: $n2
+        svg
+            fill: $n2
+        +dark
+            color: $n6
+            svg
+                fill: $n6
+
+.body
+    position: absolute
+    top: calc(100% + 16px)
+    left: -40px
+    width: 275px
+    padding: 16px
+    border-radius: 20px
+    box-shadow: 0px 40px 32px -8px rgba(15, 15, 15, 0.12)
+    background: $n8
+    border: 1px solid $n6
+    visibility: hidden
+    opacity: 0
+    transform: translateY(10px)
+    transition: all .3s
+    +dark
+        background: darken($n2, 6)
+        border: 1px solid transparent
+        box-shadow: 0px 10px 16px darken($n1, 1)
+    +m
+        position: static
+        width: auto
+        margin: 0 -32px
+        padding: 0
+        border-radius: 0
+        box-shadow: none
+        +dark
+            box-shadow: none
+            background: none
+            visibility: visible
+            transform: translateY(0)
+            opacity: 1
+            border: none
+
+.item
+    display: flex
+    align-items: center
+    height: 48px
+    padding: 0 20px
+    border-radius: 16px
+    +button-2
+    color: $n4
+    transition: all .2s
+    +m
+        height: 64px
+        padding: 0 32px
+        border-radius: 0
+        +poppins
+        font-size: 24px
+        font-weight: 600
+    svg
+        margin-right: 12px
+        fill: $n4
+        transition: fill .2s
+        +m
+            display: none
+    &:hover
+        color: $n2
+        svg
+            fill: $n2
+        +dark
+            color: $n6
+            svg
+                fill: $n6
+    &.active
+        background: $n2
+        color: $n6
+        +m
+            background: none
+            box-shadow: inset 2px 0 0 $p1
+            color: $n2
+        +dark
+            background: $n2
+            color: $n7
+            +m
+                background: none
+                color: $n6
+        svg
+            fill: $n6
+            +dark
+                fill: $n5

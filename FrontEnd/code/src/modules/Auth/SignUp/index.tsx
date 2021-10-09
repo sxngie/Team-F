@@ -2,7 +2,7 @@ import { ReactComponent as Title } from 'assets/svg/LogoTitle.svg';
 import cn from 'classnames';
 import Form from 'common/components/Form';
 import Icon from 'common/components/Icon';
-import React, { FormEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { authAtom } from 'store/auth';
 
@@ -14,7 +14,7 @@ interface Props extends Navigate {}
 //TODO: Add authentication functionalities
 const SignUp: React.FC<Props> = ({ setType, setModal }) => {
 	const setAuth = useSetRecoilState(authAtom);
-	const [email, setEmail] = useState<string>();
+	const [email, setEmail] = useState<string>("");
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();

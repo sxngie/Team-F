@@ -1,12 +1,17 @@
 @import ../../../styles/helpers
 
 .theme
-    display: inline-block
+    display: flex
     position: relative
-    user-select: none 
+    align-items: center
+    column-gap: 12px
+    user-select: none
     cursor: pointer
     -webkit-tap-highlight-color: rgba(0,0,0,0)
     font-size: 0
+
+    svg
+        fill: currentColor
 
 .input
     position: absolute
@@ -30,7 +35,7 @@
     width: 48px
     height: 24px
     background: $n6
-    border-radius: 12px 
+    border-radius: 12px
     transition: all .2s
     +dark
         background: $n3
@@ -44,4 +49,4 @@
         height: 16px
         border-radius: 50%
         background: $p1
-        transition: all .2s 
+        transition: all .2s
