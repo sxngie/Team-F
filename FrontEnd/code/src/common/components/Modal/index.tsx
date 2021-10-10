@@ -1,4 +1,4 @@
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+// import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import cn from 'classnames';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
@@ -23,6 +23,7 @@ const Modal: React.FC<Props> = ({
 	onClose,
 	children,
 }) => {
+	const scrollRef = useRef<any>();
 	const transitions = useTransition(visible, {
 		from: { opacity: 0, transform: "scale(0.8)" },
 		enter: { opacity: 1, transform: "scale(1)" },
@@ -49,13 +50,18 @@ const Modal: React.FC<Props> = ({
 		};
 	}, [escFunction]);
 
-	const scrollRef = useRef<any>();
-
+	/*
+	Waiting on merge of https://github.com/willmcpo/body-scroll-lock/pull/229
+	To enable again
+	
 	useEffect(() => {
-		visible
-			? disableBodyScroll(scrollRef as any)
-			: enableBodyScroll(scrollRef as any);
+		if (scrollRef) {
+			visible
+				? disableBodyScroll(scrollRef as any)
+				: enableBodyScroll(scrollRef as any);
+		}
 	}, [visible]);
+	*/
 
 	return createPortal(
 		transitions(

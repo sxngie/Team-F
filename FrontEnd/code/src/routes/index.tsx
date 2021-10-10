@@ -1,4 +1,3 @@
-import { IconName } from 'common/components/Icon';
 import Page from 'common/components/Page';
 import React, { lazy } from 'react';
 
