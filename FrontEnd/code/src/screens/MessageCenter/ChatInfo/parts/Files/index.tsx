@@ -27,8 +27,8 @@ const Files: React.FC<Props> = ({ setView, files = [] }) => {
 				{files.length > 0 ? (
 					<ul className={styles.preview}>
 						{files.map(({ name, mimeType, size }, i) => (
-							<label>
-								<li className={styles.item} key={i}>
+							<label key={i}>
+								<li className={styles.item}>
 									<Icon name="document" size="24" />
 									<p
 										className={styles.text}

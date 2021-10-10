@@ -27,8 +27,8 @@ const Links: React.FC<Props> = ({ setView, links = [] }) => {
 				{links.length > 0 ? (
 					<ul className={styles.preview}>
 						{links.map((link, i) => (
-							<label>
-								<li className={styles.item} key={i}>
+							<label key={i}>
+								<li className={styles.item}>
 									<Icon name="link" size="24" />
 									<a
 										className={styles.link}

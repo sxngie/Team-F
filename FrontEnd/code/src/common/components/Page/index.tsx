@@ -1,4 +1,5 @@
 import { clearAllBodyScrollLocks } from 'body-scroll-lock';
+import cn from 'classnames';
 import React, { useEffect } from 'react';
 import { RouteComponentProps, useLocation, withRouter } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ export interface PageProps extends RouteComponentProps {
 	footerHide?: boolean;
 	headerHide?: boolean;
 	wide?: boolean;
+	bodyScroll?: boolean;
 }
 
 const Page: React.FC<PageProps> = ({
@@ -19,6 +21,7 @@ const Page: React.FC<PageProps> = ({
 	footerHide,
 	headerHide,
 	wide,
+	bodyScroll,
 }) => {
 	const { pathname } = useLocation();
 
@@ -33,7 +36,13 @@ const Page: React.FC<PageProps> = ({
 				{!headerHide && (
 					<Header separatorHeader={separatorHeader} wide={wide} />
 				)}
-				<div className={styles.inner}>{children}</div>
+				<div
+					className={cn(styles.inner, {
+						[styles.bodyScroll]: bodyScroll,
+					})}
+				>
+					{children}
+				</div>
 				{!footerHide && <Footer />}
 			</div>
 		</>

@@ -114,7 +114,7 @@ const routes: Route[] = [
 	{
 		path: "",
 		render: (
-			<Page>
+			<Page bodyScroll>
 				<Product />
 			</Page>
 		),
