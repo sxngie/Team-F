@@ -20,6 +20,12 @@ interface Props extends Base {
 }
 
 const srcs = Array.from({ length: 4 }, () => faker.image.nature());
+const links = Array.from({ length: 4 }, () => faker.internet.url());
+const files = Array.from({ length: 4 }, () => ({
+	name: faker.lorem.word(),
+	mimeType: "pdf",
+	size: `${Math.floor(Math.random() * 10000) / 10} KB`,
+}));
 
 const ChatInfo: React.FC<Props> = ({ className, chat, setChat }) => {
 	const [view, setView] = useState<Control>({
@@ -45,9 +51,9 @@ const ChatInfo: React.FC<Props> = ({ className, chat, setChat }) => {
 					<Divider />
 					<Media setView={setView} view={view} srcs={srcs} />
 					<Divider />
-					<Files setView={setView} view={view} />
+					<Files setView={setView} view={view} files={files} />
 					<Divider />
-					<Links setView={setView} view={view} />
+					<Links setView={setView} view={view} links={links} />
 				</div>
 			) : (
 				<View setView={setView} view={view} />

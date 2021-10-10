@@ -27,8 +27,8 @@ const Media: React.FC<Props> = ({ setView, srcs = [] }) => {
 				{srcs.length > 0 ? (
 					<ul className={styles.preview}>
 						{srcs.map((src, i) => (
-							<button className={styles.item}>
-								<img src={src} key={i} alt="Chat Preview" />
+							<button className={styles.item} key={i}>
+								<img src={src} alt="Chat Preview" />
 							</button>
 						))}
 					</ul>

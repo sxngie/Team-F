@@ -1,0 +1,83 @@
+@import ../../../../../styles/helpers
+
+.container
+    display: flex
+    flex-direction: column
+
+.controls
+    display: grid
+    grid-template-columns: min-content 1fr max-content
+    column-gap: 10px
+    padding: 10px
+    align-items: center
+
+    svg
+        fill: $n4
+        +dark
+            fill: $n4
+
+.preview
+    width: 100%
+    justify-content: center
+    display: flex
+    flex-direction: column
+    row-gap: 10px
+    padding: 0 5px 5px 20px
+
+.item
+    padding: 10px
+    display: flex
+    cursor: pointer
+    column-gap: 10px
+    align-items: center
+    flex-direction: row
+    border-radius: 16px
+    transition: $transition
+    a
+        color: currentColor
+        +text-overflow
+    svg
+        fill: $n4
+        +dark
+            fill: $n4
+    &:hover,&:focus
+        background: $n6
+        +dark
+            background: $n2
+.title
+    +caption-1
+
+.btn
+    color: $p1
+    +caption-1
+    padding: 5px
+    border-radius: 6px
+
+    &:focus:not(:hover)
+        background: $n6
+        +dark
+            background: $n2
+
+    &:hover:not(:focus)
+        color: lighten(saturate($p1, 10), 10)
+
+    &:active
+        transform: scale(0.95)
+
+.warning
+    display: flex
+    flex-direction: row
+    column-gap: 10px
+    align-items: center
+    justify-content: center
+    color: $n6
+    margin-bottom: 30px
+    +caption-1
+    +dark
+        color: $n4
+    svg
+        fill: $n4
+        +dark
+            fill: $n4
+
+.wrapper

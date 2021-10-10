@@ -18,23 +18,29 @@ const View: React.FC<Props> = ({ view, setView, className }) => {
 			>
 				<Icon name="arrow-prev" size="24" />
 			</button>
-			{() => {
-				switch (view.type) {
-					case ViewType.media:
-						return <>Media</>;
-
-					case ViewType.files:
-						return <>Files</>;
-
-					case ViewType.links:
-						return <>Links</>;
-
-					default:
-						return <>Starred</>;
-				}
-			}}
+			<Content view={view.type} />
 		</div>
 	);
 };
 
 export default View;
+
+interface ContentProps {
+	view: ViewType;
+}
+
+const Content: React.FC<ContentProps> = ({ view }) => {
+	switch (view) {
+		case ViewType.media:
+			return <>Media</>;
+
+		case ViewType.files:
+			return <>Files</>;
+
+		case ViewType.links:
+			return <>Links</>;
+
+		default:
+			return <>Starred</>;
+	}
+};
