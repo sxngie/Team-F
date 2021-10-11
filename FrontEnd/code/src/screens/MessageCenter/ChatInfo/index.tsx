@@ -1,8 +1,10 @@
+import cn from 'classnames';
+import Icon from 'common/components/Icon';
 import Person from 'common/components/Person';
 import faker from 'faker';
 import { fakeChats } from 'mockup/fakeData';
 import React, { useState } from 'react';
-import { Favorite } from 'utils/types/Chat';
+import { Favorite } from 'utils/types/chat';
 
 import { Base } from '../util';
 import styles from './ChatInfo.module.sass';
@@ -32,11 +34,18 @@ const ChatInfo: React.FC<Props> = ({ className, chat, setChat }) => {
 		isOpen: false,
 		type: ViewType.starred,
 	});
+	console.log(chat.info);
 
 	return (
 		<section className={className}>
 			{!view.isOpen ? (
 				<div className={styles.container}>
+					<button
+						className={cn("button-circle-stroke", styles.back)}
+						onClick={() => setChat((c) => ({ ...c, info: false }))}
+					>
+						<Icon name="arrow-prev" size="24" />
+					</button>
 					<Person
 						chat={
 							{

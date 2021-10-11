@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { fakeChats, fakeFavorites } from 'mockup/fakeData';
 import React, { useState } from 'react';
 
@@ -9,9 +10,14 @@ import Users from './Users';
 interface Props {}
 
 const MessageCenter: React.FC<Props> = () => {
-	const [chat, setChat] = useState<{ visible: boolean; chatId?: string }>({
+	const [chat, setChat] = useState<{
+		visible: boolean;
+		chatId?: string;
+		info: boolean;
+	}>({
 		visible: false,
 		chatId: fakeChats[0]?.id,
+		info: false,
 	});
 
 	return (
@@ -25,7 +31,13 @@ const MessageCenter: React.FC<Props> = () => {
 				activeId={chat.chatId}
 			/>
 			<Messages setChat={setChat} chat={chat} />
-			<Info setChat={setChat} chat={chat} className={styles.info} />
+			<Info
+				setChat={setChat}
+				chat={chat}
+				className={cn(styles.info, {
+					[styles.show]: chat.info,
+				})}
+			/>
 		</main>
 	);
 };

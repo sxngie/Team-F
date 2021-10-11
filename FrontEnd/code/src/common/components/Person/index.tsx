@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import React from 'react';
-import { Favorite } from 'utils/types/Chat';
+import { Favorite } from 'utils/types/chat';
 
 import Avatars from '../Avatars';
 import styles from './Person.module.sass';

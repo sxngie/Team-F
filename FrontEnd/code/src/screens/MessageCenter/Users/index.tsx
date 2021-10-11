@@ -3,7 +3,7 @@ import Chat from 'common/components/Chat';
 import Loader from 'common/components/Loader';
 import Person from 'common/components/Person';
 import React from 'react';
-import { Chat as C, Favorite } from 'utils/types/Chat';
+import { Chat as C, Favorite } from 'utils/types/chat';
 
 import { Base } from '../util';
 import styles from './Users.module.sass';
@@ -39,7 +39,11 @@ const Users: React.FC<Props> = ({
 									key={i}
 									chat={fav}
 									onClick={(id) =>
-										setChat({ visible: true, chatId: id })
+										setChat((c) => ({
+											...c,
+											visible: true,
+											chatId: id,
+										}))
 									}
 									activeId={activeId}
 								/>
@@ -58,7 +62,13 @@ const Users: React.FC<Props> = ({
 					<Chat
 						chat={chat}
 						key={i}
-						onClick={(id) => setChat({ visible: true, chatId: id })}
+						onClick={(id) =>
+							setChat((c) => ({
+								...c,
+								visible: true,
+								chatId: id,
+							}))
+						}
 						activeId={activeId}
 					/>
 				))}

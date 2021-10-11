@@ -2,31 +2,33 @@
 
 .form
     position: relative
-
-.input
-    width: 100%
+    display: flex
+    align-items: center
     height: 48px
-    padding: 0 48px 0 14px
+    padding: 0 6px
     border-radius: 24px
-    background: none
+    column-gap: 8px
     border: 2px solid $n6
-    +poppins
-    +caption-1
-    color: $n2
     transition: border-color .2s
     +dark
         border-color: $n3
         color: $n8
     &:focus
-        border-color: $n4
+        border-color: $n5
+
+.input
+    background: none
+    +poppins
+    +caption-1
+    flex-grow: 1
+    height: 100%
+    color: $n2
+    +dark
+        color: $n8
     +placeholder
         color: $n4
 
 .btn
-    position: absolute
-    top: 8px
-    right: 8px
-    bottom: 8px
     width: 32px
     height: 32px
     border-radius: 50%
@@ -38,6 +40,20 @@
         fill: $n8
     &:hover
         background: darken($p1, 10)
+
+.leftBtn
+    width: 40px
+    height: 40px
+    transition: background .2s
+    display: grid
+    place-items: center
+    svg
+        fill: $n4
+    &:hover
+        svg
+            fill: $n2
+            +dark
+                fill: $n8
 
 .big
     .input

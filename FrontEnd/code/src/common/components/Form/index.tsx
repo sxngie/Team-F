@@ -13,7 +13,8 @@ interface Props {
 	setValue: (v: string) => void;
 	type?: string;
 	name?: string;
-	icon: IconName;
+	iconRight: IconName;
+	iconLeft?: IconName;
 }
 
 const Form: React.FC<Props> = ({
@@ -25,7 +26,8 @@ const Form: React.FC<Props> = ({
 	setValue,
 	type,
 	name,
-	icon,
+	iconRight,
+	iconLeft,
 }) => {
 	return (
 		<form
@@ -35,6 +37,11 @@ const Form: React.FC<Props> = ({
 			action=""
 			onSubmit={onSubmit}
 		>
+			{iconLeft && (
+				<button className={styles.leftBtn}>
+					<Icon name={iconLeft} size="24" />
+				</button>
+			)}
 			<input
 				className={styles.input}
 				type={type}
@@ -45,7 +52,7 @@ const Form: React.FC<Props> = ({
 				required
 			/>
 			<button className={styles.btn}>
-				<Icon name={icon} size="14" />
+				<Icon name={iconRight} size="14" />
 			</button>
 		</form>
 	);

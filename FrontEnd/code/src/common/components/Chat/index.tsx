@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { getTimeStamp } from 'utils/functions/formatter';
-import { Chat as C } from 'utils/types/Chat';
+import { Chat as C } from 'utils/types/chat';
 
 import Avatars from '../Avatars';
 import Icon from '../Icon';

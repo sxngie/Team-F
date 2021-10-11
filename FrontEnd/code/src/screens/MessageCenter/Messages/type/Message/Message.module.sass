@@ -1,0 +1,50 @@
+@import ../../../../../styles/helpers
+
+.item
+    display: flex
+    column-gap: 16px
+    flex-direction: column
+    width: 100%
+    row-gap: 8px
+
+    &.you
+        .msg
+            justify-content: flex-end
+            padding-right: 12px
+            .avatar
+                display: none
+            p
+                background: $p1
+                color: $n7
+                border-radius: 16px 3px 16px 16px
+
+.msg
+    display: flex
+    column-gap: 12px
+
+    p
+        max-width: 80%
+        word-break: break-word
+        padding: 24px 16px
+        border-radius: 3px 16px 16px 16px
+        background: $n8
+        box-shadow: 0 4px 8px 1px #6666661a
+        +dark
+            background: $n2
+            box-shadow: 0 4px 4px rgba(0,0,0,0.1)
+
+.time
+    align-self: flex-end
+
+.avatar
+    min-width: 32px
+    min-height: 32px
+    object-fit: cover
+    max-width: 32px
+    max-height: 32px
+    overflow: hidden
+    border-radius: 50%
+    border: none
+    background: $n8
+    +dark
+        background: $n2

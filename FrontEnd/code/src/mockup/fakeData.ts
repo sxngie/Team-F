@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { Chat, Favorite } from 'utils/types/Chat';
+import { Chat, Favorite, Message } from 'utils/types/chat';
 import { Notification } from 'utils/types/header';
 
 function getRandomInt(min: number, max: number) {
@@ -79,3 +79,13 @@ export const getFakeNotifications = (length: number): Notification[] =>
 export const fakeNotifications = getFakeNotifications(6).sort((a, b) =>
 	!a.date || !b.date ? -1 : b.date.getTime() - a.date.getTime()
 );
+
+export const getFakeMessages = (length: number, you: string): Message[] =>
+	Array.from({ length }, () => ({
+		chatId: faker.datatype.uuid(),
+		createdAt: faker.date.soon(),
+		id: faker.datatype.uuid(),
+		owner: Math.random() > 0.5 ? faker.datatype.uuid() : you,
+		updatedAt: faker.date.soon(),
+		message: faker.lorem.sentences(),
+	})).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());

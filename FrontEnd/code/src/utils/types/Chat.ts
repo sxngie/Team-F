@@ -1,3 +1,5 @@
+import { Id } from './auth';
+
 export interface Chat extends Favorite {
 	lastMessage?: string;
 	timeStamp?: Date;
@@ -9,4 +11,22 @@ export interface Favorite {
 	name: string;
 	avatars: string[];
 	notifications: boolean;
+}
+
+export interface Message {
+	id: Id;
+	owner: Id; // User id
+	chatId: Id;
+	createdAt: Date;
+	updatedAt: Date;
+	message?: string; // Only undefined if it includes an attachment.
+	attachment?: File;
+	reply?: Id; // Id of the message being replied to.
+}
+
+export interface File {
+	id: Id;
+	name: string;
+	mimeType: string;
+	size: string;
 }

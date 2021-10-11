@@ -53,7 +53,7 @@ const SignUp: React.FC<Props> = ({ setType, setModal }) => {
 				placeholder="Enter your email"
 				type="email"
 				name="email"
-				icon="arrow-next"
+				iconRight="arrow-next"
 			/>
 			<p className={styles.foot}>
 				Already have an account?{" "}
