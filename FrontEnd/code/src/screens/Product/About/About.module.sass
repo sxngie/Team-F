@@ -1,0 +1,52 @@
+@import ../../../styles/helpers
+
+.container
+    display: flex
+    flex-direction: column
+    row-gap: 64px
+    justify-content: center
+    padding-bottom: 120px
+
+.title
+    text-align: center
+    +headline-2
+
+.wrapper
+    display: flex
+    align-items: center
+    justify-content: center
+    column-gap: 64px
+    row-gap: 64px
+    flex-wrap: wrap
+
+.item
+    display: flex
+    align-items: center
+    max-width: 350px
+    width: auto
+
+.spotify
+    fill: $p4
+    width: 160px
+    height: 160px
+
+.live
+    fill: $p3
+    min-height: 160px
+    width: auto
+.heading
+    text-align: center
+    +body-bold-1
+
+.note
+    text-align: center
+    +body-2
+    color: $n4
+    +dark
+        color: $n4
+
+.community
+    width: 160px
+    height: 160px
+    border-radius: 50%
+    object-fit: cover
