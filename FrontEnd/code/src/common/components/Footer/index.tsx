@@ -47,7 +47,7 @@ const Footer = () => {
 				{!auth.isAuth && <Theme className={styles.theme} />}
 			</div>
 			<p className={styles.copyRight}>
-				Copyright © 2021 UI8 LLC. All rights reserved
+				Copyright © 2021 Communikey LLC. All rights reserved
 			</p>
 		</nav>
 	);
