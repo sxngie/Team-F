@@ -34,7 +34,6 @@ const ChatInfo: React.FC<Props> = ({ className, chat, setChat }) => {
 		isOpen: false,
 		type: ViewType.starred,
 	});
-	console.log(chat.info);
 
 	return (
 		<section className={className}>
