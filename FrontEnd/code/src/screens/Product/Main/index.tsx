@@ -10,7 +10,7 @@ const Main: React.FC<Props> = () => {
 		<div className={styles.container}>
 			<Background className={styles.background} />
 			<h1 className={styles.title}>
-				Go to spot for hearing music with friends
+				Go-to spot for hearing music with friends
 			</h1>
 		</div>
 	);
