@@ -98,7 +98,6 @@ const Header: React.FC<Props> = ({ separatorHeader, wide }) => {
 					</div>
 					{!isAuth ? (
 						<div className={styles.auth}>
-							<Theme className={styles.theme} />
 							<button
 								className={cn("button-stroke button-small")}
 								onClick={() =>

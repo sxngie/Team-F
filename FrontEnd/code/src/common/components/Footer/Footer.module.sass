@@ -1,6 +1,84 @@
 @import ../../../styles/helpers
 
 .footer
+    padding: 60px 80px 40px
     border-top: 1px solid $n6
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    row-gap: 24px
+    +m
+        padding: 60px 32px 40px
+
     +dark
         border-color: $n2
+
+.wrapper
+    display: flex
+    column-gap: 80px
+    flex-wrap: wrap
+    +t
+        row-gap: 12px
+        justify-content: center
+
+.logo
+    height: 40px
+    fill: $n2
+    +dark
+        fill: $n7
+
+.logoContainer
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.logoTitle
+    margin-left: 10px
+    height: 40px
+    fill: $n2
+    +dark
+        fill: $n7
+
+.controls
+    display: flex
+    flex-direction: column
+    row-gap: 24px
+
+.copyRight
+    text-align: center
+    color: $n3
+    +caption-2
+    +dark
+        color: $n4
+
+.links
+    align-items: center
+    justify-content: center
+    display: flex
+    column-gap: 24px
+    row: gap 24px
+    flex-wrap: wrap
+
+.link
+    +button-2
+    color: $n4
+    transition: color .2s
+
+    +m
+        display: flex
+        align-items: center
+        margin: 0 -32px
+        padding: 0 32px
+        height: 64px
+        +poppins
+        font-size: 24px
+        font-weight: 600
+    &:hover,
+    &.active
+        color: $n2
+        +dark
+            color: $n6
+            +m
+                background: none
+                color: $n6

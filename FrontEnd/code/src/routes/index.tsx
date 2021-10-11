@@ -120,7 +120,13 @@ const routes: Route[] = [
 		),
 		name: "Product",
 		needAuth: false,
-	}, // Implement the product page.
+	},
+	{
+		path: "support",
+		render: null,
+		name: "Support",
+		needAuth: false,
+	},
 ];
 
 export default routes;
