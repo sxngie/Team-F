@@ -10,7 +10,6 @@ import { useRecoilValue } from 'recoil';
 import { authAtom } from 'store/auth';
 
 import Modal from '../Modal';
-import Theme from '../Theme';
 import Dropdown, { Item } from './Dropdown';
 import styles from './Header.module.sass';
 import Notification from './Notification';
