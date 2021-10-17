@@ -3,3 +3,8 @@ export enum role {
 	owner = "owner",
 	member = "member",
 }
+
+export enum FileType {
+	file = "file",
+	media = "media",
+}

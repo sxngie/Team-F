@@ -16,20 +16,29 @@ type Query {
 		pageSize: Int!
 		cursor: Int!
 	): Files!
-	getLastFiles(chat: ID!, token: ID!, type: FileType!): [File!]!
+	getLastFiles(
+		chat: ID!
+		token: ID!
+		pageSize: Int!
+		type: FileType!
+	): [File!]!
 	getLinks(chat: ID!, token: ID!, pageSize: Int!, cursor: Int!): Links!
-	getLastLinks(chat: ID!, token: ID!): [String!]!
+	getLastLinks(chat: ID!, token: ID!, pageSize: Int!): [String!]!
 	#TODO: Add other queries.
 }
 
 type Mutation {
-	createMessage(
-		id: ID!
-		chat: ID!
-		token: ID!
-		message: MessageInput
-	): Message
-	#TODO: Add other mutations.
+	joinChat(chat: ID!, token: ID!): Boolean!
+	createMessage(chat: ID!, token: ID!, message: MessageInput): Message!
+	deleteMessage(id: ID!, token: ID!): Boolean!
+	editMessage(id: ID!, token: ID!, message: MessageInput): Message!
+	leaveChat(chat: ID!, token: ID!): Boolean!
+	addUser(chat: ID!, token: ID!, username: String!): Boolean!
+	removeUser(chat: ID!, token: ID!, username: String!): Boolean!
+	createChat(name: String!, token: ID!): Chat!
+	editChat(chat: ID!, token: ID!, name: String): Chat!
+	deleteChat(chat: ID!, token: ID!): Boolean!
+	editUserRole(chat: ID!, token: ID!, username: String!, role: Role!): Member!
 }
 
 #-----[Inputs]-----
@@ -55,7 +64,7 @@ type Message {
 	chat: ID!
 	createdAt: DateTime!
 	updatedAt: DateTime!
-	message: String!
+	message: String
 	attachment: File
 	reply: ID
 }
@@ -88,7 +97,7 @@ type Messages {
 type Chat {
 	id: ID!
 	name: String!
-	unread: Int!
+	notification: Boolean!
 	users: [Member!]!
 	latest: Message
 }

@@ -19,6 +19,18 @@ export interface File {
 	size: string;
 }
 
+export interface Links {
+	hasMore: boolean;
+	cusror: number;
+	links: string[];
+}
+
+export interface Files {
+	hasMore: boolean;
+	cursor: number;
+	files: Files[];
+}
+
 export interface Messages {
 	hasMore: boolean;
 	messages: Message[];
@@ -28,9 +40,9 @@ export interface Messages {
 export interface Chat {
 	id: Id;
 	name: string;
-	count: number; // Amount of messages in a chat.
+	notification: boolean; // If the chat has a recent notification
 	users: Member[];
-	messages: Messages;
+	latest?: Message;
 }
 
 export interface User {
@@ -42,5 +54,3 @@ export interface User {
 export interface Member extends User {
 	role: role;
 }
-
-//TODO: Create the rest of the general interfaces.
