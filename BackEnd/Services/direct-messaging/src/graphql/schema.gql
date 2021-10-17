@@ -24,7 +24,6 @@ type Query {
 	): [File!]!
 	getLinks(chat: ID!, token: ID!, pageSize: Int!, cursor: Int!): Links!
 	getLastLinks(chat: ID!, token: ID!, pageSize: Int!): [String!]!
-	#TODO: Add other queries.
 }
 
 type Mutation {
