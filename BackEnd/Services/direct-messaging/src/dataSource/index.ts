@@ -1,13 +1,16 @@
+import { ApolloContext } from 'api/apolloContext';
 import { DataSource, DataSourceConfig } from 'apollo-datasource';
 
-export default class ServerApi<T> extends DataSource {
-	private context!: T;
+type C = Omit<ApolloContext, "dataSources">;
+
+export default class ServerApi extends DataSource<C> {
+	private context!: C;
 
 	public constructor() {
 		super();
 	}
 
-	public initialize(config: DataSourceConfig<T>) {
+	public initialize(config: DataSourceConfig<C>) {
 		this.context = config.context;
 	}
 

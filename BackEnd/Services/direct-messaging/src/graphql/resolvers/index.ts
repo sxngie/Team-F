@@ -1,4 +1,6 @@
-import * as Mutation from './Mutation';
-import * as Query from './Query';
+import { Resolvers } from 'api/generated';
 
-export { Query, Mutation };
+import Mutation from './Mutation';
+import Query from './Query';
+
+export default { Query, Mutation } as Resolvers;

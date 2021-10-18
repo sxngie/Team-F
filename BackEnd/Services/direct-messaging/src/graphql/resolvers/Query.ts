@@ -1,8 +1,7 @@
-import {
-    GetChat, GetChats, GetFile, GetFiles, getLastFiles, GetLastLinks, GetLinks, GetMessage,
-    GetMessages, getUser, GetUsers
-} from 'api/definitions/queries';
+import { QueryResolvers } from 'api/generated';
 
 //TODO: Implement the query resolvers.
 
-export {};
+const query: QueryResolvers = {};
+
+export default query;

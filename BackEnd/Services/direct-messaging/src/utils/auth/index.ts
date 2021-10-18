@@ -1,6 +1,7 @@
-import { Authorization, Token } from 'api/utils/types';
 import express from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+
+import { Authorization, Token } from '../types';
 
 const APP_SECRET = "SuperSecretPassword"; // This will be an ENV in the future.
 
