@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"target": "ESNext", // default is es5
+		"outDir": "./build",
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noFallthroughCasesInSwitch": true,
+		"importHelpers": false,
+		"module": "commonjs",
+		"resolveJsonModule": true,
+		"moduleResolution": "Node",
+		"noImplicitAny": true,
+		"baseUrl": "./src" // Saves the use of '../../../file' and instead lets you just use 'file'
+	},
+	"include": ["src"]
+}

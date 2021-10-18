@@ -1,0 +1,16 @@
+#-----[Root Fields]-----
+
+type Query {
+	helloWorld: String!
+}
+
+type Mutation {
+	createMessage(message: String!): String!
+}
+
+#-----[Inputs]-----
+#-----[Interfaces]-----
+#-----[Types]-----
+#-----[Enum]-----
+
+scalar DateTime

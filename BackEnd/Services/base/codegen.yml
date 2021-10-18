@@ -1,0 +1,13 @@
+overwrite: true
+schema: "./src/graphql/schema.gql"
+documents: null
+generates:
+    src/api/generated.ts:
+        config:
+            contextType: "./apolloContext#ApolloContext"
+        plugins:
+            - "typescript"
+            - "typescript-resolvers"
+    ./graphql.schema.json:
+        plugins:
+            - "introspection"
