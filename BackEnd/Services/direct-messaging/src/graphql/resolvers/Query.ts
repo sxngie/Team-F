@@ -2,6 +2,6 @@ import { QueryResolvers } from 'api/generated';
 
 //TODO: Implement the query resolvers.
 
-const query: QueryResolvers = {};
+const Query: QueryResolvers = {};
 
-export default query;
+export default Query;
