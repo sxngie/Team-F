@@ -2,11 +2,11 @@ import { ApolloServer, ExpressContext } from 'apollo-server-express';
 import express from 'express';
 import { importSchema } from 'graphql-import';
 import { join } from 'path';
-import { getUserId } from 'utils/auth';
 
 import config from './config.json';
 import ServerApi from './dataSource';
 import * as resolvers from './graphql/resolvers';
+import { getUserId } from './utils/auth';
 
 const app = express();
 app.set("trust proxy", 1);
