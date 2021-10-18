@@ -1,43 +1,32 @@
 #-----[Root Fields]-----
 
 type Query {
-	getMessage(id: ID!, token: ID!): Message
-	getMessages(id: ID!, pageSize: Int!, cursor: Int!, token: ID!): Messages!
-	getChat(id: ID!, token: ID!): Chat
-	getChats(token: ID!): [Chat!]!
-	getUser(token: ID!): User
-	getUsers(chat: ID!, token: ID!): [Member!]!
+	getMessage(id: ID!): Message
+	getMessages(id: ID!, pageSize: Int!, cursor: Int!): Messages!
+	getChat(id: ID!): Chat
+	getChats: [Chat!]!
+	getUser: User
+	getUsers(chat: ID!): [Member!]!
 	#-----[Resources]-----
-	getFile(id: ID!, token: ID!, type: FileType!): File
-	getFiles(
-		chat: ID!
-		token: ID!
-		type: FileType!
-		pageSize: Int!
-		cursor: Int!
-	): Files!
-	getLastFiles(
-		chat: ID!
-		token: ID!
-		pageSize: Int!
-		type: FileType!
-	): [File!]!
-	getLinks(chat: ID!, token: ID!, pageSize: Int!, cursor: Int!): Links!
-	getLastLinks(chat: ID!, token: ID!, pageSize: Int!): [String!]!
+	getFile(id: ID!, type: FileType!): File
+	getFiles(chat: ID!, type: FileType!, pageSize: Int!, cursor: Int!): Files!
+	getLastFiles(chat: ID!, pageSize: Int!, type: FileType!): [File!]!
+	getLinks(chat: ID!, pageSize: Int!, cursor: Int!): Links!
+	getLastLinks(chat: ID!, pageSize: Int!): [String!]!
 }
 
 type Mutation {
-	joinChat(chat: ID!, token: ID!): Boolean!
-	createMessage(chat: ID!, token: ID!, message: MessageInput!): Message!
-	deleteMessage(id: ID!, token: ID!): Boolean!
-	editMessage(id: ID!, token: ID!, message: MessageInput!): Message!
-	leaveChat(chat: ID!, token: ID!): Boolean!
-	addUser(chat: ID!, token: ID!, username: String!, role: Role!): Boolean!
-	removeUser(chat: ID!, token: ID!, username: String!): Boolean!
-	createChat(name: String!, token: ID!): Chat!
-	editChat(chat: ID!, token: ID!, name: String!): Chat!
-	deleteChat(chat: ID!, token: ID!): Boolean!
-	editUserRole(chat: ID!, token: ID!, username: String!, role: Role!): Member!
+	joinChat(chat: ID!): Boolean!
+	createMessage(chat: ID!, message: MessageInput!): Message!
+	deleteMessage(id: ID!): Boolean!
+	editMessage(id: ID!, message: MessageInput!): Message!
+	leaveChat(chat: ID!): Boolean!
+	addUser(chat: ID!, username: String!, role: Role!): Boolean!
+	removeUser(chat: ID!, username: String!): Boolean!
+	createChat(name: String!): Chat!
+	editChat(chat: ID!, name: String!): Chat!
+	deleteChat(chat: ID!): Boolean!
+	editUserRole(chat: ID!, username: String!, role: Role!): Member!
 }
 
 #-----[Inputs]-----

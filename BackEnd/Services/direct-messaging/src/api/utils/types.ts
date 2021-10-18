@@ -14,3 +14,5 @@ export type Id = string;
  * ##### *Used to add more context in code.*
  */
 export type Token = `${string}.${string}.${string}`;
+
+export type Authorization = `Bearer ${Token}`;

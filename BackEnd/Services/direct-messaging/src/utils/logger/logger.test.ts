@@ -1,6 +1,6 @@
 import { join } from 'path';
 
-import Logger from './logger';
+import Logger from './index';
 
 test("Sets correct file path", () => {
 	const file = "./log.txt";
