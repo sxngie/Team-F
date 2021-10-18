@@ -1,5 +1,7 @@
-import {} from 'api/definitions/mutations';
+import { MutationResolvers } from 'api/generated';
 
 //TODO: Implement the mutation resolvers.
 
-export {};
+const Mutation: MutationResolvers = {};
+
+export default Mutation;

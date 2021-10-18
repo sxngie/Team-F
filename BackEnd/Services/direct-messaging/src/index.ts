@@ -1,23 +1,14 @@
-import { ApolloServer, ExpressContext } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import { importSchema } from 'graphql-import';
 import { join } from 'path';
 
+import { context, dataSources } from './api/apolloContext';
 import config from './config.json';
-import ServerApi from './dataSource';
-import * as resolvers from './graphql/resolvers';
+import resolvers from './graphql/resolvers';
 
 const app = express();
 app.set("trust proxy", 1);
-
-const dataSources = () => ({
-	serverApi: new ServerApi(),
-});
-
-const context = ({ req, res }: ExpressContext) => ({
-	req,
-	res,
-});
 
 const typeDefs = importSchema(join(__dirname, "./graphql/schema.gql"));
 

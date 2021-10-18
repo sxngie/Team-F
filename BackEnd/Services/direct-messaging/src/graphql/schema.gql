@@ -1,40 +1,145 @@
 #-----[Root Fields]-----
 
 type Query {
-	getMessage(id: ID!, token: ID!): Message
-	getMessages(id: ID!, pageSize: Int!, cursor: Int!, token: ID!): Messages!
-	getChat(id: ID!, token: ID!): Chat
-	getChats(token: ID!): [Chat!]!
-	getUser(token: ID!): User
-	getUsers(chat: ID!, token: ID!): [Member!]!
-	#-----[Resources]-----
-	getFile(id: ID!, token: ID!, type: FileType!): File
-	getFiles(
+	"Fetch a specific message."
+	getMessage("Message id." id: ID!): Message
+
+	"Fetch a list of messages in a chat."
+	getMessages(
+		"Chat id."
 		chat: ID!
-		token: ID!
-		type: FileType!
+		"Chunk size to fetch."
 		pageSize: Int!
+		"Current location of the index."
+		cursor: Int!
+	): Messages!
+
+	"Fetch information of a given chat."
+	getChat(id: ID!): Chat
+
+	"Fetch user owned chats."
+	getChats: Chats
+
+	"Fetch user information."
+	getUser: User
+
+	"Fetch members that belong to this chat."
+	getUsers("Chat id." chat: ID!): [Member!]!
+	#-----[Resources]-----
+
+	"Fetch a specific file."
+	getFile(id: ID!, type: FileType!): File
+
+	"Fetch a list of files in a chat."
+	getFiles(
+		"Chat id."
+		chat: ID!
+		"Type of file to fetch."
+		type: FileType!
+		"Chunk size to fetch."
+		pageSize: Int!
+		"Current location of the index."
 		cursor: Int!
 	): Files!
-	getLastFiles(chat: ID!, token: ID!, type: FileType!): [File!]!
-	getLinks(chat: ID!, token: ID!, pageSize: Int!, cursor: Int!): Links!
-	getLastLinks(chat: ID!, token: ID!): [String!]!
-	#TODO: Add other queries.
+
+	"Fetch the latest files in a chat"
+	getLastFiles(
+		"Chat id."
+		chat: ID!
+		"Chunk size to fetch."
+		pageSize: Int!
+		"Type of file to fetch."
+		type: FileType!
+	): [File!]!
+
+	"Fetch links in a chat."
+	getLinks(
+		"Chat id."
+		chat: ID!
+		"Chunk size to fetch."
+		pageSize: Int!
+		"Current location of the index."
+		cursor: Int!
+	): Links!
+
+	"Fetch the latest links in a chat"
+	getLastLinks(
+		"Chat id."
+		chat: ID!
+		"Chunk size to fetch."
+		pageSize: Int!
+	): [String!]!
 }
 
 type Mutation {
+	"Join a given chat"
+	joinChat("Chat id." chat: ID!): Boolean!
+
+	"Creates a message in a chat."
 	createMessage(
-		id: ID!
+		"Chat id."
 		chat: ID!
-		token: ID!
-		message: MessageInput
-	): Message
-	#TODO: Add other mutations.
+		"Message to be created."
+		message: MessageInput!
+	): Message!
+
+	"Delete a message from a chat."
+	deleteMessage("Message id." id: ID!): Boolean!
+
+	"Edit a message in a chat."
+	editMessage(
+		"Message id."
+		id: ID!
+		"Edited message"
+		message: MessageInput!
+	): Message!
+
+	"Leave a given chat."
+	leaveChat("Chat id." chat: ID!): Boolean!
+
+	"Add a user to a chat."
+	addUser(
+		"Chat id."
+		chat: ID!
+		"user to add to the chat."
+		username: String!
+		"Role to asign the user in the chat."
+		role: Role! = member
+	): Boolean!
+
+	"Remove a user from a chat."
+	removeUser(
+		"Chat id."
+		chat: ID!
+		"User to remove"
+		username: String!
+	): Boolean!
+
+	"Creates a chat that is owned by the creator."
+	createChat("Name of the chat." name: String!): Chat!
+
+	"Edit the chat name."
+	editChat("Chat id." chat: ID!, "New name of the chat." name: String!): Chat!
+
+	"Delete a given chat."
+	deleteChat("Chat id." chat: ID!): Boolean!
+
+	"Edit a users role."
+	editUserRole(
+		"Chat id."
+		chat: ID!
+		"User whos role will change."
+		username: String!
+		"New role to assign."
+		role: Role!
+	): Member!
 }
 
 #-----[Inputs]-----
 input MessageInput {
+	"Message content."
 	message: String
+	"Id of the message that is being replied to."
 	reply: ID
 	#Files are included in the body of the request.
 }
@@ -42,8 +147,10 @@ input MessageInput {
 #-----[Interfaces]-----
 
 interface Person {
+	"User identifier."
 	id: ID!
 	username: String!
+	"Avatar image id."
 	avatar: ID!
 }
 
@@ -51,12 +158,19 @@ interface Person {
 
 type Message {
 	id: ID!
+	"User who created the message."
 	owner: ID!
+	"Chat that this message belongs to."
 	chat: ID!
+	"Time that this message was created."
 	createdAt: DateTime!
+	"Last time this message was updated."
 	updatedAt: DateTime!
-	message: String!
+	"Message content."
+	message: String
+	"File id that is attached to this message."
 	attachment: File
+	"Id of the replied message."
 	reply: ID
 }
 
@@ -68,41 +182,63 @@ type File {
 }
 
 type Links {
+	"If there are more links left."
 	hasMore: Boolean!
+	"Current location on the list."
 	cursor: Int!
 	links: [String!]!
 }
 
 type Files {
+	"If there are more files left."
 	hasMore: Boolean!
+	"Current location on the list"
 	cursor: Int!
 	files: [File!]!
 }
 
 type Messages {
+	"If there are more files left."
 	hasMore: Boolean!
-	messages: [Message!]!
+	"Current location on the list."
 	cursor: Int!
+	messages: [Message!]!
 }
 
 type Chat {
 	id: ID!
 	name: String!
-	unread: Int!
+	"if there are unread messages in this chat."
+	notification: Boolean!
+	"Members of this chat."
 	users: [Member!]!
+	"Latest message in the chat."
 	latest: Message
 }
 
+type Chats {
+	"If there are more files left."
+	hasMore: Boolean!
+	"Current location on the list."
+	cursor: Int!
+	chats: [Chat!]!
+}
+
 type User implements Person {
+	"User identifier."
 	id: ID!
 	username: String!
+	"Avatar image id."
 	avatar: ID!
 }
 
 type Member implements Person {
+	"User identifier."
 	id: ID!
 	username: String!
+	"Avatar image id."
 	avatar: ID!
+	"User role in a chat."
 	role: Role!
 }
 
