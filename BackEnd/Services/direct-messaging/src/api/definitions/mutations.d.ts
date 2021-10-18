@@ -6,13 +6,19 @@ import { Chat, Member, Message } from 'api/entities/general';
 import { MessageInput } from 'api/entities/mutation';
 import { role } from 'api/utils/enums';
 import { Id } from 'api/utils/types';
+import { Context, Info } from 'utils/types';
 
 /**
  * Join a given chat.
  * @param {Id} chat Chat id.
  * @returns {boolean} If user joinned successfully.
  */
-export type JoinChat = (params: { chat: Id }) => boolean;
+export type JoinChat = (
+	_,
+	args: { chat: Id },
+	context: Context,
+	{ dataSource }: Info}
+) => boolean;
 
 /**
  * Creates a message in a chat.
@@ -20,24 +26,39 @@ export type JoinChat = (params: { chat: Id }) => boolean;
  * @param {MessageInput} message The message to be created.
  * @returns The created message.
  */
-export type CreateMessage = (params: {
-	chat: Id;
-	message: MessageInput;
-}) => Message;
+export type CreateMessage = (
+	_,
+	args: {
+		chat: Id;
+		message: MessageInput;
+	},
+	context: Context,
+	{ dataSource }: Info
+) => Message;
 
 /**
  * Deletes a message in a chat.
  * @param {Id} id Message id.
  * @returns {boolean} If the message was deleted successfully.
  */
-export type DeleteMessage = (params: { id: Id }) => boolean;
+export type DeleteMessage = (
+	_,
+	args: { id: Id },
+	context: Context,
+	{ dataSource }: Info
+) => boolean;
 
 /**
  * Leave a given chat.
  * @param {Id} chat Chat id.
  * @returns {boolean} If user successfully left a chat.
  */
-export type LeaveChat = (params: { chat: Id }) => boolean;
+export type LeaveChat = (
+	_,
+	args: { chat: Id },
+	context: Context,
+	{ dataSource }: Info
+) => boolean;
 
 /**
  * Add a user to a chat.
@@ -46,11 +67,12 @@ export type LeaveChat = (params: { chat: Id }) => boolean;
  * @param {role} role Role to be assigned to the new user.
  * @returns {boolean} If the user was successfully added to the chat.
  */
-export type AddUser = (params: {
-	chat: Id;
-	username: Id;
-	role: role;
-}) => boolean;
+export type AddUser = (
+	_,
+	args: { chat: Id; username: Id; role: role },
+	context: Context,
+	{ dataSource }: Info
+) => boolean;
 
 /**
  * Remove a user from a chat.
@@ -58,14 +80,24 @@ export type AddUser = (params: {
  * @param {Id} username User to be removed from the chat.
  * @returns {boolean} If the user was successfully removed from the chat.
  */
-export type RemoveUser = (params: { chat: Id; username: Id }) => boolean;
+export type RemoveUser = (
+	_,
+	args: { chat: Id; username: Id },
+	context: Context,
+	{ dataSource }: Info
+) => boolean;
 
 /**
  * Creates a chat.
  * @param {string} name Chat name.
  * @returns {Chat} Created chat.
  */
-export type CreateChat = (params: { name: string }) => Chat;
+export type CreateChat = (
+	_,
+	args: { name: string },
+	context: Context,
+	{ dataSource }:Info
+) => Chat;
 
 /**
  * Edit the name of a chat.
@@ -73,14 +105,24 @@ export type CreateChat = (params: { name: string }) => Chat;
  * @param {string} name New chat name.
  * @returns {Chat} Edited chat.
  */
-export type EditChat = (params: { chat: Id; name: string }) => Chat;
+export type EditChat = (
+	_,
+	args: { chat: Id; name: string },
+	context: Context,
+	{ dataSource }: Info
+) => Chat;
 
 /**
  * Deletes a chat.
  * @param {Id} chat Chat id.
  * @returns {boolean} If the chat was successfully deleted.
  */
-export type DeleteChat = (params: { chat: Id }) => boolean;
+export type DeleteChat = (
+	_,
+	args: { chat: Id },
+	context: Context,
+	{ dataSource }: Info
+) => boolean;
 
 /**
  * Edits the role of a user in a chat.
@@ -89,8 +131,13 @@ export type DeleteChat = (params: { chat: Id }) => boolean;
  * @param {role} role New user role.
  * @returns {Member} Updated user.
  */
-export type EditUserRole = (params: {
-	chat: Id;
-	username: Id;
-	role: role;
-}) => Member;
+export type EditUserRole = (
+	_,
+	args: {
+		chat: Id;
+		username: Id;
+		role: role;
+	},
+	context: Context,
+	{ dataSource }: Info
+) => Member;

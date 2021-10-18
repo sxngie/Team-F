@@ -3,6 +3,8 @@
 */
 
 import { FileType } from 'api/utils/enums';
+import { GraphQLFieldResolver } from 'graphql';
+import { Context, Info } from 'utils/types';
 
 import { Chat, File, Files, Links, Member, Message, Messages, User } from '../entities/general';
 import { Id } from '../utils/types';
@@ -12,7 +14,12 @@ import { Id } from '../utils/types';
  * @param {Id} id Message id.
  * @returns {Message} Specific chat message.
  */
-export type GetMessage = (params: { id: Id }) => Message;
+export type GetMessage = (
+	_,
+	args: { id: Id },
+	context: Context,
+	{ dataSource }: Info
+) => Message;
 
 /**
  * Fetches messages in a given chat.
@@ -21,37 +28,57 @@ export type GetMessage = (params: { id: Id }) => Message;
  * @param {number} cursor Starting index to fetch from the chat.
  * @returns {Messages} Chat messages.
  */
-export type GetMessages = (params: {
-	id: Id;
-	pageSize: number;
-	cursor: number;
-}) => Messages;
+export type GetMessages = (
+	_,
+	args: {
+		id: Id;
+		pageSize: number;
+		cursor: number;
+	},
+	context: Context,
+	{ dataSource }: Info
+) => Messages;
 
 /**
  * Fetches a specific chat from the chat id.
  * @param {Id} id Id of the chat to be fetched.
  * @returns {Chat} Information of the chat.
  */
-export type GetChat = (params: { id: Id }) => Chat;
+export type GetChat = (
+	_,
+	args: { id: Id },
+	context: Context,
+	{ dataSource }: Info
+) => Chat;
 
 /**
  * Fetches a list of chat information of a user.
  * @returns {Chat[]} A list of chat's the user has access to.
  */
-export type GetChats = () => Chat[];
+export type GetChats = (
+	_,
+	__,
+	context: Context,
+	{ dataSource }: Info
+) => Chat[];
 
 /**
  * Fetch user information.
  * @returns {User} User information.
  */
-export type getUser = () => User;
+export type getUser = (_, __, context: Context, { dataSource }: Info) => User;
 
 /**
  * Fetches a list of users that belong to a given chat.
  * @param {Id} chat Chat id.
  * @returns {Member[]} List of the memebers that belong to a chat.
  */
-export type GetUsers = (params: { chat: Id }) => Member[];
+export type GetUsers = (
+	_,
+	args: { chat: Id },
+	context: Context,
+	{ dataSource }: Info
+) => Member[];
 
 /**
  * Fetch a specific file.
@@ -59,7 +86,12 @@ export type GetUsers = (params: { chat: Id }) => Member[];
  * @param {FileType} type File type to fetch.
  * @returns {File} Requested file.
  */
-export type GetFile = (params: { id: Id; type: FileType }) => File;
+export type GetFile = (
+	_,
+	args: { id: Id; type: FileType },
+	context: Context,
+	{ dataSource }: Info
+) => File;
 
 /**
  * Fetches a list of files from a chat.
@@ -69,12 +101,17 @@ export type GetFile = (params: { id: Id; type: FileType }) => File;
  * @param {number} cursor Current location of the list index.
  * @returns List of files.
  */
-export type GetFiles = (params: {
-	chat: Id;
-	type: FileType;
-	pageSize: number;
-	cursor: number;
-}) => Files;
+export type GetFiles = (
+	_,
+	args: {
+		chat: Id;
+		type: FileType;
+		pageSize: number;
+		cursor: number;
+	},
+	context: Context,
+	{ dataSource }: Info
+) => Files;
 
 /**
  * Fetches the latest files.
@@ -83,11 +120,16 @@ export type GetFiles = (params: {
  * @param {number} pageSize Chunk size of the list.
  * @returns {File[]} List of files.
  */
-export type getLastFiles = (params: {
-	chat: Id;
-	type: FileType;
-	pageSize: number;
-}) => File[];
+export type getLastFiles = (
+	_,
+	args: {
+		chat: Id;
+		type: FileType;
+		pageSize: number;
+	},
+	context: Context,
+	{ dataSource }: Info
+) => File[];
 
 /**
  * Fetches a list of links in a chat.
@@ -96,11 +138,16 @@ export type getLastFiles = (params: {
  * @param {number} cursor Current location of the list index.
  * @returns {Links} List of links in a chat.
  */
-export type GetLinks = (params: {
-	chat: Id;
-	pageSize: number;
-	cursor: number;
-}) => Links;
+export type GetLinks = (
+	_,
+	args: {
+		chat: Id;
+		pageSize: number;
+		cursor: number;
+	},
+	context: Context,
+	{ dataSource }: Info
+) => Links;
 
 /**
  * Fetches the latest links in a chat.
@@ -108,4 +155,9 @@ export type GetLinks = (params: {
  * @param {number} pageSize Chunk size of the list.
  * @returns {string[]} List of the most recent links.
  */
-export type GetLastLinks = (params: { chat: Id; pageSize: number }) => string[];
+export type GetLastLinks = (
+	_,
+	args: { chat: Id; pageSize: number },
+	context: Context,
+	{ dataSource }: Info
+) => string[];

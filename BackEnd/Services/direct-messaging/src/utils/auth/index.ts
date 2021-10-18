@@ -15,11 +15,11 @@ export const getUserId = (req: express.Request, authToken?: Authorization) => {
 				throw new Error("No token found");
 			}
 			const { userId } = getTokenPayload(token) as JwtPayload;
-			return userId;
+			return userId as string;
 		}
 	} else if (authToken) {
 		const { userId } = getTokenPayload(authToken) as JwtPayload;
-		return userId;
+		return userId as string;
 	}
 
 	throw new Error("Not authenticated");
