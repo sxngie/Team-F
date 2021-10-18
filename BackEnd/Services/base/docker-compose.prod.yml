@@ -1,0 +1,8 @@
+version: "3.7"
+
+services:
+    base:
+        build:
+            target: production
+        image: base-prod
+        command: node build/index.js
