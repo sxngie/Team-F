@@ -17,3 +17,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Prisma files
+prisma/migrations
+prisma/*.db*
+
+# dotenv environment variables file
+.env*

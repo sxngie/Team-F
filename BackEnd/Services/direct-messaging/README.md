@@ -1,6 +1,6 @@
 # Direct Messaging Service
 
-*This project was bootstrapped with the base microservice template designed by [Santos O. Martínez Braña](https://github.com/SantosOMartinez).*
+_This project was bootstrapped with the base microservice template designed by [Santos O. Martínez Braña](https://github.com/SantosOMartinez)._
 
 ## Before Installation
 
@@ -16,18 +16,30 @@ To get started with this project you will need to run the following commands:
 
 This will fetch all the dependencies. We prefer to use this command over `npm install` because creates a deterministic, repeatable build. This ensures that we are all running the same versions of packages.
 
+### `yarn prisma-migrate`
+
+Creates the database needed for development.
+
+Install Prisma Client in your project with the following command:
+
+### `npm install @prisma/client`
+
+This command also runs the prisma generate command, which [generates the Prisma Client into the node_modules/.prisma/client directory.](https://www.google.com/search?q=cuid+vs+uuid&oq=cuid+vs+uuid&aqs=chrome..69i57.3354j0j1&sourceid=chrome&ie=UTF-8)
+
+Should be run at the start to create the starting prisma dependencies.
+
 ## Environment Variables
 
-To run this program you need to have a file named `.env` at the root of the project, which will contain all of the environment variables. 
+To run this program you need to have a file named `.env` at the root of the project, which will contain all of the environment variables.
 
-#### **Note: This file should not go to the github repo and can change based on production and development environments.** 
+#### **Note: This file should not go to the github repo and can change based on production and development environments.**
 
 A list of the currently used variables below:
 
-| Variable | Description |
-| -------- | ----------- |
-
-`To be announced`
+| Variable     | Description                                                                            |
+| ------------ | -------------------------------------------------------------------------------------- |
+| DATABASE_URL | This is the url for the database that stores the users. (default: file:./messaging.db) |
+| APP_SECRET   | Used in signing cookies. Should be kept a secret from the world 🌍.                    |
 
 ## Available Scripts
 
@@ -62,14 +74,31 @@ When the GraphQL schema is edited you will have to run this command to generate 
 
 **It is not required to run after install. Only when a change to the schema is made**
 
+### `npx prisma migrate dev --preview-feature`
+
+or
+
+### `yarn prisma-migrate`
+
+This should be run any time there are changes to the schema.prisma file to push any changes to the database.
+
+### `npx prisma generate`
+
+or
+
+### `yarn prisma-generate`
+
+This should also be run any time there is a change to the schema.prisma file so that prisma client gets updated with the changes.
+
 ## Docker
+
 To use this service in production mode you need to create the docker image version of the build.
 
 ### `make up`
 
 Will create a docker image and run the service in a docker container in development mode. Has hot reload enabled.
 
-*Does not build the service in production mode.*
+_Does not build the service in production mode._
 
 ### `make up-prod`
 
@@ -83,6 +112,4 @@ Will shut down and remove the docker container and image that was created with `
 
 Builds the docker image of the service.
 
-*No need to run this, it is already included on the other make commands.*
-
-
+_No need to run this, it is already included on the other make commands._

@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String @id
+  username String @unique
+  avatar   String
+
+
+}
+
+model Member {
+  id     String @id
+  role   String
+  chatId String
+
+  chat Chat @relation(fields: [chatId], references: [id])
+}
+
+model Chat {
+  id           String  @id
+  name         String
+  notification Boolean @default(false)
+
+  users    Member[]
+  messages Message[]
+}
+
+model Message {
+  id           String   @id
+  owner        String
+  chatId       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  message      String?
+  attachmentId String?
+  replyId      String?  @unique
+
+  reply      Message? @relation("RepliedMessageHistory", fields: [replyId], references: [id])
+  prevReply  Message? @relation("RepliedMessageHistory")
+  attachment File?    @relation(fields: [attachmentId], references: [id])
+  chat       Chat     @relation(fields: [chatId], references: [id])
+  links      Link[]
+}
+
+model Link {
+  id        String @id @default(uuid())
+  link      String
+  messageId String
+
+  message Message @relation(fields: [messageId], references: [id])
+}
+
+model File {
+  id       String @id
+  name     String
+  mimeType String
+  size     BigInt @default(0)
+
+  messages Message[]
+}

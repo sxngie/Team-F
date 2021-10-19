@@ -8,7 +8,9 @@
 		"build": "tsc -p .",
 		"dev": "nodemon src/index.ts",
 		"test": "jest",
-		"gql-gen": "graphql-codegen --config codegen.yml"
+		"gql-gen": "graphql-codegen --config codegen.yml",
+		"prisma-generate": "npx prisma generate",
+		"prisma-migrate": "npx prisma migrate dev --preview-feature"
 	},
 	"author": {
 		"name": "Santos O. Martínez Braña",
@@ -25,18 +27,20 @@
 	],
 	"devDependencies": {
 		"@graphql-codegen/cli": "2.2.1",
+		"@graphql-codegen/introspection": "2.1.0",
+		"@graphql-codegen/typescript": "2.2.4",
+		"@graphql-codegen/typescript-resolvers": "2.3.2",
 		"@types/express": "^4.17.13",
 		"@types/jest": "^27.0.2",
 		"@types/jsonwebtoken": "^8.5.5",
 		"jest": "^27.2.4",
 		"nodemon": "^2.0.13",
+		"prisma": "^3.2.1",
 		"ts-jest": "^27.0.5",
-		"ts-node": "^10.2.1",
-		"@graphql-codegen/typescript": "2.2.4",
-		"@graphql-codegen/typescript-resolvers": "2.3.2",
-		"@graphql-codegen/introspection": "2.1.0"
+		"ts-node": "^10.2.1"
 	},
 	"dependencies": {
+		"@prisma/client": "^3.2.1",
 		"apollo-server-express": "^3.3.0",
 		"express": "^4.17.1",
 		"graphql": "^15.6.0",
