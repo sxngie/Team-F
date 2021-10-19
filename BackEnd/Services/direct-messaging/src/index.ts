@@ -3,7 +3,7 @@ import express from 'express';
 import { importSchema } from 'graphql-import';
 import { join } from 'path';
 
-import { context, dataSources } from './api/apolloContext';
+import { context } from './api/apolloContext';
 import config from './config.json';
 import resolvers from './graphql/resolvers';
 
@@ -16,7 +16,6 @@ const server = new ApolloServer({
 	typeDefs,
 	resolvers,
 	context,
-	dataSources,
 	formatError: (err) => new Error(err.message), // should change in the future.
 });
 
