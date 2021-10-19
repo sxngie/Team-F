@@ -1,13 +1,10 @@
 import { ExpressContext } from 'apollo-server-express';
 
-import { PrismaClient } from '@prisma/client';
-
-import ServerApi from '../dataSource';
+import MsgApi from '../dataSource';
 import { getUserId } from '../utils/auth';
 
-const prisma = new PrismaClient({ errorFormat: "minimal" });
 const dataSources = {
-	serverApi: new ServerApi(prisma),
+	serverApi: new MsgApi(),
 };
 
 export const context = ({ req, res }: ExpressContext) => ({
