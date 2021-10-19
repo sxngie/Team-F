@@ -15,7 +15,7 @@ model User {
   username String @unique
   avatar   String
 
-
+  members Member[]
 }
 
 model Member {
@@ -24,6 +24,7 @@ model Member {
   chatId String
 
   chat Chat @relation(fields: [chatId], references: [id])
+  user User @relation(fields: [id], references: [id])
 }
 
 model Chat {
