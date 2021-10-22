@@ -1,0 +1,43 @@
+@import ../../../styles/helpers
+
+.slider
+    display: flex
+    position: relative
+    border-radius: 3px
+    width: 140px
+    padding: 16px 0
+    cursor: pointer
+    align-items: center
+    user-select: none
+
+.bar
+    background: darken($n6, 5)
+    pointer-events: none
+    +dark
+        background: $n4
+    height: 3px
+    position: relative
+    width: 100%
+    display: flex
+    border-radius: inherit
+    overflow: hidden
+
+.progress
+    width: 100%
+    height: 100%
+    border-radius: inherit
+    background: $n2
+    +dark
+        background: $n7
+
+.btn
+    pointer-events: none
+    position: absolute
+    height: 12px
+    width: 12px
+    border-radius: 50%
+    background: $n8
+    border: 2px solid $n2
+    +dark
+        background: $n1
+        border: 2px solid $n7
