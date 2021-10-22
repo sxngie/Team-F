@@ -11,18 +11,22 @@ interface Props {
 	you: string;
 }
 
+const src = faker.image.avatar();
+
 const index: React.FC<Props> = ({ message, you }) => {
+	const isMe = message.owner === you;
+
 	return (
-		<li
-			className={cn(styles.item, { [styles.you]: message.owner === you })}
-		>
+		<li className={cn(styles.item, { [styles.you]: isMe })}>
 			<span className={styles.msg}>
-				<img
-					className={styles.avatar}
-					alt="Avatar"
-					src={faker.image.avatar()}
-				/>
-				<p className={styles.text}>{message.message}</p>
+				{!isMe && (
+					<img className={styles.avatar} alt="Avatar" src={src} />
+				)}
+
+				<span className={styles.content}>
+					{!isMe && <p className={styles.name}>{message.owner}</p>}
+					<p className={styles.text}>{message.message}</p>
+				</span>
 			</span>
 			<p className={styles.time}>{getTimeStamp(message.createdAt)}</p>
 		</li>
