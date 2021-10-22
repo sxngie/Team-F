@@ -22,7 +22,10 @@
     +t
         padding: 32px
 
-    +m
+    +s
+        padding: 32px 16px
+
+    +t
         position: absolute
         z-index: 3
         background: $n7
@@ -34,17 +37,26 @@
         &.show
             transform: translateX(0)
 
+.container
+    overflow-y: auto
+    overflow-x: hidden
+    width: 100%
+    display: grid
+    justify-items: center
+
 .messages
     position: relative
     flex-grow: 1
     width: 100%
-    overflow-y: auto
-    overflow-x: hidden
     display: flex
+    margin: 0 auto
     padding: 48px 48px 16px
     flex-direction: column-reverse
-    row-gap: 24px
-    padding-bottom: 24px
+    row-gap: 32px
+    padding-bottom: 64px
+    max-width: 1024px
+    +a
+        padding: 48px 4px 16px
 
 .controls
     display: none
@@ -57,25 +69,27 @@
         +body-bold-1
         +text-overflow
 
-    +t
+    +d
         display: flex
 
 .back
     display: none
-    +m
+    +t
         display: grid
         place-items: center
 
 .info
     display: none
-    +t
+    +d
         display: grid
         place-items: center
 
 .form
-    width: 100%
-    max-width: 650px
+    width: calc( 100% - 64px )
+    max-width: 900px
     border-radius: 24px
     background: $n7
     +dark
         background: $n1
+    +x
+        width: calc( 100% - 16px )

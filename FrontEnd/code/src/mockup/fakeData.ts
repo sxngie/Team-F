@@ -85,7 +85,10 @@ export const getFakeMessages = (length: number, you: string): Message[] =>
 		chatId: faker.datatype.uuid(),
 		createdAt: faker.date.soon(),
 		id: faker.datatype.uuid(),
-		owner: Math.random() > 0.5 ? faker.datatype.uuid() : you,
+		owner:
+			Math.random() > 0.5
+				? `${faker.name.findName()} ${faker.name.lastName()}`
+				: you,
 		updatedAt: faker.date.soon(),
 		message: faker.lorem.sentences(),
 	})).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());

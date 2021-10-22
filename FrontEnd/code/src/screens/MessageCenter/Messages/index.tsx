@@ -39,11 +39,13 @@ const Messages: React.FC<Props> = ({ chat, setChat, className }) => {
 					<Icon name="grid" size="24" />
 				</button>
 			</div>
-			<ul className={styles.messages}>
-				{messages.map((msg, i) => (
-					<Message message={msg} key={i} you={"me"} />
-				))}
-			</ul>
+			<div className={styles.container}>
+				<ul className={styles.messages}>
+					{messages.map((msg, i) => (
+						<Message message={msg} key={i} you={"me"} />
+					))}
+				</ul>
+			</div>
 			<Form
 				className={styles.form}
 				value={message}
@@ -52,6 +54,7 @@ const Messages: React.FC<Props> = ({ chat, setChat, className }) => {
 				type="text"
 				iconRight="arrow-next"
 				iconLeft="clip"
+				autoFocus
 			/>
 		</main>
 	);

@@ -11,8 +11,6 @@
 
 .users
     position: relative
-    min-width: 420px
-    max-width: 420px
 
     height: 100%
 
@@ -23,10 +21,8 @@
     +x
         min-width: 396px
         max-width: 396px
-    +d
-        min-width: 300px
-        max-width: 300px
-    +m
+
+    +t
         border: none
         min-width: 100%
         max-width: 100%
@@ -41,7 +37,7 @@
     +x
         padding-bottom: 80px
 
-    +m
+    +t
         padding-bottom: 0px
         position: fixed
         top: 0
@@ -73,14 +69,15 @@
         padding: 20px
         width: 300px
 
-    +t
+    +d
         position: absolute
         display: flex
-        left: 300px
+        justify-content: center
+        left: 396px
         height: 100%
         z-index: 4
         background: $n7
-        width: calc( 100% - 300px)
+        width: calc( 100% - 396px)
         transform: translateX(100%)
         transition: transform .3s
         &.show
@@ -90,6 +87,9 @@
             background: $n1
             border-left: none
 
-    +m
+    +t
         width: 100%
         left: unset
+
+    +s
+        padding: 20px 16px

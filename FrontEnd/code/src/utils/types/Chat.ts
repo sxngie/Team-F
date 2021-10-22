@@ -15,7 +15,7 @@ export interface Favorite {
 
 export interface Message {
 	id: Id;
-	owner: Id; // User id
+	owner: string; // name
 	chatId: Id;
 	createdAt: Date;
 	updatedAt: Date;

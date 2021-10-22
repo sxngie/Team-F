@@ -15,6 +15,7 @@ interface Props {
 	name?: string;
 	iconRight: IconName;
 	iconLeft?: IconName;
+	autoFocus?: boolean;
 }
 
 const Form: React.FC<Props> = ({
@@ -28,6 +29,7 @@ const Form: React.FC<Props> = ({
 	name,
 	iconRight,
 	iconLeft,
+	autoFocus,
 }) => {
 	return (
 		<form
@@ -43,6 +45,7 @@ const Form: React.FC<Props> = ({
 				</button>
 			)}
 			<input
+				autoFocus={autoFocus}
 				className={styles.input}
 				type={type}
 				value={value}

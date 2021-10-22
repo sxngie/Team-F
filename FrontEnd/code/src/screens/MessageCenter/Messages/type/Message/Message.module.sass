@@ -8,35 +8,69 @@
     row-gap: 8px
 
     &.you
+        align-items: flex-end
+        .time
+            align-self: flex-end
+            padding-left: unset
+            padding-right: 16px
         .msg
             justify-content: flex-end
             padding-right: 12px
             .avatar
                 display: none
-            p
-                background: $p1
-                color: $n7
-                border-radius: 16px 3px 16px 16px
+        .content
+            align-items: flex-end
+
+        .name
+            display: none
+
+        .text
+            background: $p1
+            color: $n7
+            border-radius: 16px 3px 16px 16px
+
+.name
+    user-select: none
+    padding: 6px 0
+    +body-bold-2
+    +text-overflow
+    transition: $transition
+    &:hover
+        text-decoration: underline 2px solid
+        text-underline-offset: 1px
+        text-decoration-thickness: 1px
+        cursor: pointer
+
+.content
+    display: flex
+    flex-direction: column
+    align-items: flex-start
 
 .msg
     display: flex
     column-gap: 12px
 
-    p
-        max-width: 80%
-        word-break: break-word
-        padding: 24px 16px
-        border-radius: 3px 16px 16px 16px
-        background: $n8
-        box-shadow: 0 4px 8px 1px #6666661a
-        +dark
-            background: $n2
-            box-shadow: 0 4px 4px rgba(0,0,0,0.1)
+.text
+    max-width: 80%
+    word-break: break-word
+    padding: 24px 16px
+    border-radius: 3px 16px 16px 16px
+    background: $n8
+    box-shadow: 0 4px 4px rgba(129, 129, 129, 0.1)
+    +dark
+        background: $n2
+        box-shadow: 0 4px 4px rgba(0,0,0,0.1)
+
+    +s
+        max-width: 90%
 
 .time
-    align-self: flex-end
+    align-self: flex-start
+    padding-left: 48px
 
 .avatar
+    user-select: none
+    cursor: pointer
     min-width: 32px
     min-height: 32px
     object-fit: cover
@@ -45,6 +79,9 @@
     overflow: hidden
     border-radius: 50%
     border: none
+    transition: $transition
     background: $n8
     +dark
         background: $n2
+    &:hover
+        opacity: 0.7
