@@ -9,13 +9,24 @@ import styles from './Slider.module.sass';
 
 interface Props {
 	className?: string;
-	onChange?: (p: number) => void;
+	onChange?: (percent: number) => void;
 	initial?: number;
 }
 
 const progress = (percent = 0) => `translateX(calc(-100% + ${percent}%))`;
 
-const btn = (percent = 0) => `calc(${percent}% - 6px)`;
+const btn = (percent = 0) => `${percent}%`;
+
+const onMove = (x: number, left: number, width: number) => {
+	const dist = x - left;
+
+	if (dist < 0) {
+		return 0;
+	} else if (dist >= width) {
+		return 100;
+	}
+	return parseFloat(((dist / width) * 100).toFixed(4));
+};
 
 const Slider: React.FC<Props> = ({
 	className,
@@ -23,10 +34,11 @@ const Slider: React.FC<Props> = ({
 	onChange = () => {},
 }) => {
 	const ref = useRef<HTMLDivElement>(null);
+	const start = initial > 100 ? 100 : initial < 0 ? 0 : initial;
 	const [style, api] = useSpring(() => ({
-		to: {
-			left: btn(initial),
-			transform: progress(initial),
+		from: {
+			left: btn(start),
+			transform: progress(start),
 		},
 		config: {
 			clamp: true,
@@ -41,16 +53,7 @@ const Slider: React.FC<Props> = ({
 
 		if (left === undefined || width === undefined) return;
 
-		const dist = x - left;
-		let p = initial;
-
-		if (dist < 0) {
-			p = 0;
-		} else if (dist >= width) {
-			p = 100;
-		} else {
-			p = parseFloat(((dist / width) * 100).toFixed(4));
-		}
+		const p = onMove(x, left, width);
 
 		api.start(() => ({
 			left: btn(p),

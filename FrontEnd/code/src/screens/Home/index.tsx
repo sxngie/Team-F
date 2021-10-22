@@ -8,7 +8,11 @@ interface Props {}
 const Home: React.FC<Props> = () => {
 	return (
 		<main className={styles.main}>
-			<Slider onChange={(p) => console.log(p)} />
+			<Slider />
+			<Slider />
+			<Slider />
+			<Slider />
+			<Slider />
 		</main>
 	);
 };
