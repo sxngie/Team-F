@@ -9,7 +9,17 @@ import styles from './Slider.module.sass';
 
 interface Props {
 	className?: string;
+	/**
+	 * Returns a function that gives the current percent value of the slider.
+	 */
 	onChange?: (percent: number) => void;
+	/**
+	 * Default percent to start the slider in. If the value is greater or less
+	 * than the allowed boundaries it will change them to fit the corresponding
+	 * extreme.
+	 *
+	 *Bounds: `0 <= initial <= 100`
+	 */
 	initial?: number;
 }
 
@@ -28,6 +38,12 @@ const onMove = (x: number, left: number, width: number) => {
 	return parseFloat(((dist / width) * 100).toFixed(4));
 };
 
+/**
+ * Slider to be used to get percent values. Includes touch and mouse events
+ * and supports key events.
+ *
+ * *Only renders once! :D*
+ */
 const Slider: React.FC<Props> = ({
 	className,
 	initial = 0,
@@ -95,7 +111,6 @@ const Slider: React.FC<Props> = ({
 					return; // Quit when this doesn't handle the key event.
 			}
 
-			console.log(p.current);
 			api.start(() => ({
 				left: btn(p.current),
 				transform: progress(p.current),
