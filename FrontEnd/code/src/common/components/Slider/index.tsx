@@ -35,7 +35,7 @@ interface Props {
 	 */
 	markOnHover?: boolean;
 	/**
-	 * Tells you if the slider is being pressed by mouse or touch.
+	 * Tells you if the slider is being pressed by mouse, touch, or keyboard.
 	 */
 	isPressed?: (isPressed: boolean) => void;
 }
@@ -72,6 +72,7 @@ const Slider: React.FC<Props> = ({
 	const ref = useRef<HTMLLabelElement>(null);
 	const start = percent > 100 ? 100 : percent < 0 ? 0 : percent;
 	const p = useRef(start);
+	const pressed = useRef(false);
 	const [style, api] = useSpring(() => ({
 		from: {
 			left: btn(start),
@@ -82,6 +83,9 @@ const Slider: React.FC<Props> = ({
 			duration: 50,
 		},
 	}));
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(() => isPressed(pressed.current), []);
 
 	useEffect(() => {
 		p.current = start;
@@ -94,7 +98,11 @@ const Slider: React.FC<Props> = ({
 
 	const bind = useGesture({
 		onDrag: ({ xy: [x], down }) => {
-			isPressed(down);
+			if (down !== pressed.current && !disabled) {
+				isPressed(down);
+			}
+
+			pressed.current = down;
 			if (!down || disabled) return;
 			const left = ref.current?.getBoundingClientRect().left;
 			const width = ref.current?.clientWidth;
@@ -128,6 +136,7 @@ const Slider: React.FC<Props> = ({
 						break;
 					}
 					p.current = lower;
+					if (!e.repeat) isPressed(true);
 					break;
 				case "Right": // IE/Edge specific value
 				case "ArrowRight":
@@ -138,6 +147,7 @@ const Slider: React.FC<Props> = ({
 						break;
 					}
 					p.current = raise;
+					if (!e.repeat) isPressed(true);
 					break;
 				default:
 					return; // Quit when this doesn't handle the key event.
@@ -148,6 +158,23 @@ const Slider: React.FC<Props> = ({
 				transform: progress(p.current),
 			}));
 			onChange(p.current);
+		},
+		onKeyUp: ({ event }) => {
+			if (disabled) return;
+
+			const e = event as KeyboardEvent;
+			const key = e.key;
+
+			switch (key) {
+				case "Left": // IE/Edge specific value
+				case "ArrowLeft":
+				case "Right": // IE/Edge specific value
+				case "ArrowRight":
+					isPressed(false);
+					break;
+				default:
+					return; // Quit when this doesn't handle the key event.
+			}
 		},
 	});
 
