@@ -24,6 +24,20 @@ interface Props {
 	 *Bounds: `0 <= initial <= 100`
 	 */
 	percent?: number;
+	/**
+	 * If the slider is disabled.
+	 *
+	 * This determines if it can change values with user events
+	 */
+	disabled?: boolean;
+	/**
+	 * If the target mark should be hidden and only shown on hover or focus
+	 */
+	markOnHover?: boolean;
+	/**
+	 * Tells you if the slider is being pressed by mouse or touch.
+	 */
+	isPressed?: (isPressed: boolean) => void;
 }
 
 const progress = (percent = 0) => `translateX(calc(-100% + ${percent}%))`;
@@ -51,6 +65,9 @@ const Slider: React.FC<Props> = ({
 	className,
 	onChange = () => {},
 	percent = 0,
+	disabled,
+	markOnHover,
+	isPressed = () => {},
 }) => {
 	const ref = useRef<HTMLLabelElement>(null);
 	const start = percent > 100 ? 100 : percent < 0 ? 0 : percent;
@@ -72,11 +89,13 @@ const Slider: React.FC<Props> = ({
 			left: btn(p.current),
 			transform: progress(p.current),
 		}));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [percent]);
 
 	const bind = useGesture({
 		onDrag: ({ xy: [x], down }) => {
-			if (!down) return;
+			isPressed(down);
+			if (!down || disabled) return;
 			const left = ref.current?.getBoundingClientRect().left;
 			const width = ref.current?.clientWidth;
 
@@ -92,9 +111,11 @@ const Slider: React.FC<Props> = ({
 			onChange(p.current);
 		},
 		onKeyDown: ({ event }) => {
+			if (disabled) return;
+
 			const e = event as KeyboardEvent;
 			const key = e.key;
-			let delta = e.repeat ? 10 : 5;
+			let delta = e.repeat ? 10 : 1;
 
 			switch (key) {
 				case "Left": // IE/Edge specific value
@@ -131,7 +152,13 @@ const Slider: React.FC<Props> = ({
 	});
 
 	return (
-		<label className={cn(styles.slider, className)} ref={ref} {...bind()}>
+		<label
+			className={cn(styles.slider, className, {
+				[styles.disabled]: disabled,
+			})}
+			ref={ref}
+			{...bind()}
+		>
 			<button className={styles.bar}>
 				<animated.span
 					className={styles.progress}
@@ -139,7 +166,7 @@ const Slider: React.FC<Props> = ({
 				></animated.span>
 			</button>
 			<animated.span
-				className={styles.btn}
+				className={cn(styles.btn, { [styles.onHover]: markOnHover })}
 				style={{ left: style.left }}
 			></animated.span>
 		</label>

@@ -23,6 +23,7 @@ export default function useAnimationFrame(
 	useEffect(() => {
 		animationInterval(ms, controller.current.signal, callbackRef.current);
 
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		return () => controller.current.abort();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ms]);

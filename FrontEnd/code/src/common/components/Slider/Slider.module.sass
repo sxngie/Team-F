@@ -9,12 +9,15 @@
     cursor: pointer
     align-items: center
     user-select: none
+    &:hover,&:focus-within
+        .onHover
+            opacity: 1
 
 .bar
     background: darken($n6, 5)
     pointer-events: none
     +dark
-        background: $n4
+        background: $n3
     height: 3px
     position: relative
     width: 100%
@@ -34,6 +37,7 @@
     background: $n2
     +dark
         background: $n7
+        box-shadow: 4px 0px 8px $n3
 
 .btn
     transform: translateX(-50%)
@@ -47,3 +51,11 @@
     +dark
         background: $n1
         border: 2px solid $n7
+
+.disabled
+    pointer-events: none
+    user-select: none
+
+.onHover
+    opacity: 0
+    transition: opacity $transition / 2

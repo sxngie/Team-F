@@ -1,5 +1,6 @@
 import SongProgress from 'common/components/SongProgress';
-import React, { useEffect, useState } from 'react';
+import Volume from 'common/components/Volume';
+import React, { useState } from 'react';
 
 import styles from './Home.module.sass';
 
@@ -17,6 +18,7 @@ const Home: React.FC<Props> = () => {
 				setPosition={setPosition}
 				showRemaining
 			/>
+			<Volume volume={50} />
 		</main>
 	);
 };
