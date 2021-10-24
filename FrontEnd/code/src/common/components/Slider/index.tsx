@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { useGesture } from 'react-use-gesture';
 
@@ -11,6 +11,9 @@ interface Props {
 	className?: string;
 	/**
 	 * Returns a function that gives the current percent value of the slider.
+	 *
+	 * *Only triggers when change occurs from within. If the percent value is
+	 * changed using the `value` prop then it will not trigger.*
 	 */
 	onChange?: (percent: number) => void;
 	/**
@@ -20,7 +23,7 @@ interface Props {
 	 *
 	 *Bounds: `0 <= initial <= 100`
 	 */
-	initial?: number;
+	percent?: number;
 }
 
 const progress = (percent = 0) => `translateX(calc(-100% + ${percent}%))`;
@@ -46,11 +49,11 @@ const onMove = (x: number, left: number, width: number) => {
  */
 const Slider: React.FC<Props> = ({
 	className,
-	initial = 0,
 	onChange = () => {},
+	percent = 0,
 }) => {
 	const ref = useRef<HTMLLabelElement>(null);
-	const start = initial > 100 ? 100 : initial < 0 ? 0 : initial;
+	const start = percent > 100 ? 100 : percent < 0 ? 0 : percent;
 	const p = useRef(start);
 	const [style, api] = useSpring(() => ({
 		from: {
@@ -62,6 +65,14 @@ const Slider: React.FC<Props> = ({
 			duration: 50,
 		},
 	}));
+
+	useEffect(() => {
+		p.current = start;
+		api.start(() => ({
+			left: btn(p.current),
+			transform: progress(p.current),
+		}));
+	}, [percent]);
 
 	const bind = useGesture({
 		onDrag: ({ xy: [x], down }) => {
@@ -115,6 +126,7 @@ const Slider: React.FC<Props> = ({
 				left: btn(p.current),
 				transform: progress(p.current),
 			}));
+			onChange(p.current);
 		},
 	});
 

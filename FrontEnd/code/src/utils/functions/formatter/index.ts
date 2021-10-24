@@ -95,4 +95,34 @@ export const getTimeStamp = (date: Date) => {
 	});
 };
 
+/**
+ * Converts milliseconds into its components up until the hours.
+ * @param ms Time to be converted
+ * @returns Object with the hours, minutes, seconds, and milliseconds.
+ */
+export const msToTime = (ms: number) => {
+	const milliseconds = Math.floor((ms % 1000) / 100);
+	const seconds = Math.floor((ms / 1000) % 60);
+	const minutes = Math.floor((ms / (1000 * 60)) % 60);
+	const hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
+
+	return {
+		ms: milliseconds,
+		seconds,
+		minutes,
+		hours,
+	};
+};
+
+export const msTimeFormat = (ms?: number) => {
+	if (!ms) return "0:00";
+	const time = msToTime(ms);
+
+	const minutes =
+		time.hours && time.minutes < 10 ? "0" + time.minutes : time.minutes;
+	const seconds = time.seconds < 10 ? "0" + time.seconds : time.seconds;
+
+	return `${time.hours ? `${time.hours}:` : ""}${minutes}:${seconds}`;
+};
+
 // etc... More to come as needed.
