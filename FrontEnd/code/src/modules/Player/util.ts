@@ -27,6 +27,7 @@ export const useController = (
 		if (!paused) start();
 
 		return () => stop();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return { stop, start, position: p, setPosition, setDuration };
