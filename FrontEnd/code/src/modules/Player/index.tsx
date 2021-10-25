@@ -23,15 +23,26 @@ const Player: React.FC<Props> = () => {
 	);
 
 	useEffect(() => {
-		if (controller.position >= player.duration) {
+		if (controller.position >= player.duration)
 			setPlayer((s) => ({ ...s, paused: true }));
-		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [controller.position]);
 
 	useEffect(() => {
 		controller.setPosition(player.position);
 		controller.setDuration(player.duration);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [player.position, player.duration]);
+
+	const onPressed = (press: boolean) => {
+		!press && !player.paused ? controller.start() : controller.stop();
+
+		if (!press)
+			setPlayer((s) => ({
+				...s,
+				position: controller.position,
+			}));
+	};
 
 	return (
 		<div className={styles.player}>
@@ -93,20 +104,8 @@ const Player: React.FC<Props> = () => {
 				className={styles.progress}
 				duration={player.duration}
 				position={controller.position}
-				setPosition={(pos) => {
-					controller.setPosition(pos);
-				}}
-				isPressed={(press) => {
-					!press && !player.paused
-						? controller.start()
-						: controller.stop();
-
-					if (!press)
-						setPlayer((s) => ({
-							...s,
-							position: controller.position,
-						}));
-				}}
+				setPosition={(pos) => controller.setPosition(pos)}
+				isPressed={onPressed}
 			/>
 		</div>
 	);
