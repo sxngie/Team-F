@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React from 'react';
+import React, { useRef } from 'react';
 import { msTimeFormat } from 'utils/functions/formatter';
 
 import Slider from '../Slider';
@@ -46,6 +46,7 @@ const TrackProgress: React.FC<Props> = ({
 	isPressed = () => {},
 }) => {
 	const p = position > duration ? duration : position < 0 ? 0 : position;
+	const pressed = useRef(false);
 
 	return (
 		<div className={cn(className, styles.wrapper)}>
@@ -53,9 +54,14 @@ const TrackProgress: React.FC<Props> = ({
 			<Slider
 				className={styles.slider}
 				percent={(p / duration) * 100}
-				onChange={(percent) => setPosition(duration * (percent / 100))}
+				onChange={(percent) => {
+					setPosition(Math.floor(duration * (percent / 100)));
+				}}
 				disabled={disabled}
-				isPressed={isPressed}
+				isPressed={(p) => {
+					isPressed(p);
+					pressed.current = p;
+				}}
 			/>
 			<p className={styles.text}>
 				{msTimeFormat(showRemaining ? duration - p : duration)}

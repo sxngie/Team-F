@@ -32,6 +32,7 @@
             background: linear-gradient(-20deg,$n2,lighten($n1, 2))
 
     +m
+
         max-width: 375px
         display: grid
         grid-template-columns: 1fr max-content
@@ -127,6 +128,8 @@
             fill: $n3
             +dark
                 fill: $n5
+            &.liked
+                fill: $s4
 
     &:active
         transform: scale(0.80)
@@ -149,6 +152,9 @@
 
 .active
     fill: $p1
+
+.liked
+    fill: $s4
 
 @keyframes spin
     100%
