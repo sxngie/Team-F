@@ -55,13 +55,14 @@ const TrackProgress: React.FC<Props> = ({
 				className={styles.slider}
 				percent={(p / duration) * 100}
 				onChange={(percent) => {
-					setPosition(Math.floor(duration * (percent / 100)));
+					setPosition(Math.round(duration * (percent / 100)));
 				}}
 				disabled={disabled}
 				isPressed={(p) => {
 					isPressed(p);
 					pressed.current = p;
 				}}
+				delta={(5000 / duration) * 100}
 			/>
 			<p className={styles.text}>
 				{msTimeFormat(showRemaining ? duration - p : duration)}

@@ -38,6 +38,10 @@ interface Props {
 	 * Tells you if the slider is being pressed by mouse, touch, or keyboard.
 	 */
 	isPressed?: (isPressed: boolean) => void;
+	/**
+	 * Percent to change by when key pressed.
+	 */
+	delta?: number;
 }
 
 const progress = (percent = 0) => `translateX(calc(-100% + ${percent}%))`;
@@ -68,6 +72,7 @@ const Slider: React.FC<Props> = ({
 	disabled,
 	markOnHover,
 	isPressed = () => {},
+	delta = 5,
 }) => {
 	const ref = useRef<HTMLLabelElement>(null);
 	const start = percent > 100 ? 100 : percent < 0 ? 0 : percent;
@@ -123,7 +128,6 @@ const Slider: React.FC<Props> = ({
 
 			const e = event as KeyboardEvent;
 			const key = e.key;
-			let delta = e.repeat ? 10 : 1;
 
 			switch (key) {
 				case "Left": // IE/Edge specific value
