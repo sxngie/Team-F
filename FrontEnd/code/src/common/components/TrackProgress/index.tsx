@@ -3,7 +3,7 @@ import React from 'react';
 import { msTimeFormat } from 'utils/functions/formatter';
 
 import Slider from '../Slider';
-import styles from './SongProgress.module.sass';
+import styles from './TrackProgress.module.sass';
 
 interface Props {
 	className?: string;
@@ -36,7 +36,7 @@ interface Props {
 	isPressed?: (pressed: boolean) => void;
 }
 
-const SongProgress: React.FC<Props> = ({
+const TrackProgress: React.FC<Props> = ({
 	duration = 1,
 	position = 0,
 	setPosition = () => {},
@@ -64,4 +64,4 @@ const SongProgress: React.FC<Props> = ({
 	);
 };
 
-export default SongProgress;
+export default TrackProgress;

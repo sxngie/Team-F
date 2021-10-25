@@ -1,0 +1,54 @@
+@import ../../../styles/helpers
+
+.wrapper
+    display: flex
+    justify-content: center
+    align-items: center
+    column-gap: 8px
+    user-select: none
+
+.play
+    width: 48px
+    height: 48px
+    padding: 16px
+    border-radius: 50%
+    display: grid
+    place-items: center
+    background: $n2
+    box-shadow: 0 4px 8px $n5
+    +dark
+        background: $n6
+        box-shadow: 0 4px 8px darken($n1, 30)
+
+    &:hover,&.active,&:focus-visible
+        transition: $transition
+        background: $n4
+        +dark
+            background: $n5
+
+    &:active
+        transform: scale(0.9)
+
+.playBtn
+    fill: $n7
+    +dark
+        fill: $n2
+
+.icon
+    fill: $n2
+    +dark
+        fill: $n6
+
+.btn
+    padding: 12px
+    display: grid
+    place-items: center
+    &:hover,&.active,&:focus-visible
+        transition: $transition
+        .icon
+            fill: $n4
+            +dark
+                fill: $n5
+
+    &:active
+        transform: scale(0.80)

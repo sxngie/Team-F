@@ -47,13 +47,13 @@ export interface WebPlaybackState {
 	 *  to `true` when playing an ad track.
 	 */
 	disallows: {
-		pausing: boolean;
-		peeking_next: boolean;
-		peeking_prev: boolean;
-		resuming: boolean;
-		seeking: boolean;
-		skipping_next: boolean;
-		skipping_prev: boolean;
+		pausing?: boolean;
+		peeking_next?: boolean;
+		peeking_prev?: boolean;
+		resuming?: boolean;
+		seeking?: boolean;
+		skipping_next?: boolean;
+		skipping_prev?: boolean;
 	};
 	/**
 	 * Whether the current track is paused.
@@ -64,12 +64,16 @@ export interface WebPlaybackState {
 	 */
 	position: number;
 	/**
+	 * The duration of the current track in ms.
+	 */
+	duration: number;
+	/**
 	 * The repeat mode.
 	 * - No repeat mode is `0`
 	 * - repeat context is `1`
 	 * - repeat track is `2`
 	 */
-	repeat_mode: 0 | 1 | 2;
+	repeat_mode: number;
 	/**
 	 * True if shuffled, false otherwise.
 	 */
@@ -78,7 +82,7 @@ export interface WebPlaybackState {
 		/**
 		 * The track currently on local playback
 		 */
-		current_track: WebPlaybackTrack;
+		current_track: WebPlaybackTrack | null;
 		/**
 		 * Previously played tracks. Number can vary.
 		 */
