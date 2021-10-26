@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import animationInterval from 'utils/functions/animationFrame';
 
-const interval = 300;
+const interval = 1000;
 
 interface Controller {
 	duration: number;

@@ -14,6 +14,8 @@ import { useController } from './util';
 
 interface Props {}
 
+// TODO: Should extract player state logic to a custom hook.
+
 const Player: React.FC<Props> = () => {
 	const [player, setPlayer] = useRecoilState(trackPlayerAtom);
 	const controller = useController(
@@ -44,6 +46,24 @@ const Player: React.FC<Props> = () => {
 			}));
 	};
 
+	const onPause = (p: boolean) => {
+		if (controller.position < player.duration) {
+			setPlayer((s) => ({ ...s, paused: p }));
+			p ? controller.stop() : controller.start();
+		}
+	};
+
+	const onPrev = () => {
+		if (controller.position > 1000) {
+			controller.setPosition(0);
+			setPlayer((s) => ({
+				...s,
+				position: 0,
+			}));
+			return;
+		}
+	};
+
 	return (
 		<div className={styles.player}>
 			<div className={styles.controls}>
@@ -67,12 +87,8 @@ const Player: React.FC<Props> = () => {
 					<Repeat mode={player.repeat_mode} />
 					<Play
 						isPaused={player.paused}
-						setPaused={(p) => {
-							if (controller.position < player.duration) {
-								setPlayer((s) => ({ ...s, paused: p }));
-								p ? controller.stop() : controller.start();
-							}
-						}}
+						setPaused={onPause}
+						onPrev={onPrev}
 						className={cn(styles.playBtn, {
 							[styles.playing]: !player.paused,
 						})}
