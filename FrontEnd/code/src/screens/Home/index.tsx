@@ -1,5 +1,5 @@
 import Player from 'modules/Player';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
 import styles from './Home.module.sass';

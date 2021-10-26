@@ -31,13 +31,7 @@ const MessageCenter: React.FC<Props> = () => {
 				activeId={chat.chatId}
 			/>
 			<Messages setChat={setChat} chat={chat} />
-			<Info
-				setChat={setChat}
-				chat={chat}
-				className={cn(styles.info, {
-					[styles.show]: chat.info,
-				})}
-			/>
+			<Info setChat={setChat} chat={chat} />
 		</main>
 	);
 };

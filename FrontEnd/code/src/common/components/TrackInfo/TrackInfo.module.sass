@@ -1,6 +1,15 @@
 @import ../../../styles/helpers
 
 .info
+    &:hover,&.active,&:focus-visible
+        transition: $transition
+        text-decoration-color: $n3
+        text-underline-offset: 2px
+        text-decoration: underline solid 2px
+        +dark
+            text-decoration-color: $n8
+    &:active
+        transform: scale(0.95)
 
 .title
     +caption-bold-1

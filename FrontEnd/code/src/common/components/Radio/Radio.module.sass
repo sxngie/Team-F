@@ -3,7 +3,7 @@
 .radio
     display: inline-block
     position: relative
-    user-select: none 
+    user-select: none
     cursor: pointer
     -webkit-tap-highlight-color: rgba(0,0,0,0)
 
@@ -11,7 +11,7 @@
     position: absolute
     top: 0
     left: 0
-    opacity: 0 
+    opacity: 0
     &:checked + .inner .tick
         &:before
             transform: translate(-50%,-50%) scale(1)
@@ -28,8 +28,8 @@
     width: 24px
     height: 24px
     margin-right: 12px
-    border-radius: 50% 
-    border: 2px solid $n6
+    border-radius: 50%
+    border: 2px solid darken($n6,3 )
     transition: all .2s
     +dark
         background: $n1
@@ -49,6 +49,6 @@
 .text
     line-height: (24/14)
     font-weight: 500
-    color: $n2 
+    color: $n2
     +dark
         color: $n8

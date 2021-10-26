@@ -36,7 +36,9 @@ const ChatInfo: React.FC<Props> = ({ className, chat, setChat }) => {
 	});
 
 	return (
-		<section className={className}>
+		<section
+			className={cn(className, styles.info, { [styles.show]: chat.info })}
+		>
 			{!view.isOpen ? (
 				<div className={styles.container}>
 					<button

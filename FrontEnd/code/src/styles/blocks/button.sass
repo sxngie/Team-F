@@ -78,16 +78,16 @@
   height: 48px
   padding: 0
   border-radius: 50%
-  box-shadow: 0 0 0 2px $n6 inset
+  box-shadow: 0 0 0 2px darken($n6,3 ) inset
   background: transparent
   transition: all .2s
   svg
-      fill: $n4
+    fill: $n4
   &:hover
-      background: $n2
-      box-shadow: 0 0 0 2px $n2 inset
-      svg
-          fill: $n8
+    background: $n2
+    box-shadow: 0 0 0 2px $n2 inset
+    svg
+      fill: $n8
   +dark-common
     box-shadow: 0 0 0 2px $n3 inset
     &:hover
@@ -97,6 +97,3 @@
   flex: 0 0 40px
   width: 40px
   height: 40px
-
-
-
