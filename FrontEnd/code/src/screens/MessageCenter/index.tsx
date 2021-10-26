@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import { fakeChats, fakeFavorites } from 'mockup/fakeData';
 import React, { useState } from 'react';
 

@@ -32,7 +32,11 @@ const Page: React.FC<PageProps> = ({
 
 	return (
 		<>
-			<div className={styles.page}>
+			<div
+				className={cn(styles.page, {
+					[styles.bodyScroll]: bodyScroll,
+				})}
+			>
 				{!headerHide && (
 					<Header separatorHeader={separatorHeader} wide={wide} />
 				)}

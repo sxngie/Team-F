@@ -7,7 +7,6 @@
     flex-direction: column
     justify-content: center
     align-items: center
-    position: relative
     height: 100%
     width: 100%
     padding-bottom: 16px
@@ -21,11 +20,6 @@
 
     +t
         padding: 32px
-
-    +s
-        padding: 32px 16px
-
-    +t
         position: absolute
         z-index: 3
         background: $n7
@@ -37,13 +31,17 @@
         &.show
             animation: open .3s forwards
 
+    +s
+        padding: 32px 16px
+
 .container
+    position: relative
     overflow-y: auto
     overflow-x: hidden
     width: 100%
     display: flex
     flex-direction: column-reverse
-    justify-items: center
+    align-items: center
 
 .messages
     position: relative
@@ -84,12 +82,16 @@
         place-items: center
 
 .form
+    position: absolute
+    bottom: 16px
     width: calc( 100% - 64px )
-    max-width: 900px
+    max-width: 1024px
     border-radius: 24px
+    border: 2px solid $n6
     background: $n7
     +dark
-        background: $n1
+        backdrop-filter: blur(5px)
+        background: transparentize($n1, 0.05)
     +x
         width: calc( 100% - 16px )
 
