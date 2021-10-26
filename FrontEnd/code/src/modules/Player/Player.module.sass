@@ -10,8 +10,10 @@
     align-items: center
     justify-content: center
     border-radius: 20px
-    box-shadow: 0 4px 8px transparentize($n5,0.6 )
+    box-shadow: 0 2px 8px transparentize($n5,0.6 )
+    outline: 1px solid $n6
     +dark
+        outline: 1px solid $n2
         box-shadow: 0 4px 16px darken($n1,1 )
 
     &::before
@@ -22,17 +24,15 @@
         height: 100%
         border-radius: inherit
         position: absolute
-        background: linear-gradient(-20deg,lighten($n6,5 ),$n8)
+        background: linear-gradient(-20deg,lighten($n6,4 ),$n7)
         opacity: 0.5
         filter: blur(0.5px)
-
         overflow: hidden
         +dark
             opacity: 0.6
             background: linear-gradient(-20deg,$n2,lighten($n1, 2))
 
     +m
-
         max-width: 375px
         display: grid
         grid-template-columns: 1fr max-content
