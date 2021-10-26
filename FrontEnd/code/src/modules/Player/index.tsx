@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import TrackInfo from 'common/components/TrackInfo';
 import React, { useEffect } from 'react';
-import { useContainerQuery } from 'react-container-query';
 import { useRecoilState } from 'recoil';
 import { trackPlayerAtom } from 'store/music';
 
