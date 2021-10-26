@@ -1,19 +1,21 @@
 @import ../../styles/helpers
 
 .player
+    pointer-events: all
     position: relative
     display: flex
     flex-direction: column
-    padding: 20px 32px
+    padding: 10px 24px
+    height: $player-h
     width: 100%
     max-width: 700px
     align-items: center
     justify-content: center
     border-radius: 20px
     box-shadow: 0 2px 8px transparentize($n5,0.6 )
-    outline: 1px solid $n6
+    border: 1px solid $n6
     +dark
-        outline: 1px solid $n2
+        border: 1px solid $n2
         box-shadow: 0 4px 16px darken($n1,1 )
 
     &::before
@@ -24,26 +26,60 @@
         height: 100%
         border-radius: inherit
         position: absolute
-        background: linear-gradient(-20deg,lighten($n6,4 ),$n7)
-        opacity: 0.5
-        filter: blur(0.5px)
+        background: linear-gradient(-20deg,transparentize(lighten($n6,4 ),0.1 ),transparentize($n7, 0.2 ))
+        backdrop-filter: blur(10px)
         overflow: hidden
         +dark
-            opacity: 0.6
-            background: linear-gradient(-20deg,$n2,lighten($n1, 2))
+            background: linear-gradient(-20deg,transparentize($n2, 0.2),transparentize(lighten($n1, 2),0.1 ))
 
-    +m
+    &.compact
+        height: $player-h-m
         max-width: 375px
         display: grid
         grid-template-columns: 1fr max-content
-        column-gap: 10px
-        row-gap: 10px
-        padding: 10px 20px
+        column-gap: 6px
+        padding: 8px 16px 5px
+
+        .btns
+            display: none
+        .playBtn
+            grid-column: 2
+            grid-row: 1
+            button
+                &:nth-child(1),&:nth-child(3)
+                    display: none
+        .playing
+            button:nth-child(2)
+                svg
+                    animation: spin 5s linear infinite
+                    animation-delay: 1s
+        .volume
+            display: none
+        .info
+            text-align: left
+            width: 100%
+            grid-column: 1
+            grid-row: 1
+            position: relative
+            overflow: unset
+            text-overflow: ellipsis
+            white-space: normal
+            display: flex
+            flex-direction: column
+
+            & > span
+                display: -webkit-box
+                max-width: 100%
+                -webkit-line-clamp: 1
+                -webkit-box-orient: vertical
+                overflow: hidden
+
+        .control
+            display: none
+
 .btns
     display: flex
     column-gap: 16px
-    +m
-        display: none
 
 .controls
     display: flex
@@ -55,25 +91,6 @@
     justify-content: center
     align-items: center
     display: flex
-
-.playBtn
-    +m
-        grid-column: 2
-        grid-row: 1
-        button
-            &:nth-child(1),&:nth-child(3)
-                display: none
-
-.playing
-    +m
-        button:nth-child(2)
-            svg
-                animation: spin 5s linear infinite
-                animation-delay: 1s
-
-.volume
-    +m
-        display: none
 
 .info
     width: 90%
@@ -90,26 +107,6 @@
                 text-decoration-color: $n8
     &:active
         transform: scale(0.95)
-
-    +m
-        text-align: left
-        width: 100%
-        grid-column: 1
-        grid-row: 1
-        position: relative
-        overflow: unset
-        text-overflow: ellipsis
-        white-space: normal
-        display: flex
-        flex-direction: column
-
-        & > span
-            display: -webkit-box
-            max-width: 100%
-            -webkit-line-clamp: 1
-            -webkit-box-orient: vertical
-            overflow: hidden
-
 .progress
     width: 100%
     grid-column: 1 / 3
@@ -136,7 +133,10 @@
         transform: scale(0.80)
 
 .control
-    padding: 16px
+    width: 48px
+    height: 48px
+    display: grid
+    place-items: center
     transition: $transition
     &:hover,&.active,&:focus-visible
         .icon
@@ -148,8 +148,6 @@
 
     &:active
         transform: scale(0.80)
-    +m
-        display: none
 
 .active
     fill: $p1

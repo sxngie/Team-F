@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import TrackInfo from 'common/components/TrackInfo';
 import React, { useEffect } from 'react';
+import { useContainerQuery } from 'react-container-query';
 import { useRecoilState } from 'recoil';
 import { trackPlayerAtom } from 'store/music';
 
@@ -12,11 +13,17 @@ import Repeat from './components/Repeat';
 import styles from './Player.module.sass';
 import { useController } from './util';
 
-interface Props {}
+interface Props {
+	/**
+	 * If the player should turn into compact mode.
+	 */
+	compact?: boolean;
+	className?: string;
+}
 
 // TODO: Should extract player state logic to a custom hook.
 
-const Player: React.FC<Props> = () => {
+const Player: React.FC<Props> = ({ compact, className }) => {
 	const [player, setPlayer] = useRecoilState(trackPlayerAtom);
 	const controller = useController(
 		player.position,
@@ -65,7 +72,11 @@ const Player: React.FC<Props> = () => {
 	};
 
 	return (
-		<div className={styles.player}>
+		<div
+			className={cn(className, styles.player, {
+				[styles.compact]: compact,
+			})}
+		>
 			<div className={styles.controls}>
 				<div className={styles.btns}>
 					<button className={styles.btn}>
