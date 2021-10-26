@@ -30,12 +30,12 @@
         z-index: 3
         background: $n7
         width: 100%
-        transform: translateX(100%)
+        animation: close .3s forwards
         transition: transform .3s
         +dark
             background: $n1
         &.show
-            transform: translateX(0)
+            animation: open .3s forwards
 
 .container
     overflow-y: auto
@@ -93,3 +93,15 @@
         background: $n1
     +x
         width: calc( 100% - 16px )
+
+@keyframes open
+    from
+        transform: translateX(100%)
+    to
+        transform: translateX(0)
+
+@keyframes close
+    from
+        transform: translateX(0)
+    to
+        transform: translateX(100%)

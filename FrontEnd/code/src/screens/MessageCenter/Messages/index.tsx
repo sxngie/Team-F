@@ -54,7 +54,6 @@ const Messages: React.FC<Props> = ({ chat, setChat, className }) => {
 				type="text"
 				iconRight="arrow-next"
 				iconLeft="clip"
-				autoFocus
 			/>
 		</main>
 	);

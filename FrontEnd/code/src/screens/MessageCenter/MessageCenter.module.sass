@@ -3,8 +3,6 @@
 
 .container
     position: relative
-    display: grid
-    grid-template-columns: min-content 1fr min-content
     height: 100%
     width: 100%
     display: flex
@@ -26,33 +24,6 @@
         border: none
         min-width: 100%
         max-width: 100%
-
-.messages
-    position: relative
-    flex-grow: 1
-    width: 100%
-    height: 100%
-    padding-bottom: 104px
-
-    +x
-        padding-bottom: 80px
-
-    +t
-        padding-bottom: 0px
-        position: fixed
-        top: 0
-        left: 0
-        right: 0
-        bottom: 0
-        z-index: 3
-        height: auto
-        background: $n7
-        transform: translateX(100%)
-        transition: transform .3s
-        +dark
-            background: $n1
-        &.show
-            transform: translateX(0)
 
 .info
     flex-shrink: 0
@@ -78,11 +49,11 @@
         z-index: 4
         background: $n7
         width: calc( 100% - 396px)
-        transform: translateX(100%)
-        transition: transform .3s
+        animation: close .3s forwards
         &.show
             border-left: none
-            transform: translateX(0)
+            animation: open .3s forwards
+
         +dark
             background: $n1
             border-left: none
@@ -93,3 +64,15 @@
 
     +s
         padding: 20px 16px
+
+@keyframes open
+    from
+        transform: translateX(100%)
+    to
+        transform: translateX(0)
+
+@keyframes close
+    from
+        transform: translateX(0)
+    to
+        transform: translateX(100%)
