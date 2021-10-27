@@ -17,17 +17,20 @@ const pos = (n: number) => {
 };
 
 interface Props {
-	avatars: string[];
+	avatars?: string[];
+	type?: number;
 }
 
-const Avatars: React.FC<Props> = ({ avatars }) => {
+const Avatars: React.FC<Props> = ({ avatars = [], type }) => {
 	const count = avatars.length > 3 ? 3 : avatars.length;
-	const imgClass = pos(count);
+	const imgClass = pos(type ? type : count);
 	const [error, setError] = useState(false);
 	const [style, setStyle] = useState<React.CSSProperties>();
 
 	useEffect(() => {
-		setStyle({ animation: `${styles.grow} 0.4s ease forwards` });
+		setStyle({
+			animation: `${styles.grow} 0.4s ease forwards`,
+		});
 	}, [avatars]);
 
 	return (

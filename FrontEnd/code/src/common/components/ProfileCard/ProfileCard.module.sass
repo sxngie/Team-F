@@ -5,12 +5,16 @@
     flex-direction: column
     width: 300px
     min-height: 265px
-    // padding-left: 10px
     border-radius: 16px
-    background-color: black
+    background-color: $n7
+    box-shadow: 0px 3px 8px lighten($n5, 12)
+    +dark
+        background-color: darken($n1, 2)
+        box-shadow: 0px 3px 8px darken($n2, 3)
     font-family: Poppins
 
 .banner
+    object-fit: cover
     position: absolute
     left: 0
     top: 0
@@ -18,17 +22,42 @@
     height: 100%
     border-top-left-radius: 16px
     border-top-right-radius: 16px
-    background-color: #23262F
+    background-color: $n6
+    display: grid
+    place-items: center
+    fill: $n5
+    +dark
+        background-color: $n2
+        fill: $n5
 
 .button
+    color: $n7
     justify-content: center
     display: flex
     align-items: center
     padding: 5px 15px
-    background-color: #4D76E0
+    background-color: $p1
     border-radius: 16px
     font-weight: 600
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1)
+    box-shadow: 0px 2px 8px $n5
+    +dark
+        box-shadow: 0px 2px 8px $n3
+    width: max-content
+    z-index: 1
+    transition: $transition
+
+    &:active
+        transform: scale(0.95)
+
+    &.followed
+        background-color: $n4
+        &:hover
+
+            background: $p5
+            & > span
+                display: none
+            &::before
+                content: 'Unfollow'
 
 .top
     position: relative
@@ -36,47 +65,108 @@
     flex-direction: column
     width: 300px
     height: 89px
+    padding: 16px 30px 0 16px
 
 .bottom
-    padding: 36px 16px 16px
+    padding: 16px
+    display: flex
+    flex-direction: column
 
 .avatar
+    object-fit: cover
     width: 64px
     height: 64px
     border-radius: 38px
-    padding: 5px
-    border: 5px solid black
-    background-color: #23262F
+    border: 6px solid $n7
+    background-color: $n6
+    position: absolute
+    bottom: -32px
+    right: 30px
+    z-index: 1
+    display: grid
+    place-items: center
+    fill: $n5
+    +dark
+        border: 6px solid darken($n1, 3)
+        background-color: $n2
+        fill: $n5
+
+.user
+    transition: $transition
+    &:hover, &:focus-visible
+        text-decoration: 2px underline
+        text-underline-offset: 2px
+
+    &:active
+        transform: scale(0.98)
 
 .name
-    font-weight: 500
-    font-size: 16px
-    height: 24px
-    // line-height: 24px
-    color: #F4F5F6
+    +body-bold-2
+    display: -webkit-box
+    -webkit-line-clamp: 2
+    -webkit-box-orient: vertical
+    overflow: hidden
 
 .username
-    font-size: 12px
-    color: #777E91
-    // line-height: 20px
+    +caption-2
+    color: $n4
+    margin-bottom: 10px
+    margin-top: -2px
 
 .description
-    font-size: 14px
-    color: #E6E8EC
-    padding-bottom: 10px
-    line-height: 24px
+    white-space: pre-wrap
+    +caption-1
+    font-weight: 200
+    color: $n3
+    +dark
+        color: $n6
 
-.items
-    font-size: 14px
-    padding-bottom: 5px
-    display: inline-flex
-    flex-wrap: wrap
-    gap: 12px
+.follows
+    user-select: none
+    padding: 10px 0
+    display: flex
+    column-gap: 24px
 
-#numbers
-    font-weight: 600
-    color: #F4F5F6
+.numbers
+    font-weight: 500
+    &:hover, &:focus-visible
+        text-decoration: 2px underline
+        text-underline-offset: 2px
+
+    &:active
+        transform: scale(0.98)
 
 .text
-    font-size: 14px
-    color: #777E91
+    color: $n4
+    +caption-1
+    font-weight: normal
+    margin-left: 4px
+
+.mutuals
+    +caption-2
+    color: $n4
+
+.mutualWrapper
+    display: flex
+    align-items: center
+    column-gap: 8px
+    user-select: none
+    &:hover, &:focus-visible
+        text-decoration: 2px underline
+        text-underline-offset: 2px
+
+    &:active
+        transform: scale(0.98)
+
+.nameWrapper
+    column-gap: 8px
+    max-width: calc(300px - 64px - 30px - 12px)
+    display: flex
+    align-items: center
+
+.verified
+    min-width: 24px
+    min-height: 24px
+    fill: $p1
+    +dark
+        fill: $n7
