@@ -7,18 +7,24 @@ interface Props {
 	path: string;
 	render: React.ReactNode;
 	needAuth?: boolean;
+	exact?: boolean;
 }
 
 /**
  * Redirects users if they are not authenticated.
  */
-const ProtectedRoute: React.FC<Props> = ({ render, needAuth, ...rest }) => {
+const ProtectedRoute: React.FC<Props> = ({
+	render,
+	needAuth,
+	exact,
+	...rest
+}) => {
 	const auth = useRecoilValue(authAtom);
 	const hasAcces = !needAuth || auth.isAuth;
 	return (
 		<Route
 			{...rest}
-			exact
+			exact={exact}
 			render={(props) =>
 				hasAcces ? (
 					render

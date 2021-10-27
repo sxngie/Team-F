@@ -28,7 +28,7 @@ export interface ModalState {
 const items: Options[] = [
 	{
 		menu: [
-			{ title: "Account", icon: "user", path: "profile" },
+			{ title: "Account", icon: "user", path: "account" },
 			{ title: "Settings", icon: "gear", path: "settings" },
 		],
 	},

@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import React, { useState } from 'react';
 import { animated, config, useTransition } from 'react-spring';
+import { navToUser } from 'routes/history';
 
 import Avatars from '../Avatars';
 import Icon from '../Icon';
@@ -45,7 +46,10 @@ const ProfileCard: React.FC<Props> = ({ username, visible }) => {
 							<span>{followed ? "Following" : "Follow"}</span>
 						</button>
 						{error.avatar ? (
-							<span className={styles.avatar}>
+							<span
+								className={styles.avatar}
+								onClick={() => navToUser(username)}
+							>
 								<Icon name="user" size={32} />
 							</span>
 						) : (
@@ -56,6 +60,7 @@ const ProfileCard: React.FC<Props> = ({ username, visible }) => {
 									setError({ ...error, avatar: true })
 								}
 								src={data.avatar}
+								onClick={() => navToUser(username)}
 							/>
 						)}
 						{error.banner ? (
@@ -74,7 +79,10 @@ const ProfileCard: React.FC<Props> = ({ username, visible }) => {
 						)}
 					</div>
 					<div className={styles.bottom}>
-						<button className={styles.user}>
+						<button
+							className={styles.user}
+							onClick={() => navToUser(username)}
+						>
 							<div className={styles.nameWrapper}>
 								<p className={styles.name}>{data.name}</p>
 								{data.verified && (
@@ -89,17 +97,26 @@ const ProfileCard: React.FC<Props> = ({ username, visible }) => {
 						<p className={styles.description}>{data.description}</p>
 
 						<span className={styles.follows}>
-							<button className={styles.numbers}>
+							<button
+								className={styles.numbers}
+								onClick={() => navToUser(username, "following")}
+							>
 								<span>{followShort(data.following)}</span>
 								<span className={styles.text}>Following</span>
 							</button>
 
-							<button className={styles.numbers}>
+							<button
+								className={styles.numbers}
+								onClick={() => navToUser(username, "followers")}
+							>
 								<span>{followShort(data.followers)}</span>
 								<span className={styles.text}>Followers</span>
 							</button>
 						</span>
-						<button className={styles.mutualWrapper}>
+						<button
+							className={styles.mutualWrapper}
+							onClick={() => navToUser(username, "mutuals")}
+						>
 							<Avatars
 								type={data.mutuals.top.length}
 								avatars={data.mutuals.top.map(

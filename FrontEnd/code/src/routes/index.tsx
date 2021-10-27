@@ -8,6 +8,7 @@ export interface Route {
 	render: React.ReactNode; // Screen component goes here.
 	name: string;
 	needAuth: boolean;
+	exact?: boolean;
 }
 
 /**
@@ -20,7 +21,8 @@ const routeNames = [
 	"library",
 	"discover",
 	"messages",
-	"profile",
+	"user/:user/:location?",
+	"account",
 	"settings",
 	"support",
 ] as const;
@@ -35,6 +37,7 @@ const MessageCenter = lazy(() => import("screens/MessageCenter"));
 const Profile = lazy(() => import("screens/Profile"));
 const Settings = lazy(() => import("screens/Settings"));
 const Product = lazy(() => import("screens/Product"));
+const Account = lazy(() => import("screens/Account"));
 
 /**
  * Application routes to be rendered.
@@ -50,6 +53,7 @@ const routes: Route[] = [
 		),
 		name: "Home",
 		needAuth: true,
+		exact: true,
 	},
 	{
 		path: "music",
@@ -60,6 +64,7 @@ const routes: Route[] = [
 		),
 		name: "Music",
 		needAuth: true,
+		exact: true,
 	},
 	{
 		path: "library",
@@ -70,6 +75,7 @@ const routes: Route[] = [
 		),
 		name: "Library",
 		needAuth: true,
+		exact: true,
 	},
 	{
 		path: "discover",
@@ -80,6 +86,7 @@ const routes: Route[] = [
 		),
 		name: "Discover",
 		needAuth: true,
+		exact: true,
 	},
 	{
 		path: "messages",
@@ -90,9 +97,10 @@ const routes: Route[] = [
 		),
 		name: "Messages",
 		needAuth: true,
+		exact: true,
 	},
 	{
-		path: "profile",
+		path: "user/:user/:location?",
 		render: (
 			<Page>
 				<Profile />
@@ -100,6 +108,7 @@ const routes: Route[] = [
 		),
 		name: "Profile",
 		needAuth: true,
+		exact: true,
 	},
 	{
 		path: "settings",
@@ -110,6 +119,7 @@ const routes: Route[] = [
 		),
 		name: "Settings",
 		needAuth: true,
+		exact: true,
 	},
 	{
 		path: "",
@@ -120,12 +130,25 @@ const routes: Route[] = [
 		),
 		name: "Product",
 		needAuth: false,
+		exact: true,
 	},
 	{
 		path: "support",
 		render: null,
 		name: "Support",
 		needAuth: false,
+		exact: true,
+	},
+	{
+		path: "account",
+		render: (
+			<Page>
+				<Account />
+			</Page>
+		),
+		name: "Account",
+		needAuth: true,
+		exact: false,
 	},
 ];
 
